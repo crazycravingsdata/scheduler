@@ -153,6 +153,40 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   .moreLabel{font-size:10px;color:var(--ink-soft);font-weight:600;}
 
+  .viewModeSelect{
+    border:1px solid var(--border);background:#fff;border-radius:9px;padding:9px 12px;
+    font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;
+  }
+
+  /* ---------- WEEK VIEW ---------- */
+  .weekGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+  .weekDayCard{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    min-height:260px;padding:10px;cursor:pointer;transition:box-shadow .15s, transform .15s;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .weekDayCard:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
+  .weekDayCard.isToday{border:2px solid var(--pink);}
+  .weekDayHead{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;display:flex;justify-content:space-between;}
+  .weekDayHead span{font-size:16px;color:var(--ink);}
+  .weekDayEvents{display:flex;flex-direction:column;gap:4px;overflow:hidden;}
+
+  /* ---------- YEAR VIEW ---------- */
+  .yearGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .miniMonth{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;}
+  .miniMonthTitle{font-weight:700;font-size:14px;margin-bottom:8px;text-align:center;}
+  .miniMonthGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .miniDay{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;flex-direction:column;
+    font-size:10px;border-radius:5px;cursor:pointer;color:var(--ink);position:relative;
+  }
+  .miniDay:hover{background:#fdeef3;}
+  .miniDay.otherMonth{color:var(--border);cursor:default;}
+  .miniDay.isToday{background:var(--pink);color:#fff;font-weight:700;}
+  .miniDay .miniDot{width:4px;height:4px;border-radius:50%;background:var(--pink);position:absolute;bottom:2px;}
+  .miniDay.isToday .miniDot{background:#fff;}
+  @media (max-width:900px){ .yearGrid{grid-template-columns:repeat(2,1fr);} }
+
   /* ---------- DAY VIEW ---------- */
   .dayViewHeader{
     display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;
@@ -168,6 +202,32 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     border:none;background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:#fff;
     padding:10px 18px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;
   }
+  .blockTimeBtn{
+    border:1px solid var(--ink-soft);background:#fff;color:var(--ink-soft);
+    padding:10px 16px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;
+  }
+  .blockTimeBtn:hover{background:#f2f0f2;}
+  .streetSalesBtn{
+    border:1px solid var(--purple);background:#fff;color:var(--purple);
+    padding:10px 16px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;
+  }
+  .streetSalesBtn:hover{background:#f4f1ff;}
+  .timeBlockEl.streetSales{
+    background:repeating-linear-gradient(45deg,#c9bdf0,#c9bdf0 8px,#e2dbf7 8px,#e2dbf7 16px);
+    border:1px solid #8f7fd4;
+  }
+  .timeBlockEl.streetSales .timeBlockLabel{color:#4b3f80;}
+
+  .timeBlockEl{
+    position:absolute;left:3px;right:3px;border-radius:8px;overflow:hidden;cursor:pointer;
+    background:repeating-linear-gradient(45deg,#c7c7cc,#c7c7cc 8px,#dcdce0 8px,#dcdce0 16px);
+    border:1px solid #9d9da5;z-index:2;display:flex;align-items:center;justify-content:center;
+    padding:4px 6px;
+  }
+  .timeBlockEl .timeBlockLabel{
+    background:rgba(255,255,255,0.88);color:#4a4a52;font-size:10.5px;font-weight:700;
+    padding:3px 7px;border-radius:6px;text-align:center;line-height:1.3;
+  }
 
   .scheduleWrap{
     display:flex;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);
@@ -177,9 +237,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     width:70px;flex-shrink:0;border-right:1px solid var(--border);
   }
   .timeCol .hourSlot, .vanCol .hourSlot{
-    height:60px;border-bottom:1px solid var(--border);font-size:11px;color:var(--ink-soft);
+    height:var(--hour-px,60px);border-bottom:1px solid var(--border);font-size:11px;color:var(--ink-soft);
     padding:4px 6px;box-sizing:border-box;
   }
+  .zoomControls{display:flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--border);border-radius:9px;padding:4px 6px;}
+  .zoomBtn{
+    border:none;background:#f2f0f8;color:var(--ink);width:26px;height:26px;border-radius:6px;
+    cursor:pointer;font-size:15px;font-weight:700;line-height:1;display:flex;align-items:center;justify-content:center;
+  }
+  .zoomBtn:hover{background:#e6e2f0;}
+  .zoomLabel{font-size:11px;color:var(--ink-soft);font-weight:700;min-width:34px;text-align:center;}
   .vanColHead{
     height:52px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:center;
     gap:8px;font-weight:700;font-size:14px;position:sticky;top:0;background:var(--card);z-index:5;
@@ -252,7 +319,10 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--purple);}
   .fieldRow{display:flex;gap:10px;}
-  .fieldRow .field{flex:1;}
+  .fieldRow .field{flex:1;min-width:0;}
+  .formSection{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+  .formSection:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:14px;}
+  .formSectionTitle{font-size:11px;font-weight:800;color:var(--pink-dark);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px;display:flex;align-items:center;gap:6px;}
   .timeSelectGroup{display:flex;gap:5px;}
   .timeSelectGroup select{
     flex:1;min-width:0;padding:10px 4px;border:1px solid var(--border);border-radius:9px;font-size:14px;
@@ -299,6 +369,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     font-family:inherit;outline:none;
   }
   .catalogFormField input[type=text]:focus, .catalogFormField select:focus{border-color:var(--pink);}
+  .roleCheckboxes{display:flex;gap:14px;align-items:center;padding:6px 0;}
+  .roleCheck{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;text-transform:none;letter-spacing:0;}
+  .roleCheck input{width:15px;height:15px;cursor:pointer;accent-color:var(--pink);}
   .catalogAddBtn{
     border:none;background:var(--pink);color:#fff;padding:11px 22px;border-radius:24px;font-weight:700;
     font-size:14px;cursor:pointer;white-space:nowrap;
@@ -338,6 +411,56 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   .catalogCard.editing select{border:1px solid var(--border);border-radius:7px;padding:6px 8px;font-size:13px;background:#fff;font-family:inherit;}
 
   .emptyCatalogMsg{color:var(--ink-soft);font-size:13px;}
+
+  /* ---------- EMPLOYEE SCHEDULE ---------- */
+  .scheduleRangeLabel{font-size:14px;font-weight:700;color:var(--ink-soft);margin:0 0 12px;}
+  .schedGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .schedHeadCell{
+    text-align:center;font-size:11px;font-weight:700;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.3px;padding:6px 0;
+  }
+  .schedCell{
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    min-height:104px;padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:5px;
+    transition:box-shadow .15s, transform .15s;
+  }
+  .schedCell:hover{box-shadow:var(--shadow);transform:translateY(-2px);}
+  .schedCell.outside{background:#faf7f9;opacity:.5;cursor:default;}
+  .schedCell.outside:hover{box-shadow:none;transform:none;}
+  .schedCell.isToday{border:2px solid var(--pink);}
+  .schedDayNum{font-size:13px;font-weight:700;color:var(--ink);}
+  .schedPill{
+    font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.2px;
+    padding:3px 7px;border-radius:7px;color:#fff;display:block;width:fit-content;
+    margin-bottom:3px;
+  }
+  .schedPill.off{background:#b9b9c2;}
+  .schedPill.corp{background:#3fb27f;}
+  .schedPill.street{background:#9b8ce0;}
+  .schedPill.both{background:linear-gradient(90deg,#3fb27f,#9b8ce0);}
+  .schedPill.suggested{opacity:.45;border:1px dashed rgba(0,0,0,.25);}
+  .schedTimes{font-size:10.5px;color:var(--ink-soft);line-height:1.45;}
+  .schedNote{font-size:10px;color:var(--ink-soft);font-style:italic;line-height:1.35;}
+  .schedSuggestTag{font-size:9px;color:var(--pink-dark);font-weight:700;text-transform:uppercase;}
+
+  /* ---------- DAILY DRIVER INSTRUCTIONS ---------- */
+  .driverPanel{
+    margin-top:18px;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);
+  }
+  .driverPanelHead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .driverPanelHead h3{margin:0;font-size:16px;}
+  .driverPanelGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:900px){ .driverPanelGrid{grid-template-columns:1fr;} }
+  .driverPanelLabel{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px;}
+  .checklistBox{display:flex;flex-direction:column;gap:7px;}
+  .checkItem{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink);cursor:pointer;}
+  .checkItem input{width:16px;height:16px;cursor:pointer;accent-color:var(--pink);flex-shrink:0;}
+  .checkItem.done span{text-decoration:line-through;color:var(--ink-soft);}
+  .driverPanel textarea{
+    width:100%;border:1px solid var(--border);border-radius:9px;padding:9px;font-size:13px;
+    min-height:52px;font-family:inherit;box-sizing:border-box;
+  }
 
   /* ---------- EVENTS LIST TABLE ---------- */
   .eventsTableWrap{
@@ -390,6 +513,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       <nav class="tabs">
         <button id="tabCalendar" class="active" onclick="switchTab('calendar')">Calendar</button>
         <button id="tabEventsList" onclick="switchTab('eventsList')">Events</button>
+        <button id="tabVanView" onclick="switchTab('vanView')">Van View</button>
+        <button id="tabSchedule" onclick="switchTab('schedule')">Schedule</button>
         <button id="tabVans" onclick="switchTab('vans')">Vans</button>
         <button id="tabEmployees" onclick="switchTab('employees')">Employees</button>
       </nav>
@@ -405,6 +530,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         <div class="monthHeader">
           <h2 id="monthLabel">Month</h2>
           <div class="monthNav">
+            <select id="calViewMode" class="viewModeSelect" onchange="switchCalendarViewMode()">
+              <option value="month">Month view</option>
+              <option value="week">Week view</option>
+              <option value="year">Year view</option>
+            </select>
             <div class="jumpToDate">
               <select id="jumpMonth" onchange="onJumpMonthYearChange()"></select>
               <select id="jumpDay"></select>
@@ -412,11 +542,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
               <button class="jumpGoBtn" onclick="jumpToDate()" title="Go to date">Go →</button>
             </div>
             <button class="todayBtn" onclick="goToToday()">Today</button>
-            <button class="navBtn" onclick="changeMonth(-1)">‹</button>
-            <button class="navBtn" onclick="changeMonth(1)">›</button>
+            <button class="navBtn" onclick="changePeriod(-1)">‹</button>
+            <button class="navBtn" onclick="changePeriod(1)">›</button>
           </div>
         </div>
         <div class="calGrid" id="calGrid"></div>
+        <div class="weekGrid" id="weekGrid" style="display:none;"></div>
+        <div class="yearGrid" id="yearGrid" style="display:none;"></div>
       </section>
 
       <!-- DAY VIEW -->
@@ -430,8 +562,15 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             </div>
           </div>
           <div style="display:flex;gap:8px;align-items:center;">
+            <div class="zoomControls" title="Zoom the schedule rows">
+              <button class="zoomBtn" onclick="changeHourZoom(-1)">−</button>
+              <span class="zoomLabel">100%</span>
+              <button class="zoomBtn" onclick="changeHourZoom(1)">+</button>
+            </div>
             <button class="navBtn" onclick="changeDay(-1)">‹</button>
             <button class="navBtn" onclick="changeDay(1)">›</button>
+            <button class="blockTimeBtn" onclick="openBlockModal()">🚫 Block Time</button>
+            <button class="streetSalesBtn" onclick="openStreetSalesModal()">🍦 Street Sales</button>
             <button class="addBookingBtn" onclick="openBookingModal()">+ New Event</button>
           </div>
         </div>
@@ -483,6 +622,105 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         </div>
       </section>
 
+      <!-- VAN VIEW -->
+      <section id="vanViewSection" style="display:none;">
+        <div class="dayViewHeader">
+          <div class="left">
+            <div>
+              <h2>🚐 Van View</h2>
+              <div class="sub" id="vanViewSub"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <select id="vanViewSelect" onchange="onVanViewSelectChange()"></select>
+<div class="zoomControls" title="Zoom the schedule rows">
+              <button class="zoomBtn" onclick="changeHourZoom(-1)">−</button>
+              <span class="zoomLabel">100%</span>
+              <button class="zoomBtn" onclick="changeHourZoom(1)">+</button>
+            </div>
+            <button class="navBtn" onclick="changeVanViewDay(-1)">‹</button>
+            <button class="navBtn" onclick="changeVanViewDay(1)">›</button>
+            <button class="todayBtn" onclick="goToVanViewToday()">Today</button>
+            <button class="blockTimeBtn" onclick="openBlockModalForVanView()">🚫 Block Time</button>
+            <button class="streetSalesBtn" onclick="openStreetSalesModalForVanView()">🍦 Street Sales</button>
+            <button class="addBookingBtn" onclick="openBookingModalForVanView()">+ New Event</button>
+          </div>
+        </div>
+        <div class="scheduleWrap" id="vanViewScheduleWrap"></div>
+
+        <div class="driverPanel">
+          <div class="driverPanelHead">
+            <h3>&#129530; Daily Driver Instructions</h3>
+            <button class="addBookingBtn" onclick="generateRunSheetPDF()">&#128196; Daily Run Sheet</button>
+          </div>
+          <div class="driverPanelGrid">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                <label class="driverPanelLabel">Pre-departure checklist</label>
+                <button type="button" class="iconBtn" title="Edit checklist items" onclick="openChecklistEditor()" style="width:26px;height:26px;font-size:12px;flex-shrink:0;">&#9998;</button>
+              </div>
+              <div class="checklistBox" id="checklistBox"></div>
+            </div>
+            <div>
+              <div class="fieldRow" style="margin-bottom:10px;">
+                <div class="field">
+                  <label>Garage Arrival</label>
+                  <div class="timeSelectGroup">
+                    <select id="dvArrHour"></select>
+                    <select id="dvArrMin"></select>
+                    <select id="dvArrAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Van Return</label>
+                  <div class="timeSelectGroup">
+                    <select id="dvRetHour"></select>
+                    <select id="dvRetMin"></select>
+                    <select id="dvRetAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Today's extra notes</label>
+                <textarea id="dvNotes" placeholder="Anything specific for this van today..."></textarea>
+              </div>
+              <div class="field">
+                <label>Return notes</label>
+                <textarea id="dvReturnNotes" placeholder="e.g. Refill stock, wash the van, drop the float at the office..."></textarea>
+              </div>
+              <button class="saveNoteBtn" id="dvSaveBtn" onclick="saveDriverInstructions()">Save instructions</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EMPLOYEE SCHEDULE -->
+      <section id="scheduleView" style="display:none;">
+        <div class="dayViewHeader">
+          <div class="left">
+            <div>
+              <h2>&#128203; Employee Schedule</h2>
+              <div class="sub">Auto-suggested from assigned events &mdash; review, adjust and confirm. Client names are never shown to staff.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <select id="schEmployee" onchange="loadSchedule()"></select>
+            <select id="schPeriod" onchange="loadSchedule()">
+              <option value="week">Weekly</option>
+              <option value="biweek">Bi-weekly</option>
+              <option value="month">Monthly</option>
+            </select>
+            <button class="navBtn" onclick="changeSchedulePeriod(-1)">&lsaquo;</button>
+            <button class="navBtn" onclick="changeSchedulePeriod(1)">&rsaquo;</button>
+            <button class="todayBtn" onclick="goToScheduleToday()">Today</button>
+            <button class="blockTimeBtn" onclick="autofillSchedule()">&#9889; Auto-fill from events</button>
+            <button class="addBookingBtn" onclick="generateSchedulePDF()">&#128196; Export PDF</button>
+          </div>
+        </div>
+        <div class="scheduleRangeLabel" id="schRangeLabel"></div>
+        <div class="schedGrid" id="schedGrid"></div>
+      </section>
+
       <!-- VANS MANAGEMENT -->
       <section id="vansView" style="display:none;" class="catalogSection">
         <h2 style="margin-top:0;">🚐 Manage Vans</h2>
@@ -510,11 +748,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             <input type="text" id="newEmployeeName" placeholder="e.g. Jonathan" onkeydown="if(event.key==='Enter'){event.preventDefault();addEmployee();}">
           </div>
           <div class="catalogFormField">
-            <label>Role</label>
-            <select id="newEmployeeRole">
-              <option value="driver">Driver</option>
-              <option value="helper">Helper</option>
-            </select>
+            <label>Roles</label>
+            <div class="roleCheckboxes">
+              <label class="roleCheck"><input type="checkbox" id="newRoleDriver"> Driver</label>
+              <label class="roleCheck"><input type="checkbox" id="newRoleHelper"> Helper</label>
+            </div>
           </div>
           <button class="catalogAddBtn" onclick="addEmployee()">+ Add</button>
         </div>
@@ -541,161 +779,323 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   </div>
 </div>
 
-<!-- BOOKING MODAL -->
-<div class="overlay" id="bookingOverlay" style="display:none;">
+<!-- SCHEDULE DAY EDIT MODAL -->
+<div class="overlay" id="schEditOverlay" style="display:none;">
   <div class="modal">
-    <h3 id="modalTitle">New Event</h3>
-    <input type="hidden" id="bookingId">
+    <h3 id="schEditTitle">Edit Day</h3>
+    <input type="hidden" id="schEditDate">
+
+    <div class="field">
+      <label>Day Type</label>
+      <select id="schEditType" onchange="onSchTypeChange()">
+        <option value="off">OFF</option>
+        <option value="corp">Corp. Event</option>
+        <option value="street">Street Sales</option>
+        <option value="both">Corp. Event + Street Sales</option>
+      </select>
+    </div>
+
+    <div id="schTimeFields">
+      <div class="fieldRow">
+        <div class="field">
+          <label>Arrival Time</label>
+          <div class="timeSelectGroup">
+            <select id="schArrHour"></select>
+            <select id="schArrMin"></select>
+            <select id="schArrAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Van Return / Drop-off</label>
+          <div class="timeSelectGroup">
+            <select id="schRetHour"></select>
+            <select id="schRetMin"></select>
+            <select id="schRetAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Custom Notes</label>
+      <textarea id="schEditNotes" placeholder="e.g. Be at the house by 9pm, need to scoop ice cream..."></textarea>
+    </div>
+
+    <div class="modalActions">
+      <div>
+        <button class="btn btnDelete" onclick="clearScheduleDay()">Clear Day</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btnCancel" onclick="closeSchEditModal()">Cancel</button>
+        <button class="btn btnPrimary" onclick="saveScheduleDay()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCK TIME MODAL -->
+<div class="overlay" id="blockOverlay" style="display:none;">
+  <div class="modal">
+    <h3 id="blockModalTitle">Block Time</h3>
+    <input type="hidden" id="blockId">
 
     <div class="field">
       <label>Van</label>
-      <select id="fVan"></select>
+      <select id="bVan"></select>
     </div>
 
     <div class="fieldRow">
       <div class="field">
         <label>Start</label>
         <div class="timeSelectGroup">
-          <select id="fStartHour" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
-          <select id="fStartMin" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
-          <select id="fStartAMPM" onchange="refreshEmployeeOptions();validateEventTimeRange();"><option value="AM">AM</option><option value="PM">PM</option></select>
+          <select id="bStartHour"></select>
+          <select id="bStartMin"></select>
+          <select id="bStartAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
         </div>
       </div>
       <div class="field">
         <label>End</label>
         <div class="timeSelectGroup">
-          <select id="fEndHour" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
-          <select id="fEndMin" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
-          <select id="fEndAMPM" onchange="refreshEmployeeOptions();validateEventTimeRange();"><option value="AM">AM</option><option value="PM">PM</option></select>
+          <select id="bEndHour"></select>
+          <select id="bEndMin"></select>
+          <select id="bEndAMPM"><option value="AM">AM</option><option value="PM">PM</option></select>
         </div>
       </div>
     </div>
-    <div class="field" id="timeErrorMsg" style="display:none;color:var(--cancel);font-size:12px;font-weight:700;margin-top:-8px;"></div>
+    <div class="field" id="blockTimeErrorMsg" style="display:none;color:var(--cancel);font-size:12px;font-weight:700;margin-top:-8px;"></div>
 
     <div class="field">
-      <label>Company / Event Name</label>
-      <input type="text" id="fClient" placeholder="e.g. XPTO Inc / Dave Thompson's Birthday Party">
+      <label id="bReasonLabel">Reason (optional)</label>
+      <input type="text" id="bReason" placeholder="e.g. Maintenance, driver day off...">
     </div>
 
-    <div class="field">
-      <label>Contact Name</label>
-      <input type="text" id="fContactName" placeholder="e.g. Dave Thompson">
-    </div>
-
-    <div class="field">
-      <label>Street Address</label>
-      <input type="text" id="fAddressStreet" placeholder="e.g. #4 359 Lynden Rd">
-    </div>
-
-    <div class="fieldRow">
-      <div class="field">
-        <label>City</label>
-        <input type="text" id="fAddressCity" placeholder="e.g. Hamilton">
+    <div class="modalActions">
+      <div>
+        <button class="btn btnDelete" id="blockDeleteBtn" onclick="deleteBlock()" style="display:none;">Delete</button>
       </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btnCancel" onclick="closeBlockModal()">Cancel</button>
+        <button class="btn btnPrimary" onclick="saveBlock()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="checklistEditorOverlay" style="display:none;">
+  <div class="modal">
+    <h3>Edit Checklist Items</h3>
+    <p class="fieldHint" style="margin-top:-10px;">This is the standard pre-departure checklist shown for every van/day. Add, rename, remove or reorder items below.</p>
+    <div id="checklistEditorList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+    <button type="button" class="smallBtn" onclick="addChecklistEditorItem()">+ Add item</button>
+    <div class="modalActions">
+      <div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btnCancel" onclick="closeChecklistEditor()">Cancel</button>
+        <button class="btn btnPrimary" onclick="saveChecklistItems()">Save Checklist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="cellChoiceOverlay" style="display:none;">
+  <div class="modal" style="width:320px;">
+    <h3>What would you like to add?</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button type="button" class="btn btnPrimary" style="width:100%;" onclick="cellChoiceSelect('event')">&#128197; Event</button>
+      <button type="button" class="btn btnPrimary" style="width:100%;background:linear-gradient(135deg,#8a7dc9,#6b5ca8);" onclick="cellChoiceSelect('street')">&#127848; Street Sales</button>
+      <button type="button" class="btn btnPrimary" style="width:100%;background:linear-gradient(135deg,#8f8f95,#6d6d73);" onclick="cellChoiceSelect('block')">&#128683; Block Time</button>
+    </div>
+    <div class="modalActions">
+      <div></div>
+      <div><button class="btn btnCancel" onclick="closeCellChoice()">Cancel</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="overlay" id="bookingOverlay" style="display:none;">
+  <div class="modal">
+    <h3 id="modalTitle">New Event</h3>
+    <input type="hidden" id="bookingId">
+
+    <div class="formSection">
+      <p class="formSectionTitle">&#128667; Van &amp; Van Schedule</p>
       <div class="field">
-        <label>Province</label>
-        <select id="fAddressProvince">
-          <option value="ON">ON</option>
-          <option value="AB">AB</option>
-          <option value="BC">BC</option>
-          <option value="MB">MB</option>
-          <option value="NB">NB</option>
-          <option value="NL">NL</option>
-          <option value="NS">NS</option>
-          <option value="NT">NT</option>
-          <option value="NU">NU</option>
-          <option value="PE">PE</option>
-          <option value="QC">QC</option>
-          <option value="SK">SK</option>
-          <option value="YT">YT</option>
+        <label>Van</label>
+        <select id="fVan"></select>
+      </div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>Start</label>
+          <div class="timeSelectGroup">
+            <select id="fStartHour" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
+            <select id="fStartMin" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
+            <select id="fStartAMPM" onchange="refreshEmployeeOptions();validateEventTimeRange();"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>End</label>
+          <div class="timeSelectGroup">
+            <select id="fEndHour" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
+            <select id="fEndMin" onchange="refreshEmployeeOptions();validateEventTimeRange();"></select>
+            <select id="fEndAMPM" onchange="refreshEmployeeOptions();validateEventTimeRange();"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+      </div>
+      <div class="field" id="timeErrorMsg" style="display:none;color:var(--cancel);font-size:12px;font-weight:700;margin-top:-8px;"></div>
+    </div>
+
+    <div class="formSection">
+      <p class="formSectionTitle">&#127970; Client &amp; Contact</p>
+      <div class="field">
+        <label>Company / Event Name</label>
+        <input type="text" id="fClient" placeholder="e.g. XPTO Inc / Dave Thompson's Birthday Party">
+      </div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>Contact First Name</label>
+          <input type="text" id="fContactName" placeholder="e.g. Dave">
+        </div>
+        <div class="field">
+          <label>Contact Last Name</label>
+          <input type="text" id="fContactLastName" placeholder="e.g. Thompson">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input type="text" id="fPhone" placeholder="e.g. (289) 000-0000">
+      </div>
+    </div>
+
+    <div class="formSection">
+      <p class="formSectionTitle">&#128205; Location</p>
+      <div class="field">
+        <label>Street Address</label>
+        <input type="text" id="fAddressStreet" placeholder="e.g. #4 359 Lynden Rd">
+      </div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>City</label>
+          <input type="text" id="fAddressCity" placeholder="e.g. Hamilton">
+        </div>
+        <div class="field">
+          <label>Province</label>
+          <select id="fAddressProvince">
+            <option value="ON">ON</option>
+            <option value="AB">AB</option>
+            <option value="BC">BC</option>
+            <option value="MB">MB</option>
+            <option value="NB">NB</option>
+            <option value="NL">NL</option>
+            <option value="NS">NS</option>
+            <option value="NT">NT</option>
+            <option value="NU">NU</option>
+            <option value="PE">PE</option>
+            <option value="QC">QC</option>
+            <option value="SK">SK</option>
+            <option value="YT">YT</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Postal Code</label>
+          <input type="text" id="fAddressPostalCode" placeholder="e.g. L8P 1A1" style="text-transform:uppercase;">
+        </div>
+      </div>
+      <p class="fieldHint" style="margin-bottom:0;">📍 Fill in the full address (with postal code) so the QR code on the itinerary points to the exact location on Google Maps.</p>
+    </div>
+
+    <div class="formSection">
+      <p class="formSectionTitle">&#127843; Event Details</p>
+      <div class="fieldRow">
+        <div class="field">
+          <label>Event Start Time</label>
+          <div class="timeSelectGroup">
+            <select id="fEventTimeHour" onchange="validateEventTimeRange()"></select>
+            <select id="fEventTimeMin" onchange="validateEventTimeRange()"></select>
+            <select id="fEventTimeAMPM" onchange="validateEventTimeRange()"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Event End Time</label>
+          <div class="timeSelectGroup">
+            <select id="fEventEndTimeHour" onchange="validateEventTimeRange()"></select>
+            <select id="fEventEndTimeMin" onchange="validateEventTimeRange()"></select>
+            <select id="fEventEndTimeAMPM" onchange="validateEventTimeRange()"><option value="AM">AM</option><option value="PM">PM</option></select>
+          </div>
+        </div>
+      </div>
+      <div class="field" id="eventTimeErrorMsg" style="display:none;color:var(--cancel);font-size:12px;font-weight:700;margin-top:-8px;"></div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>Number of People</label>
+          <input type="number" id="fNumberOfPeople" min="0" step="1" placeholder="e.g. 200">
+        </div>
+        <div class="field">
+          <label>Travel Fee (CAD)</label>
+          <input type="number" id="fTravelFee" min="0" step="0.01" placeholder="e.g. 50">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Ice Cream Type</label>
+        <select id="fIceCreamType" onchange="updateIceCreamPriceFields()">
+          <option value="">— select —</option>
+          <option value="sundae">Ice Cream Sundaes</option>
+          <option value="only">Ice Cream Only</option>
+          <option value="both">Ice Cream Sundaes & Ice Cream Only</option>
         </select>
       </div>
-      <div class="field">
-        <label>Postal Code</label>
-        <input type="text" id="fAddressPostalCode" placeholder="e.g. L8P 1A1" style="text-transform:uppercase;">
-      </div>
-    </div>
-    <p class="fieldHint">📍 Fill in the full address (with postal code) so the QR code on the itinerary points to the exact location on Google Maps.</p>
 
-    <div class="field">
-      <label>Phone</label>
-      <input type="text" id="fPhone" placeholder="e.g. (289) 000-0000">
-    </div>
-
-    <div class="fieldRow">
-      <div class="field">
-        <label>Event Start Time</label>
-        <div class="timeSelectGroup">
-          <select id="fEventTimeHour" onchange="validateEventTimeRange()"></select>
-          <select id="fEventTimeMin" onchange="validateEventTimeRange()"></select>
-          <select id="fEventTimeAMPM" onchange="validateEventTimeRange()"><option value="AM">AM</option><option value="PM">PM</option></select>
+      <div class="fieldRow" id="iceCreamPriceFields" style="display:none;">
+        <div class="field" id="priceSundaeField" style="display:none;">
+          <label>Price per Sundae (CAD)</label>
+          <input type="number" id="fPriceSundae" min="0" step="0.01" placeholder="e.g. 6.50">
         </div>
-      </div>
-      <div class="field">
-        <label>Event End Time</label>
-        <div class="timeSelectGroup">
-          <select id="fEventEndTimeHour" onchange="validateEventTimeRange()"></select>
-          <select id="fEventEndTimeMin" onchange="validateEventTimeRange()"></select>
-          <select id="fEventEndTimeAMPM" onchange="validateEventTimeRange()"><option value="AM">AM</option><option value="PM">PM</option></select>
+        <div class="field" id="priceOnlyField" style="display:none;">
+          <label>Price per Unit — Ice Cream Only (CAD)</label>
+          <input type="number" id="fPriceOnly" min="0" step="0.01" placeholder="e.g. 4.00">
         </div>
       </div>
     </div>
-    <div class="field" id="eventTimeErrorMsg" style="display:none;color:var(--cancel);font-size:12px;font-weight:700;margin-top:-8px;"></div>
 
-    <div class="fieldRow">
+    <div class="formSection">
+      <p class="formSectionTitle">&#128100; Staff</p>
       <div class="field">
-        <label>Number of People</label>
-        <input type="number" id="fNumberOfPeople" min="0" step="1" placeholder="e.g. 200">
+        <label>Driver</label>
+        <select id="fDriver" onchange="onDriverSelectChange()"></select>
       </div>
+
       <div class="field">
-        <label>Travel Fee (CAD)</label>
-        <input type="number" id="fTravelFee" min="0" step="0.01" placeholder="e.g. 50">
+        <label>Helper(s)</label>
+        <div class="chipsInputRow">
+          <select id="fHelperSelect"></select>
+          <button type="button" class="smallBtn" onclick="addHelperChip()">+ Add</button>
+        </div>
+        <div class="chipsList" id="helpersChipsList"></div>
       </div>
     </div>
 
-    <div class="field">
-      <label>Ice Cream Type</label>
-      <select id="fIceCreamType" onchange="updateIceCreamPriceFields()">
-        <option value="">— select —</option>
-        <option value="sundae">Ice Cream Sundae</option>
-        <option value="only">Ice Cream Only</option>
-        <option value="both">Ice Cream Sundae & Ice Cream Only</option>
-      </select>
-    </div>
-
-    <div class="fieldRow" id="iceCreamPriceFields" style="display:none;">
-      <div class="field" id="priceSundaeField" style="display:none;">
-        <label>Price per Sundae (CAD)</label>
-        <input type="number" id="fPriceSundae" min="0" step="0.01" placeholder="e.g. 6.50">
+    <div class="formSection">
+      <p class="formSectionTitle">&#128221; Notes</p>
+      <div class="field">
+        <label>On-site Logistics <span style="text-transform:none;font-weight:400;">(parking, access, setup &mdash; shown to the driver)</span></label>
+        <textarea id="fSiteNotes" placeholder="e.g. Look for orange cones for parking, enter through the side gate..."></textarea>
       </div>
-      <div class="field" id="priceOnlyField" style="display:none;">
-        <label>Price per Unit — Ice Cream Only (CAD)</label>
-        <input type="number" id="fPriceOnly" min="0" step="0.01" placeholder="e.g. 4.00">
+
+      <div class="field">
+        <label>Additional Info <span style="text-transform:none;font-weight:400;">(shown in the itinerary PDF for van staff)</span></label>
+        <textarea id="fNotes" placeholder="Event details, special instructions..."></textarea>
       </div>
-    </div>
 
-    <div class="field">
-      <label>Driver</label>
-      <select id="fDriver" onchange="onDriverSelectChange()"></select>
-    </div>
-
-    <div class="field">
-      <label>Helper(s)</label>
-      <div class="chipsInputRow">
-        <select id="fHelperSelect"></select>
-        <button type="button" class="smallBtn" onclick="addHelperChip()">+ Add</button>
+      <div class="field">
+        <label>Internal Info <span style="text-transform:none;font-weight:400;">(private — invoicing/financial notes, never shown to van staff)</span></label>
+        <textarea id="fInternalNotes" placeholder="Invoice details, financial notes, internal reminders..."></textarea>
       </div>
-      <div class="chipsList" id="helpersChipsList"></div>
-    </div>
-
-    <div class="field">
-      <label>Additional Info <span style="text-transform:none;font-weight:400;">(shown in the itinerary PDF for van staff)</span></label>
-      <textarea id="fNotes" placeholder="Event details, special instructions..."></textarea>
-    </div>
-
-    <div class="field">
-      <label>Internal Info <span style="text-transform:none;font-weight:400;">(private — invoicing/financial notes, never shown to van staff)</span></label>
-      <textarea id="fInternalNotes" placeholder="Invoice details, financial notes, internal reminders..."></textarea>
     </div>
 
     <div class="field">
@@ -756,11 +1156,33 @@ const APP_PASSWORD = "crazy@admin";
 
 const HOUR_START = 10;  // 10 AM
 const HOUR_END = 24;    // 12 AM (midnight)
-const HOUR_PX = 60;
+let HOUR_PX = parseInt(localStorage.getItem('cc_hour_px')) || 60;
+const HOUR_PX_MIN = 40, HOUR_PX_MAX = 160, HOUR_PX_STEP = 20;
+
+function applyHourZoom(){
+  document.documentElement.style.setProperty('--hour-px', HOUR_PX + 'px');
+  document.querySelectorAll('.zoomLabel').forEach(el=>{
+    el.textContent = Math.round((HOUR_PX/60)*100) + '%';
+  });
+}
+function changeHourZoom(delta){
+  HOUR_PX = Math.min(HOUR_PX_MAX, Math.max(HOUR_PX_MIN, HOUR_PX + delta*HOUR_PX_STEP));
+  localStorage.setItem('cc_hour_px', String(HOUR_PX));
+  applyHourZoom();
+  // re-render whichever schedule view is currently visible so blocks reposition
+  if(document.getElementById('dayView').style.display==='block'){
+    renderBookingBlocks();
+    renderTimeBlocks();
+  }
+  if(document.getElementById('vanViewSection').style.display==='block'){
+    renderVanViewBookingBlocks();
+    renderVanViewTimeBlocks();
+  }
+}
 
 const STATUS_COLORS = { ok:'#3fb27f', pending:'#f2a93b', unconfirmed:'#9b8ce0', cancel:'#e05c5c' };
 const STATUS_LABELS = { ok:'OK', pending:'Pending', unconfirmed:'Unconfirmed', cancel:'Cancelled' };
-const ICE_CREAM_LABELS = { sundae:'Ice Cream Sundae', only:'Ice Cream Only', both:'Ice Cream Sundae & Ice Cream Only' };
+const ICE_CREAM_LABELS = { sundae:'Ice Cream Sundaes', only:'Ice Cream Only', both:'Ice Cream Sundaes & Ice Cream Only' };
 
 let currentTab = 'calendar';
 let viewMonth = new Date().getMonth();
@@ -773,11 +1195,13 @@ let editingVanId = null;
 let editingEmployeeId = null;
 let bookingsByDate = {};  // { 'yyyy-mm-dd': [bookings...] }
 let currentDayBookings = [];
+let currentDayBlocks = [];
 let dayNotesCache = {};   // { 'yyyy-mm-dd': text }
 
 let editingStatus = 'ok';
 let monthUnsub = null;
 let dayUnsub = null;
+let dayBlockUnsub = null;
 
 /* ---------------- AUTH (simple password gate) ---------------- */
 function tryLogin(){
@@ -799,9 +1223,11 @@ function logout(){
 function showApp(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('mainApp').style.display='block';
+  applyHourZoom();
   initVansListener();
   initEmployeesListener();
-  renderMonth();
+  loadChecklistSettings();
+  renderCalendarView();
   initNotificationSystem();
 }
 
@@ -927,7 +1353,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 /* ---------------- TIME SELECT HELPERS (evita ambiguidade AM/PM) ---------------- */
 function populateTimeSelects(){
-  ['fStartHour','fEndHour','fEventTimeHour','fEventEndTimeHour'].forEach(id=>{
+  ['fStartHour','fEndHour','fEventTimeHour','fEventEndTimeHour','bStartHour','bEndHour','schArrHour','schRetHour','dvArrHour','dvRetHour'].forEach(id=>{
     const sel = document.getElementById(id);
     sel.innerHTML = '';
     for(let h=1; h<=12; h++){
@@ -936,7 +1362,7 @@ function populateTimeSelects(){
       sel.appendChild(opt);
     }
   });
-  ['fStartMin','fEndMin','fEventTimeMin','fEventEndTimeMin'].forEach(id=>{
+  ['fStartMin','fEndMin','fEventTimeMin','fEventEndTimeMin','bStartMin','bEndMin','schArrMin','schRetMin','dvArrMin','dvRetMin'].forEach(id=>{
     const sel = document.getElementById(id);
     sel.innerHTML = '';
     for(let m=0; m<60; m+=5){
@@ -999,15 +1425,21 @@ function switchTab(tab){
   currentTab = tab;
   document.getElementById('tabCalendar').classList.toggle('active', tab==='calendar');
   document.getElementById('tabEventsList').classList.toggle('active', tab==='eventsList');
+  document.getElementById('tabVanView').classList.toggle('active', tab==='vanView');
+  document.getElementById('tabSchedule').classList.toggle('active', tab==='schedule');
   document.getElementById('tabVans').classList.toggle('active', tab==='vans');
   document.getElementById('tabEmployees').classList.toggle('active', tab==='employees');
   document.getElementById('monthView').style.display = tab==='calendar' ? 'block':'none';
   document.getElementById('dayView').style.display = 'none';
   document.getElementById('eventsListView').style.display = tab==='eventsList' ? 'block':'none';
+  document.getElementById('vanViewSection').style.display = tab==='vanView' ? 'block':'none';
+  document.getElementById('scheduleView').style.display = tab==='schedule' ? 'block':'none';
   document.getElementById('vansView').style.display = tab==='vans' ? 'block':'none';
   document.getElementById('employeesView').style.display = tab==='employees' ? 'block':'none';
-  if(tab==='calendar') renderMonth();
+  if(tab==='calendar') renderCalendarView();
   if(tab==='eventsList') initEventsListTab();
+  if(tab==='vanView') initVanViewTab();
+  if(tab==='schedule') initScheduleTab();
   if(tab==='vans') renderVansManage();
   if(tab==='employees') renderEmployeesManage();
 }
@@ -1016,11 +1448,15 @@ function openDayView(dateISO){
   selectedDate = dateISO;
   document.getElementById('monthView').style.display='none';
   document.getElementById('eventsListView').style.display='none';
+  document.getElementById('vanViewSection').style.display='none';
+  document.getElementById('scheduleView').style.display='none';
   document.getElementById('vansView').style.display='none';
   document.getElementById('employeesView').style.display='none';
   document.getElementById('dayView').style.display='block';
   document.getElementById('tabCalendar').classList.add('active');
   document.getElementById('tabEventsList').classList.remove('active');
+  document.getElementById('tabVanView').classList.remove('active');
+  document.getElementById('tabSchedule').classList.remove('active');
   document.getElementById('tabVans').classList.remove('active');
   document.getElementById('tabEmployees').classList.remove('active');
   renderDayView();
@@ -1032,8 +1468,21 @@ function initEmployeesListener(){
     employees = [];
     snap.forEach(doc=> employees.push({id:doc.id, ...doc.data()}));
     if(document.getElementById('employeesView').style.display==='block') renderEmployeesManage();
+    if(document.getElementById('scheduleView').style.display==='block') populateScheduleEmployeeSelect();
     if(document.getElementById('bookingOverlay').style.display==='flex') refreshEmployeeOptions();
   });
+}
+
+// Employees can hold more than one role (e.g. someone who works as both Driver
+// and Helper). Roles are stored as a `roles` array; older records used a single
+// `role` string, so this normalizes both shapes into one array.
+function getEmployeeRoles(e){
+  if(Array.isArray(e.roles) && e.roles.length) return e.roles;
+  if(e.role) return [e.role];
+  return [];
+}
+function employeeHasRole(e, role){
+  return getEmployeeRoles(e).includes(role);
 }
 
 function renderEmployeesManage(){
@@ -1044,28 +1493,32 @@ function renderEmployeesManage(){
     return;
   }
   employees.forEach(e=>{
+    const roles = getEmployeeRoles(e);
     const card = document.createElement('div');
     if(editingEmployeeId === e.id){
       card.className='catalogCard editing';
       card.innerHTML = `
         <input type="text" id="editEmpName-${e.id}" value="${escapeHtml(e.name||'')}" onkeydown="if(event.key==='Enter'){saveEmployeeEdit('${e.id}');}">
-        <select id="editEmpRole-${e.id}">
-          <option value="driver" ${e.role==='driver'?'selected':''}>Driver</option>
-          <option value="helper" ${e.role==='helper'?'selected':''}>Helper</option>
-        </select>
+        <div class="roleCheckboxes">
+          <label class="roleCheck"><input type="checkbox" id="editRoleDriver-${e.id}" ${roles.includes('driver')?'checked':''}> Driver</label>
+          <label class="roleCheck"><input type="checkbox" id="editRoleHelper-${e.id}" ${roles.includes('helper')?'checked':''}> Helper</label>
+        </div>
         <div class="catalogActions">
-          <button class="catalogIconBtn saveBtn" title="Save" onclick="saveEmployeeEdit('${e.id}')">✓</button>
-          <button class="catalogIconBtn" title="Cancel" onclick="cancelEditEmployee()">✕</button>
+          <button class="catalogIconBtn saveBtn" title="Save" onclick="saveEmployeeEdit('${e.id}')">\u2713</button>
+          <button class="catalogIconBtn" title="Cancel" onclick="cancelEditEmployee()">\u2715</button>
         </div>
       `;
     } else {
       card.className='catalogCard';
+      const badges = roles.length
+        ? roles.map(r=>`<span class="catalogRoleBadge ${r}">${r==='driver'?'Driver':'Helper'}</span>`).join('')
+        : '<span class="catalogRoleBadge" style="background:#b9b9c2;">No role</span>';
       card.innerHTML = `
-        <span class="catalogRoleBadge ${e.role}">${e.role==='driver'?'Driver':'Helper'}</span>
+        ${badges}
         <span class="catalogName">${escapeHtml(e.name||'')}</span>
         <div class="catalogActions">
-          <button class="catalogIconBtn" title="Edit" onclick="startEditEmployee('${e.id}')">✏️</button>
-          <button class="catalogIconBtn removeBtn" title="Remove" onclick="deleteEmployee('${e.id}')">✕</button>
+          <button class="catalogIconBtn" title="Edit" onclick="startEditEmployee('${e.id}')">\u270f\ufe0f</button>
+          <button class="catalogIconBtn removeBtn" title="Remove" onclick="deleteEmployee('${e.id}')">\u2715</button>
         </div>
       `;
     }
@@ -1076,21 +1529,34 @@ function renderEmployeesManage(){
 function addEmployee(){
   const nameInput = document.getElementById('newEmployeeName');
   const name = nameInput.value.trim();
-  const role = document.getElementById('newEmployeeRole').value;
+  const roles = [];
+  if(document.getElementById('newRoleDriver').checked) roles.push('driver');
+  if(document.getElementById('newRoleHelper').checked) roles.push('helper');
+
   if(!name){ alert('Enter the employee\'s name.'); return; }
+  if(roles.length===0){ alert('Select at least one role (Driver and/or Helper).'); return; }
+
   db.collection('employees').add({
-    name, role, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    name, roles, createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   nameInput.value = '';
+  document.getElementById('newRoleDriver').checked = false;
+  document.getElementById('newRoleHelper').checked = false;
   nameInput.focus();
 }
 function startEditEmployee(id){ editingEmployeeId = id; renderEmployeesManage(); }
 function cancelEditEmployee(){ editingEmployeeId = null; renderEmployeesManage(); }
 function saveEmployeeEdit(id){
   const name = document.getElementById(`editEmpName-${id}`).value.trim();
-  const role = document.getElementById(`editEmpRole-${id}`).value;
+  const roles = [];
+  if(document.getElementById(`editRoleDriver-${id}`).checked) roles.push('driver');
+  if(document.getElementById(`editRoleHelper-${id}`).checked) roles.push('helper');
+
   if(!name){ alert('Enter the employee\'s name.'); return; }
-  updateEmployee(id, {name, role});
+  if(roles.length===0){ alert('Select at least one role (Driver and/or Helper).'); return; }
+
+  // clear the legacy single-role field so it can't shadow the new array
+  updateEmployee(id, {name, roles, role: firebase.firestore.FieldValue.delete()});
   editingEmployeeId = null;
   renderEmployeesManage();
 }
@@ -1125,7 +1591,7 @@ function refreshEmployeeOptions(){
   const driverSel = document.getElementById('fDriver');
   const currentDriverId = driverSel.value;
   driverSel.innerHTML = '<option value="">— select —</option>' + employees
-    .filter(e=>e.role==='driver')
+    .filter(e=>employeeHasRole(e,'driver'))
     .map(e=>{
       const isBusy = busy.has(e.id) && e.id!==currentDriverId;
       return `<option value="${e.id}" ${isBusy?'disabled':''}>${escapeHtml(e.name)}${isBusy?' (busy at this time)':''}</option>`;
@@ -1136,7 +1602,7 @@ function refreshEmployeeOptions(){
   const helperSel = document.getElementById('fHelperSelect');
   const addedIds = new Set(currentHelpers.map(h=>h.id));
   helperSel.innerHTML = employees
-    .filter(e=>e.role==='helper' && !addedIds.has(e.id))
+    .filter(e=>employeeHasRole(e,'helper') && !addedIds.has(e.id))
     .map(e=>{
       const isBusy = busy.has(e.id);
       return `<option value="${e.id}" ${isBusy?'disabled':''}>${escapeHtml(e.name)}${isBusy?' (busy at this time)':''}</option>`;
@@ -1152,6 +1618,7 @@ function initVansListener(){
     snap.forEach(doc=> vans.push({id:doc.id, ...doc.data()}));
     if(document.getElementById('vansView').style.display==='block') renderVansManage();
     if(document.getElementById('dayView').style.display==='block') renderDayView();
+    if(document.getElementById('vanViewSection').style.display==='block') renderVanView();
     populateVanSelect();
   });
 }
@@ -1235,6 +1702,33 @@ function populateVanSelect(){
 }
 
 /* ---------------- MONTH VIEW ---------------- */
+let calViewMode = 'month'; // 'month' | 'week' | 'year'
+let weekRefDate = new Date(); // reference date for week view navigation
+
+function renderCalendarView(){
+  document.getElementById('calGrid').style.display = calViewMode==='month' ? 'grid' : 'none';
+  document.getElementById('weekGrid').style.display = calViewMode==='week' ? 'grid' : 'none';
+  document.getElementById('yearGrid').style.display = calViewMode==='year' ? 'grid' : 'none';
+  if(calViewMode==='month') renderMonth();
+  else if(calViewMode==='week') renderWeek();
+  else if(calViewMode==='year') renderYear();
+}
+function switchCalendarViewMode(){
+  calViewMode = document.getElementById('calViewMode').value;
+  renderCalendarView();
+}
+function changePeriod(delta){
+  if(calViewMode==='month'){
+    changeMonth(delta);
+  } else if(calViewMode==='week'){
+    weekRefDate.setDate(weekRefDate.getDate() + delta*7);
+    renderWeek();
+  } else if(calViewMode==='year'){
+    viewYear += delta;
+    renderYear();
+  }
+}
+
 function changeMonth(delta){
   viewMonth += delta;
   if(viewMonth<0){ viewMonth=11; viewYear--; }
@@ -1244,7 +1738,8 @@ function changeMonth(delta){
 function goToToday(){
   const t = new Date();
   viewMonth = t.getMonth(); viewYear = t.getFullYear();
-  renderMonth();
+  weekRefDate = new Date();
+  renderCalendarView();
 }
 
 /* ---------------- JUMP TO DATE (roulette-style dropdowns) ---------------- */
@@ -1290,6 +1785,908 @@ function jumpToDate(){
   const dateISO = formatISO(new Date(year, month, day));
   viewMonth = month; viewYear = year;
   openDayView(dateISO);
+}
+
+/* ---------------- VAN VIEW ---------------- */
+let vanViewDate = formatISO(new Date());
+let vanViewSelectedVanId = null;
+let vanViewBookings = [];
+let vanViewBlocks = [];
+let vanViewBookingUnsub = null;
+let vanViewBlockUnsub = null;
+
+function initVanViewTab(){
+  if(vans.length && !vanViewSelectedVanId) vanViewSelectedVanId = vans[0].id;
+  renderVanView();
+}
+
+function populateVanViewSelect(){
+  const sel = document.getElementById('vanViewSelect');
+  sel.innerHTML = vans.map(v=>`<option value="${v.id}">${escapeHtml(v.name)}</option>`).join('');
+  if(vanViewSelectedVanId) sel.value = vanViewSelectedVanId;
+}
+
+function onVanViewSelectChange(){
+  vanViewSelectedVanId = document.getElementById('vanViewSelect').value;
+  renderVanView();
+}
+
+function changeVanViewDay(delta){
+  const d = parseISO(vanViewDate);
+  d.setDate(d.getDate()+delta);
+  vanViewDate = formatISO(d);
+  renderVanView();
+}
+
+function goToVanViewToday(){
+  vanViewDate = formatISO(new Date());
+  renderVanView();
+}
+
+function renderVanView(){
+  const wrap = document.getElementById('vanViewScheduleWrap');
+  if(vans.length===0){
+    document.getElementById('vanViewSub').textContent = '';
+    wrap.innerHTML = `<div class="emptyVansMsg">No vans added yet. Go to the <b>Vans</b> tab to add one.</div>`;
+    return;
+  }
+  if(!vanViewSelectedVanId || !vans.find(v=>v.id===vanViewSelectedVanId)){
+    vanViewSelectedVanId = vans[0].id;
+  }
+  populateVanViewSelect();
+
+  const d = parseISO(vanViewDate);
+  document.getElementById('vanViewSub').textContent = `${WEEKDAYS_FULL[d.getDay()]}, ${formatDateBR(d)}`;
+
+  buildVanViewGrid();
+  loadVanViewBookings();
+  loadVanViewBlocks();
+  loadDriverInstructions();
+}
+
+function buildVanViewGrid(){
+  const wrap = document.getElementById('vanViewScheduleWrap');
+  wrap.innerHTML = '';
+  const van = vans.find(v=>v.id===vanViewSelectedVanId);
+  if(!van) return;
+
+  const timeCol = document.createElement('div');
+  timeCol.className = 'timeCol';
+  let timeColHtml = `<div class="timeColHead"></div>`;
+  for(let h=HOUR_START; h<HOUR_END; h++){ timeColHtml += `<div class="hourSlot">${minutesToLabel(h*60)}</div>`; }
+  timeCol.innerHTML = timeColHtml;
+  wrap.appendChild(timeCol);
+
+  const track = document.createElement('div');
+  track.className = 'vansTrack';
+
+  const col = document.createElement('div');
+  col.className = 'vanCol';
+  col.dataset.vanId = van.id;
+  col.style.minWidth = '320px';
+  let head = `<div class="vanColHead"><span class="vanColorDot" style="background:${van.color}"></span>${escapeHtml(van.name)}</div>`;
+  let slots = '';
+  for(let h=HOUR_START; h<HOUR_END; h++){ slots += `<div class="hourSlot" data-hour="${h}"></div>`; }
+  col.innerHTML = head + slots;
+
+  col.addEventListener('click', (e)=>{
+    if(e.target.closest('.bookingBlock')) return;
+    if(e.target.closest('.timeBlockEl')) return;
+    const slot = e.target.closest('.hourSlot');
+    if(!slot || slot.classList.contains('vanColHead')) return;
+    const hour = parseInt(slot.dataset.hour);
+    const rect = slot.getBoundingClientRect();
+    const offsetY = e.clientY - rect.top;
+    const minuteOffset = Math.round((offsetY/60)*60/15)*15;
+    const startMin = hour*60 + Math.min(minuteOffset,45);
+    const startH = String(Math.floor(startMin/60)).padStart(2,'0');
+    const startM = String(startMin%60).padStart(2,'0');
+    const endMin = startMin+60;
+    const endH = String(Math.floor(endMin/60)).padStart(2,'0');
+    const endM = String(endMin%60).padStart(2,'0');
+    selectedDate = vanViewDate;
+    openCellChoice(van.id, `${startH}:${startM}`, `${endH}:${endM}`);
+  });
+
+  track.appendChild(col);
+  wrap.appendChild(track);
+}
+
+function loadVanViewBookings(){
+  if(vanViewBookingUnsub) vanViewBookingUnsub();
+  vanViewBookingUnsub = db.collection('bookings')
+    .where('date','==',vanViewDate).where('vanId','==',vanViewSelectedVanId)
+    .onSnapshot(snap=>{
+      vanViewBookings = [];
+      snap.forEach(doc=> vanViewBookings.push({id:doc.id, ...doc.data()}));
+      renderVanViewBookingBlocks();
+    });
+}
+
+function loadVanViewBlocks(){
+  if(vanViewBlockUnsub) vanViewBlockUnsub();
+  vanViewBlockUnsub = db.collection('timeBlocks')
+    .where('date','==',vanViewDate).where('vanId','==',vanViewSelectedVanId)
+    .onSnapshot(snap=>{
+      vanViewBlocks = [];
+      snap.forEach(doc=> vanViewBlocks.push({id:doc.id, ...doc.data()}));
+      renderVanViewTimeBlocks();
+    });
+}
+
+function renderVanViewBookingBlocks(){
+  const wrap = document.getElementById('vanViewScheduleWrap');
+  const col = wrap.querySelector('.vanCol');
+  if(!col) return;
+  wrap.querySelectorAll('.bookingBlock').forEach(el=>el.remove());
+
+  const dayStartMin = HOUR_START*60;
+  const HEAD = 52;
+
+  vanViewBookings.forEach(b=>{
+    const startMin = timeToMinutes(b.startTime||'09:00');
+    const endMin = Math.max(timeToMinutes(b.endTime||'10:00'), startMin+15);
+    const van = vans.find(v=>v.id===b.vanId);
+    const color = STATUS_COLORS[b.status] || (van?van.color:'#ec1561');
+
+    const rawTop = HEAD + ((startMin-dayStartMin)/60)*HOUR_PX;
+    const rawBottom = HEAD + ((endMin-dayStartMin)/60)*HOUR_PX;
+    const top = Math.max(HEAD, rawTop);
+    const height = Math.max(rawBottom - top, 44);
+    const isOutOfRange = startMin < dayStartMin;
+
+    const helperNames = (b.helpers && b.helpers.length) ? b.helpers.join(', ') : '';
+    const lines = [];
+    lines.push(`<b>${escapeHtml(b.clientName||'No name')}</b>`);
+    lines.push(`<div class="meta">🕐 ${b.startTime||''}–${b.endTime||''}${isOutOfRange?' ⚠️ before '+minutesToLabel(dayStartMin):''}</div>`);
+    if(b.address) lines.push(`<div class="meta">📍 ${escapeHtml(b.address)}</div>`);
+    if(b.phone) lines.push(`<div class="meta">📞 ${escapeHtml(b.phone)}</div>`);
+    if(b.driver) lines.push(`<div class="meta">🚗 ${escapeHtml(b.driver)}</div>`);
+    if(helperNames) lines.push(`<div class="meta">🙋 ${escapeHtml(helperNames)}</div>`);
+    if(b.notes) lines.push(`<div class="meta notesLine">📝 ${escapeHtml(b.notes)}</div>`);
+
+    const block = document.createElement('div');
+    block.className = 'bookingBlock';
+    if(isOutOfRange) block.style.outline = '2px dashed rgba(255,255,255,0.8)';
+    block.style.top = top+'px';
+    block.style.height = Math.max(height,44)+'px';
+    block.style.background = color;
+    block.innerHTML = lines.join('');
+    block.onclick = (e)=>{ e.stopPropagation(); selectedDate = vanViewDate; openViewBookingModal(b); };
+    col.appendChild(block);
+  });
+}
+
+function renderVanViewTimeBlocks(){
+  const wrap = document.getElementById('vanViewScheduleWrap');
+  const col = wrap.querySelector('.vanCol');
+  if(!col) return;
+  wrap.querySelectorAll('.timeBlockEl').forEach(el=>el.remove());
+
+  const dayStartMin = HOUR_START*60;
+  const HEAD = 52;
+
+  vanViewBlocks.forEach(blk=>{
+    const startMin = timeToMinutes(blk.startTime||'00:00');
+    const endMin = Math.max(timeToMinutes(blk.endTime||'00:00'), startMin+15);
+    const rawTop = HEAD + ((startMin-dayStartMin)/60)*HOUR_PX;
+    const rawBottom = HEAD + ((endMin-dayStartMin)/60)*HOUR_PX;
+    const top = Math.max(HEAD, rawTop);
+    const height = Math.max(rawBottom - top, 30);
+
+    const isStreet = blk.kind === 'streetSales';
+    const el = document.createElement('div');
+    el.className = 'timeBlockEl' + (isStreet ? ' streetSales' : '');
+    el.style.top = top+'px';
+    el.style.height = height+'px';
+    const label = isStreet ? '🍦 Street Sales' : '🚫 Blocked';
+    el.innerHTML = `<div class="timeBlockLabel">${label}${blk.reason?'<br>'+escapeHtml(blk.reason):''}</div>`;
+    el.onclick = (e)=>{ e.stopPropagation(); selectedDate = vanViewDate; openBlockModal(blk); };
+    col.appendChild(el);
+  });
+}
+
+function openBookingModalForVanView(){
+  selectedDate = vanViewDate;
+  openBookingModal(null, vanViewSelectedVanId);
+}
+function openBlockModalForVanView(){
+  selectedDate = vanViewDate;
+  openBlockModal();
+  if(vanViewSelectedVanId) document.getElementById('bVan').value = vanViewSelectedVanId;
+}
+
+/* ---------------- EMPLOYEE SCHEDULE ----------------
+   Stored per employee+date in the `schedules` collection, doc id `${empId}_${date}`.
+   PRIVACY: day types are masked categories only - client/company names are never
+   written here, so nothing exported for staff can leak customer identities.
+------------------------------------------------------- */
+const SCHED_TYPE_LABELS = { off:'OFF', corp:'Corp. Event', street:'Street Sales', both:'Corp. Event + Street Sales' };
+let schedRefDate = new Date();
+let schedEmployeeId = null;
+let schedEntries = {};      // saved: { 'yyyy-mm-dd': {...} }
+let schedSuggestions = {};  // derived from events: { 'yyyy-mm-dd': {...} }
+let schedUnsub = null;
+
+function initScheduleTab(){
+  populateScheduleEmployeeSelect();
+  loadSchedule();
+}
+
+function populateScheduleEmployeeSelect(){
+  const sel = document.getElementById('schEmployee');
+  const prev = schedEmployeeId || sel.value;
+  sel.innerHTML = employees.map(e=>`<option value="${e.id}">${escapeHtml(e.name)}</option>`).join('');
+  if(prev && employees.find(e=>e.id===prev)) sel.value = prev;
+  schedEmployeeId = sel.value || (employees[0] && employees[0].id) || null;
+}
+
+function getSchedulePeriodRange(){
+  const period = document.getElementById('schPeriod').value;
+  const ref = new Date(schedRefDate);
+  if(period === 'month'){
+    return { start: new Date(ref.getFullYear(), ref.getMonth(), 1),
+             end:   new Date(ref.getFullYear(), ref.getMonth()+1, 0) };
+  }
+  const start = new Date(ref);
+  start.setDate(start.getDate() - start.getDay());
+  const end = new Date(start);
+  end.setDate(start.getDate() + (period === 'biweek' ? 13 : 6));
+  return { start, end };
+}
+
+function changeSchedulePeriod(delta){
+  const period = document.getElementById('schPeriod').value;
+  if(period === 'month') schedRefDate.setMonth(schedRefDate.getMonth() + delta);
+  else if(period === 'biweek') schedRefDate.setDate(schedRefDate.getDate() + delta*14);
+  else schedRefDate.setDate(schedRefDate.getDate() + delta*7);
+  loadSchedule();
+}
+function goToScheduleToday(){
+  schedRefDate = new Date();
+  loadSchedule();
+}
+
+function loadSchedule(){
+  schedEmployeeId = document.getElementById('schEmployee').value || schedEmployeeId;
+  const grid = document.getElementById('schedGrid');
+  if(!schedEmployeeId){
+    grid.innerHTML = '<p class="emptyCatalogMsg">No employees registered yet. Add one in the Employees tab.</p>';
+    document.getElementById('schRangeLabel').textContent = '';
+    return;
+  }
+  const { start, end } = getSchedulePeriodRange();
+  const startISO = formatISO(start), endISO = formatISO(end);
+  document.getElementById('schRangeLabel').textContent =
+    `${MONTHS[start.getMonth()]} ${start.getDate()} - ${MONTHS[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`;
+
+  // Single-field query only (equality on employeeId) so Firestore never needs a
+  // composite index; the date range is filtered client-side below.
+  if(schedUnsub) schedUnsub();
+  schedUnsub = db.collection('schedules')
+    .where('employeeId','==',schedEmployeeId)
+    .onSnapshot(snap=>{
+      schedEntries = {};
+      snap.forEach(doc=>{
+        const d = doc.data();
+        if(d.date >= startISO && d.date <= endISO) schedEntries[d.date] = d;
+      });
+      computeScheduleSuggestions(startISO, endISO).then(()=> renderScheduleGrid());
+    }, err=>{
+      console.error('Error loading schedule:', err);
+      grid.innerHTML = `<p class="emptyCatalogMsg">Could not load the schedule.<br>${escapeHtml(err.message)}</p>`;
+    });
+}
+
+// Looks at bookings + street-sales blocks the employee is assigned to and
+// derives a suggested day type / arrival / return for each date in range.
+function computeScheduleSuggestions(startISO, endISO){
+  schedSuggestions = {};
+  const bookingsP = db.collection('bookings')
+    .where('date','>=',startISO).where('date','<=',endISO).get();
+  const blocksP = db.collection('timeBlocks')
+    .where('date','>=',startISO).where('date','<=',endISO).get();
+
+  return Promise.all([bookingsP, blocksP]).then(([bSnap, blkSnap])=>{
+    const vanDaysWithStreet = new Set();
+    blkSnap.forEach(doc=>{
+      const blk = doc.data();
+      if(blk.kind === 'streetSales') vanDaysWithStreet.add(`${blk.vanId}_${blk.date}`);
+    });
+
+    bSnap.forEach(doc=>{
+      const b = doc.data();
+      if(b.status === 'cancel') return;
+      // Street Sales is driver-only work — helpers never get it on their schedule,
+      // so only the driver's own van/day tracks toward the 'both' upgrade below.
+      const isDriver = b.driverId === schedEmployeeId;
+      const isHelper = Array.isArray(b.helperIds) && b.helperIds.includes(schedEmployeeId);
+      if(!isDriver && !isHelper) return;
+
+      const s = schedSuggestions[b.date] || { type:'corp', arrivalTime:null, returnTime:null, vanIds:new Set() };
+      s.type = 'corp';
+      if(b.vanId && isDriver) s.vanIds.add(b.vanId);
+      const st = b.startTime || '';
+      const en = b.endTime || '';
+      if(st && (!s.arrivalTime || st < s.arrivalTime)) s.arrivalTime = st;
+      if(en && (!s.returnTime || en > s.returnTime)) s.returnTime = en;
+      schedSuggestions[b.date] = s;
+    });
+
+    // upgrade to 'both' only when THIS employee was the driver on that van/day
+    // and that van also has street sales — helpers are never assigned Street Sales.
+    Object.keys(schedSuggestions).forEach(dISO=>{
+      const s = schedSuggestions[dISO];
+      let hasStreet = false;
+      s.vanIds.forEach(vid=>{ if(vanDaysWithStreet.has(`${vid}_${dISO}`)) hasStreet = true; });
+      if(hasStreet) s.type = 'both';
+      delete s.vanIds;
+    });
+  }).catch(err=>{
+    console.error('Error computing suggestions:', err);
+  });
+}
+
+// 'both' shows as two separate colour-coded pills instead of one long label
+function schedPillsHTML(type, extraClass){
+  const types = type === 'both' ? ['corp','street'] : [type];
+  return types.map(t=>`<span class="schedPill ${t}${extraClass?' '+extraClass:''}">${SCHED_TYPE_LABELS[t]}</span>`).join('');
+}
+
+function renderScheduleGrid(){
+  const grid = document.getElementById('schedGrid');
+  const { start, end } = getSchedulePeriodRange();
+  const period = document.getElementById('schPeriod').value;
+  const todayISO = formatISO(new Date());
+  grid.innerHTML = '';
+
+  WEEKDAYS.forEach(w=>{
+    const h = document.createElement('div');
+    h.className = 'schedHeadCell';
+    h.textContent = w;
+    grid.appendChild(h);
+  });
+
+  let cursor = new Date(start);
+  if(period === 'month') cursor.setDate(cursor.getDate() - cursor.getDay());
+  const lastCell = new Date(end);
+  lastCell.setDate(lastCell.getDate() + (6 - lastCell.getDay()));
+
+  while(cursor <= lastCell){
+    const dISO = formatISO(cursor);
+    const inPeriod = cursor >= start && cursor <= end;
+    const entry = schedEntries[dISO];
+    const sug = schedSuggestions[dISO];
+
+    const cell = document.createElement('div');
+    cell.className = 'schedCell' + (inPeriod ? '' : ' outside') + (dISO===todayISO ? ' isToday' : '');
+    let html = `<div class="schedDayNum">${cursor.getDate()}</div>`;
+
+    if(inPeriod){
+      if(entry){
+        html += schedPillsHTML(entry.type);
+        if(entry.type !== 'off'){
+          html += `<div class="schedTimes">In: ${entry.arrivalTime?minutesToLabel(timeToMinutes(entry.arrivalTime)):'-'}<br>Out: ${entry.returnTime?minutesToLabel(timeToMinutes(entry.returnTime)):'-'}</div>`;
+        }
+        if(entry.notes) html += `<div class="schedNote">${escapeHtml(entry.notes)}</div>`;
+      } else if(sug){
+        html += schedPillsHTML(sug.type, 'suggested');
+        html += `<div class="schedSuggestTag">suggested</div>`;
+        html += `<div class="schedTimes">In: ${sug.arrivalTime?minutesToLabel(timeToMinutes(sug.arrivalTime)):'-'}<br>Out: ${sug.returnTime?minutesToLabel(timeToMinutes(sug.returnTime)):'-'}</div>`;
+      }
+      const cellDate = dISO;
+      cell.onclick = ()=> openSchEditModal(cellDate);
+    }
+    cell.innerHTML = html;
+    grid.appendChild(cell);
+    cursor.setDate(cursor.getDate()+1);
+  }
+}
+
+// Confirms every suggestion in the visible period that has no saved entry yet.
+function autofillSchedule(){
+  const pending = Object.keys(schedSuggestions).filter(d=>!schedEntries[d]);
+  if(pending.length === 0){
+    alert('Nothing to auto-fill: every day with assigned events is already confirmed.');
+    return;
+  }
+  if(!confirm(`Confirm ${pending.length} suggested day(s) for this employee?`)) return;
+
+  const batch = db.batch();
+  pending.forEach(dISO=>{
+    const s = schedSuggestions[dISO];
+    const ref = db.collection('schedules').doc(`${schedEmployeeId}_${dISO}`);
+    batch.set(ref, {
+      employeeId: schedEmployeeId,
+      date: dISO,
+      type: s.type,
+      arrivalTime: s.arrivalTime || '',
+      returnTime: s.returnTime || '',
+      notes: '',
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  });
+  batch.commit().catch(err=>{
+    console.error('Error auto-filling schedule:', err);
+    alert(`Could not auto-fill.\n\n${err.message}`);
+  });
+}
+
+function onSchTypeChange(){
+  const isOff = document.getElementById('schEditType').value === 'off';
+  document.getElementById('schTimeFields').style.display = isOff ? 'none' : 'block';
+}
+
+function openSchEditModal(dISO){
+  const entry = schedEntries[dISO];
+  const sug = schedSuggestions[dISO];
+  const base = entry || sug || {};
+  const d = parseISO(dISO);
+
+  document.getElementById('schEditTitle').textContent = `${WEEKDAYS_FULL[d.getDay()]}, ${formatDateBR(d)}`;
+  document.getElementById('schEditDate').value = dISO;
+  document.getElementById('schEditType').value = base.type || 'off';
+  set24hrToSelects('schArr', base.arrivalTime || '09:00');
+  set24hrToSelects('schRet', base.returnTime || '17:00');
+  document.getElementById('schEditNotes').value = (entry && entry.notes) || '';
+  onSchTypeChange();
+  document.getElementById('schEditOverlay').style.display = 'flex';
+}
+function closeSchEditModal(){
+  document.getElementById('schEditOverlay').style.display = 'none';
+}
+function saveScheduleDay(){
+  const dISO = document.getElementById('schEditDate').value;
+  const type = document.getElementById('schEditType').value;
+  db.collection('schedules').doc(`${schedEmployeeId}_${dISO}`).set({
+    employeeId: schedEmployeeId,
+    date: dISO,
+    type,
+    arrivalTime: type === 'off' ? '' : selectsTo24hr('schArr'),
+    returnTime:  type === 'off' ? '' : selectsTo24hr('schRet'),
+    notes: document.getElementById('schEditNotes').value.trim(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=> closeSchEditModal())
+    .catch(err=>{
+      console.error('Error saving schedule day:', err);
+      alert(`Could not save.\n\n${err.message}\n\nCheck that the "schedules" collection is allowed in your Firestore rules.`);
+    });
+}
+function clearScheduleDay(){
+  const dISO = document.getElementById('schEditDate').value;
+  if(!schedEntries[dISO]){ closeSchEditModal(); return; }
+  if(!confirm('Clear this day from the schedule?')) return;
+  db.collection('schedules').doc(`${schedEmployeeId}_${dISO}`).delete()
+    .then(()=> closeSchEditModal())
+    .catch(err=>{
+      console.error('Error clearing day:', err);
+      alert(`Could not clear the day.\n\n${err.message}`);
+    });
+}
+
+/* ---- Employee schedule PDF (calendar-grid planner) ---- */
+function generateSchedulePDF(){
+  if(!window.jspdf){ alert('PDF library failed to load. Check your internet connection and try again.'); return; }
+  if(!schedEmployeeId){ alert('Select an employee first.'); return; }
+
+  const emp = employees.find(e=>e.id===schedEmployeeId);
+  const empName = emp ? emp.name : 'Employee';
+  const { start, end } = getSchedulePeriodRange();
+  const period = document.getElementById('schPeriod').value;
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:'letter', orientation:'landscape' });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 32;
+  const bannerHeight = 60;
+
+  doc.setFillColor(236,21,97);
+  doc.rect(0,0,pageWidth,bannerHeight,'F');
+  const logoH = 40, logoW = logoH * PDF_LOGO_RATIO;
+  doc.addImage(PDF_LOGO, 'PNG', margin, (bannerHeight-logoH)/2, logoW, logoH);
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(15);
+  doc.text(`Schedule - ${pdfSafeText(empName)}`, margin + logoW + 14, bannerHeight/2 - 2);
+  doc.setFontSize(10);
+  doc.setFont('helvetica','normal');
+  doc.text(`${MONTHS[start.getMonth()]} ${start.getDate()} - ${MONTHS[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`,
+           margin + logoW + 14, bannerHeight/2 + 14);
+
+  const gridTop = bannerHeight + 34;
+  const colWidth = (pageWidth - margin*2) / 7;
+
+  doc.setFillColor(236,21,97);
+  doc.rect(margin, gridTop - 20, colWidth*7, 20, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(9);
+  WEEKDAYS.forEach((w,i)=> doc.text(w, margin + i*colWidth + 6, gridTop - 6));
+
+  let cursor = new Date(start);
+  if(period === 'month') cursor.setDate(cursor.getDate() - cursor.getDay());
+  const lastCell = new Date(end);
+  lastCell.setDate(lastCell.getDate() + (6 - lastCell.getDay()));
+  const cells = [];
+  while(cursor <= lastCell){ cells.push(new Date(cursor)); cursor.setDate(cursor.getDate()+1); }
+
+  const rowCount = Math.ceil(cells.length / 7);
+  const availableHeight = pageHeight - gridTop - margin - 26;
+  const rowHeight = Math.min(96, availableHeight / rowCount);
+
+  const PILL_RGB = { off:[185,185,194], corp:[63,178,127], street:[155,140,224], both:[90,160,175] };
+
+  doc.setDrawColor(220,205,212);
+  cells.forEach((d, idx)=>{
+    const row = Math.floor(idx/7), col = idx % 7;
+    const x = margin + col*colWidth;
+    const yTop = gridTop + row*rowHeight;
+    const inPeriod = d >= start && d <= end;
+    const entry = schedEntries[formatISO(d)];
+
+    doc.setFillColor(inPeriod ? 255 : 246, inPeriod ? 255 : 246, inPeriod ? 255 : 248);
+    doc.rect(x, yTop, colWidth, rowHeight, 'FD');
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9);
+    doc.setTextColor(inPeriod ? 60 : 170, inPeriod ? 50 : 170, inPeriod ? 55 : 175);
+    doc.text(String(d.getDate()), x + 5, yTop + 12);
+
+    if(!inPeriod || !entry) return;
+
+    // 'both' is rendered as two separate colour-coded pills, stacked
+    const pillTypes = entry.type === 'both' ? ['corp','street'] : [entry.type];
+    let py = yTop + 17;
+    pillTypes.forEach(pt=>{
+      const pill = PILL_RGB[pt] || [150,150,150];
+      const label = (SCHED_TYPE_LABELS[pt] || '').toUpperCase();
+      doc.setFillColor(pill[0], pill[1], pill[2]);
+      doc.roundedRect(x + 5, py, colWidth - 12, 12, 3, 3, 'F');
+      doc.setTextColor(255,255,255);
+      doc.setFontSize(6.5);
+      doc.text(pdfSafeText(label).slice(0, 26), x + 8, py + 8.5);
+      py += 14;
+    });
+
+    let ty = py + 9;
+    doc.setTextColor(70,60,65);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(7.5);
+    if(entry.type !== 'off'){
+      if(entry.arrivalTime){ doc.text(`In: ${minutesToLabel(timeToMinutes(entry.arrivalTime))}`, x + 6, ty); ty += 9; }
+      if(entry.returnTime){ doc.text(`Out: ${minutesToLabel(timeToMinutes(entry.returnTime))}`, x + 6, ty); ty += 9; }
+    }
+    if(entry.notes){
+      doc.setTextColor(120,110,115);
+      doc.setFontSize(6.5);
+      const noteLines = doc.splitTextToSize(pdfSafeText(entry.notes), colWidth - 12);
+      const room = Math.max(0, Math.floor((yTop + rowHeight - ty - 3) / 8));
+      noteLines.slice(0, room).forEach(line=>{ doc.text(line, x + 6, ty); ty += 8; });
+    }
+  });
+
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.setTextColor(140,130,135);
+  doc.text('In = arrival at base   |   Out = van return / drop-off', margin, pageHeight - 18);
+
+  const nameCode = (empName || 'EMPLOYEE').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
+  const periodTag = period === 'month' ? 'MONTHLY' : (period === 'biweek' ? 'BIWEEKLY' : 'WEEKLY');
+  doc.save(`SCHEDULE-${nameCode}-${periodTag}-${formatISO(start)}.pdf`);
+}
+
+/* ---------------- DAILY DRIVER INSTRUCTIONS ----------------
+   One doc per van+date in `driverInstructions`, id `${vanId}_${date}`.
+   The checklist is a fixed standard list; only the ticked items, times and
+   free-text notes are stored per day.
+--------------------------------------------------------- */
+const DEFAULT_CHECKLIST = [
+  'Fuel level checked',
+  'Ice cream stock loaded',
+  'Cones, cups and toppings loaded',
+  'Napkins, spoons and gloves',
+  'Generator / power checked',
+  'Float / card machine ready',
+  'Cleaning supplies on board',
+  'Van exterior clean',
+];
+// The checklist item list itself is editable and stored in Firestore
+// (settings/checklist -> {items:[...]}). Falls back to DEFAULT_CHECKLIST
+// until the gestora customizes it for the first time.
+let STANDARD_CHECKLIST = DEFAULT_CHECKLIST.slice();
+let checklistSettingsUnsub = null;
+
+function loadChecklistSettings(){
+  if(checklistSettingsUnsub) return;
+  checklistSettingsUnsub = db.collection('settings').doc('checklist').onSnapshot(snap=>{
+    STANDARD_CHECKLIST = (snap.exists && Array.isArray(snap.data().items) && snap.data().items.length)
+      ? snap.data().items : DEFAULT_CHECKLIST.slice();
+    if(driverInstrData !== undefined) renderChecklist((driverInstrData||{}).checklist || []);
+  }, err=> console.error('Error loading checklist settings:', err));
+}
+
+let driverInstrUnsub = null;
+let driverInstrData = null;
+
+function renderChecklist(checked){
+  const box = document.getElementById('checklistBox');
+  if(!box) return;
+  const set = new Set(checked || []);
+  box.innerHTML = STANDARD_CHECKLIST.map(item=>{
+    const done = set.has(item);
+    return `<label class="checkItem${done?' done':''}">
+      <input type="checkbox" data-item="${escapeHtml(item)}" ${done?'checked':''} onchange="onChecklistToggle(this)">
+      <span>${escapeHtml(item)}</span>
+    </label>`;
+  }).join('');
+}
+function onChecklistToggle(input){
+  input.closest('.checkItem').classList.toggle('done', input.checked);
+}
+function getCheckedItems(){
+  return Array.from(document.querySelectorAll('#checklistBox input:checked')).map(i=>i.dataset.item);
+}
+
+/* ---- Checklist item editor (customize the standard list itself) ---- */
+function openChecklistEditor(){
+  const list = document.getElementById('checklistEditorList');
+  list.innerHTML = STANDARD_CHECKLIST.map((item,idx)=>`
+    <div class="chipsInputRow" data-idx="${idx}">
+      <input type="text" value="${escapeHtml(item)}" style="flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;">
+      <button type="button" class="smallBtn" onclick="removeChecklistEditorItem(${idx})">Remove</button>
+    </div>`).join('');
+  document.getElementById('checklistEditorOverlay').style.display = 'flex';
+}
+function closeChecklistEditor(){
+  document.getElementById('checklistEditorOverlay').style.display = 'none';
+}
+function addChecklistEditorItem(){
+  const list = document.getElementById('checklistEditorList');
+  const idx = list.children.length;
+  const row = document.createElement('div');
+  row.className = 'chipsInputRow';
+  row.dataset.idx = idx;
+  row.innerHTML = `<input type="text" value="" placeholder="e.g. New checklist item" style="flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;">
+    <button type="button" class="smallBtn" onclick="removeChecklistEditorItem(${idx})">Remove</button>`;
+  list.appendChild(row);
+  row.querySelector('input').focus();
+}
+function removeChecklistEditorItem(idx){
+  const row = document.querySelector(`#checklistEditorList [data-idx="${idx}"]`);
+  if(row) row.remove();
+}
+function saveChecklistItems(){
+  const items = Array.from(document.querySelectorAll('#checklistEditorList input'))
+    .map(i=>i.value.trim()).filter(Boolean);
+  if(items.length === 0){ alert('Add at least one checklist item.'); return; }
+  db.collection('settings').doc('checklist').set({
+    items, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=> closeChecklistEditor())
+    .catch(err=>{
+      console.error('Error saving checklist items:', err);
+      alert(`Could not save.\n\n${err.message}\n\nCheck that the "settings" collection is allowed in your Firestore rules.`);
+    });
+}
+
+function loadDriverInstructions(){
+  if(!vanViewSelectedVanId) return;
+  if(driverInstrUnsub) driverInstrUnsub();
+  driverInstrUnsub = db.collection('driverInstructions')
+    .doc(`${vanViewSelectedVanId}_${vanViewDate}`)
+    .onSnapshot(snap=>{
+      driverInstrData = snap.exists ? snap.data() : null;
+      const d = driverInstrData || {};
+      renderChecklist(d.checklist || []);
+      set24hrToSelects('dvArr', d.arrivalTime || '09:00');
+      set24hrToSelects('dvRet', d.returnTime || '17:00');
+      document.getElementById('dvNotes').value = d.notes || '';
+      document.getElementById('dvReturnNotes').value = d.returnNotes || '';
+    }, err=> console.error('Error loading driver instructions:', err));
+}
+
+function saveDriverInstructions(){
+  if(!vanViewSelectedVanId){ alert('Select a van first.'); return; }
+  const btn = document.getElementById('dvSaveBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  db.collection('driverInstructions').doc(`${vanViewSelectedVanId}_${vanViewDate}`).set({
+    vanId: vanViewSelectedVanId,
+    date: vanViewDate,
+    checklist: getCheckedItems(),
+    arrivalTime: selectsTo24hr('dvArr'),
+    returnTime: selectsTo24hr('dvRet'),
+    notes: document.getElementById('dvNotes').value.trim(),
+    returnNotes: document.getElementById('dvReturnNotes').value.trim(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(()=>{
+    btn.textContent = 'Saved';
+    setTimeout(()=>{ btn.textContent = 'Save instructions'; btn.disabled = false; }, 1500);
+  }).catch(err=>{
+    console.error('Error saving driver instructions:', err);
+    alert(`Could not save.\n\n${err.message}\n\nCheck that the "driverInstructions" collection is allowed in your Firestore rules.`);
+    btn.textContent = 'Save instructions'; btn.disabled = false;
+  });
+}
+
+/* ---- Daily Run Sheet PDF (consolidated timeline for one van/day) ---- */
+function generateRunSheetPDF(){
+  if(!window.jspdf){ alert('PDF library failed to load. Check your internet connection and try again.'); return; }
+  if(!vanViewSelectedVanId){ alert('Select a van first.'); return; }
+
+  const van = vans.find(v=>v.id===vanViewSelectedVanId);
+  const vanName = van ? van.name : 'Van';
+  const d = parseISO(vanViewDate);
+  const instr = driverInstrData || {};
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:'letter' });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 44;
+  const bannerHeight = 70;
+
+  doc.setFillColor(236,21,97);
+  doc.rect(0,0,pageWidth,bannerHeight,'F');
+  const logoH = 46, logoW = logoH * PDF_LOGO_RATIO;
+  doc.addImage(PDF_LOGO, 'PNG', margin, (bannerHeight-logoH)/2, logoW, logoH);
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(17);
+  doc.text('Daily Run Sheet', margin + logoW + 16, bannerHeight/2 - 3);
+  doc.setFontSize(10);
+  doc.setFont('helvetica','normal');
+  doc.text(`${pdfSafeText(vanName)}  |  ${WEEKDAYS_FULL[d.getDay()]}, ${formatDateBR(d)}`, margin + logoW + 16, bannerHeight/2 + 14);
+
+  let y = bannerHeight + 30;
+  const contentWidth = pageWidth - margin*2;
+
+  // Build the chronological timeline: garage arrival -> stops -> street sales -> return
+  const timeline = [];
+  if(instr.arrivalTime){
+    timeline.push({ time: instr.arrivalTime, kind:'base', title:'Arrive at garage / base', lines:[] });
+  }
+  vanViewBookings.slice().forEach(b=>{
+    const lines = [];
+    if(b.address) lines.push(pdfSafeText(b.address));
+    const evTime = b.eventTime
+      ? (b.eventEndTime ? `${minutesToLabel(timeToMinutes(b.eventTime))} - ${minutesToLabel(timeToMinutes(b.eventEndTime))}` : minutesToLabel(timeToMinutes(b.eventTime)))
+      : '';
+    if(evTime) lines.push(`Event window: ${evTime}`);
+    if(b.numberOfPeople) lines.push(`People: ${b.numberOfPeople}`);
+    if(b.iceCreamType) lines.push(`Type: ${ICE_CREAM_LABELS[b.iceCreamType]||b.iceCreamType}`);
+    if(b.driver) lines.push(`Driver: ${pdfSafeText(b.driver)}`);
+    if(b.helpers && b.helpers.length) lines.push(`Helper(s): ${pdfSafeText(b.helpers.join(', '))}`);
+    if(b.siteNotes) lines.push(`Logistics: ${pdfSafeText(b.siteNotes)}`);
+    if(b.notes) lines.push(`Notes: ${pdfSafeText(b.notes)}`);
+    timeline.push({
+      time: b.startTime || '',
+      kind: 'event',
+      title: pdfSafeText(b.clientName||'Event'),
+      lines
+    });
+  });
+  vanViewBlocks.forEach(blk=>{
+    timeline.push({
+      time: blk.startTime || '',
+      kind: blk.kind === 'streetSales' ? 'street' : 'blocked',
+      title: blk.kind === 'streetSales' ? 'Street Sales' : 'Blocked period',
+      lines: [
+        `${minutesToLabel(timeToMinutes(blk.startTime||'00:00'))} - ${minutesToLabel(timeToMinutes(blk.endTime||'00:00'))}`,
+        blk.reason ? pdfSafeText(blk.reason) : ''
+      ].filter(Boolean)
+    });
+  });
+  if(instr.returnTime){
+    timeline.push({
+      time: instr.returnTime, kind:'base', title:'Return van to base',
+      lines: instr.returnNotes ? [pdfSafeText(instr.returnNotes)] : []
+    });
+  }
+  timeline.sort((a,b)=> (a.time||'').localeCompare(b.time||''));
+
+  const KIND_RGB = { base:[120,110,115], event:[63,178,127], street:[155,140,224], blocked:[160,160,168] };
+
+  // ---- checklist box ----
+  const checked = new Set(instr.checklist || []);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(12);
+  doc.setTextColor(40,20,30);
+  doc.text('Pre-departure checklist', margin, y);
+  y += 14;
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9.5);
+  const colW = contentWidth/2;
+  STANDARD_CHECKLIST.forEach((item, i)=>{
+    const cx = margin + (i % 2) * colW;
+    const cy = y + Math.floor(i/2) * 15;
+    doc.setDrawColor(150,140,145);
+    doc.rect(cx, cy - 7.5, 9, 9);
+    if(checked.has(item)){
+      doc.setDrawColor(63,178,127);
+      doc.setLineWidth(1.4);
+      doc.line(cx+1.6, cy-3.2, cx+3.6, cy-0.7);
+      doc.line(cx+3.6, cy-0.7, cx+7.4, cy-5.6);
+      doc.setLineWidth(1);
+    }
+    doc.setTextColor(60,50,55);
+    doc.text(pdfSafeText(item), cx + 14, cy);
+  });
+  y += Math.ceil(STANDARD_CHECKLIST.length/2) * 15 + 12;
+
+  if(instr.notes){
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(10);
+    doc.setTextColor(40,20,30);
+    doc.text("Today's notes:", margin, y);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(70,60,65);
+    const nl = doc.splitTextToSize(pdfSafeText(instr.notes), contentWidth - 78);
+    nl.forEach((line,i)=> doc.text(line, margin + 78, y + i*12));
+    y += Math.max(14, nl.length*12 + 4);
+  }
+
+  y += 8;
+  doc.setDrawColor(246,217,226);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 20;
+
+  // ---- timeline ----
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(12);
+  doc.setTextColor(40,20,30);
+  doc.text("Today's run", margin, y);
+  y += 16;
+
+  if(timeline.length === 0){
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(10);
+    doc.setTextColor(140,130,135);
+    doc.text('Nothing scheduled for this van today.', margin, y);
+    y += 16;
+  }
+
+  timeline.forEach((item, idx)=>{
+    const lines = item.lines.filter(Boolean);
+    const wrapped = [];
+    lines.forEach(l=>{ doc.splitTextToSize(l, contentWidth - 92).forEach(w=> wrapped.push(w)); });
+    const blockH = Math.max(30, 20 + wrapped.length*11);
+
+    if(y + blockH > pageHeight - 50){ doc.addPage(); y = 50; }
+
+    const rgbv = KIND_RGB[item.kind] || [150,150,150];
+    doc.setFillColor(idx % 2 === 0 ? 253 : 255, idx % 2 === 0 ? 243 : 255, idx % 2 === 0 ? 246 : 255);
+    doc.rect(margin, y - 12, contentWidth, blockH, 'F');
+    doc.setFillColor(rgbv[0], rgbv[1], rgbv[2]);
+    doc.rect(margin, y - 12, 4, blockH, 'F');
+
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(11);
+    doc.setTextColor(40,20,30);
+    doc.text(item.time ? minutesToLabel(timeToMinutes(item.time)) : '--:--', margin + 12, y);
+    doc.text(pdfSafeText(item.title), margin + 92, y);
+
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(9);
+    doc.setTextColor(85,75,80);
+    wrapped.forEach((line, i)=> doc.text(line, margin + 92, y + 13 + i*11));
+
+    y += blockH + 6;
+  });
+
+  // footer
+  const footY = pageHeight - 34;
+  doc.setDrawColor(246,217,226);
+  doc.line(margin, footY - 12, pageWidth - margin, footY - 12);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(8.5);
+  doc.setTextColor(236,21,97);
+  doc.text('.', margin, footY);
+  doc.setTextColor(70,60,65);
+  doc.text('Arrive 15 minutes before the event start time.   .   Check all items before leaving.   .   Last call is 15 minutes before the event ends.', margin + 6, footY);
+
+  const vanCode = (vanName||'VAN').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
+  doc.save(`RUNSHEET-${vanCode}-${buildEventFileCode('', vanViewDate)}.pdf`);
 }
 
 /* ---------------- EVENTS LIST TAB ---------------- */
@@ -1357,7 +2754,7 @@ function renderEventsList(){
       <td>${formatDateBR(d)}</td>
       <td>${b.startTime||''}</td>
       <td>${escapeHtml(b.clientName||'No name')}</td>
-      <td>${escapeHtml(b.contactName||'—')}</td>
+      <td>${escapeHtml([b.contactName,b.contactLastName].filter(Boolean).join(' ')||'—')}</td>
       <td>${van?escapeHtml(van.name):'—'}</td>
       <td><span class="statusDot" style="background:${statusColor};"></span>${STATUS_LABELS[b.status]||'OK'}</td>
       <td>
@@ -1451,7 +2848,7 @@ function generateMonthlyReport(){
       time: timeValue,
       company: b.clientName || '—',
       address: b.address || '—',
-      contact: b.contactName || '—',
+      contact: [b.contactName,b.contactLastName].filter(Boolean).join(' ') || '—',
       phone: b.phone || '—',
       people: b.numberOfPeople ? String(b.numberOfPeople) : '—',
       travelFee: b.travelFee ? `$${Number(b.travelFee).toFixed(2)}` : '—',
@@ -1573,6 +2970,116 @@ function loadMonthBookings(year, month){
     });
 }
 
+/* ---------------- WEEK VIEW ---------------- */
+let weekUnsub = null;
+
+function renderWeek(){
+  const start = new Date(weekRefDate);
+  start.setDate(start.getDate() - start.getDay());
+  const todayISO = formatISO(new Date());
+
+  document.getElementById('monthLabel').textContent = `Week of ${MONTHS[start.getMonth()]} ${start.getDate()}, ${start.getFullYear()}`;
+
+  const grid = document.getElementById('weekGrid');
+  grid.innerHTML = '';
+  for(let i=0; i<7; i++){
+    const d = new Date(start);
+    d.setDate(start.getDate()+i);
+    const dISO = formatISO(d);
+    const card = document.createElement('div');
+    card.className = 'weekDayCard' + (dISO===todayISO ? ' isToday' : '');
+    card.onclick = ()=> openDayView(dISO);
+    card.innerHTML = `<div class="weekDayHead">${WEEKDAYS[d.getDay()]} <span>${d.getDate()}</span></div><div class="weekDayEvents" id="wk-ev-${dISO}"></div>`;
+    grid.appendChild(card);
+  }
+  loadWeekBookings(start);
+}
+
+function loadWeekBookings(startDate){
+  const start = formatISO(startDate);
+  const endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate()+6);
+  const end = formatISO(endDate);
+
+  if(weekUnsub) weekUnsub();
+  weekUnsub = db.collection('bookings')
+    .where('date','>=',start).where('date','<=',end)
+    .onSnapshot(snap=>{
+      const byDate = {};
+      snap.forEach(doc=>{
+        const b = {id:doc.id, ...doc.data()};
+        (byDate[b.date] = byDate[b.date]||[]).push(b);
+      });
+      Object.keys(byDate).forEach(dISO=>{
+        const container = document.getElementById(`wk-ev-${dISO}`);
+        if(!container) return;
+        const items = byDate[dISO].sort((a,b)=> (a.startTime||'').localeCompare(b.startTime||''));
+        container.innerHTML = items.map(b=>{
+          const van = vans.find(v=>v.id===b.vanId);
+          const color = STATUS_COLORS[b.status] || (van?van.color:'#999');
+          const fullTitle = `${b.startTime||''} ${b.clientName||''}${b.notes ? ' | '+b.notes : ''}`;
+          return `<div class="eventPill" style="background:${color};" title="${escapeHtml(fullTitle)}">${b.startTime||''} ${escapeHtml(b.clientName||'')}</div>`;
+        }).join('');
+      });
+    });
+}
+
+/* ---------------- YEAR VIEW ---------------- */
+let yearUnsub = null;
+let yearEventDates = new Set();
+
+function renderYear(){
+  document.getElementById('monthLabel').textContent = `${viewYear}`;
+  const grid = document.getElementById('yearGrid');
+  grid.innerHTML = '';
+  for(let m=0; m<12; m++){
+    const mini = document.createElement('div');
+    mini.className = 'miniMonth';
+    mini.innerHTML = `<div class="miniMonthTitle">${MONTHS[m]}</div><div class="miniMonthGrid" id="mini-${m}"></div>`;
+    grid.appendChild(mini);
+  }
+  loadYearBookings();
+  for(let m=0; m<12; m++) renderMiniMonth(m);
+}
+
+function renderMiniMonth(m){
+  const container = document.getElementById(`mini-${m}`);
+  if(!container) return;
+  container.innerHTML = '';
+  const todayISO = formatISO(new Date());
+
+  const firstDay = new Date(viewYear, m, 1);
+  const startOffset = firstDay.getDay();
+  const daysInMonth = new Date(viewYear, m+1, 0).getDate();
+
+  for(let i=0; i<startOffset; i++){
+    const el = document.createElement('div');
+    el.className = 'miniDay otherMonth';
+    container.appendChild(el);
+  }
+  for(let d=1; d<=daysInMonth; d++){
+    const dISO = formatISO(new Date(viewYear, m, d));
+    const el = document.createElement('div');
+    el.className = 'miniDay' + (dISO===todayISO ? ' isToday' : '');
+    el.innerHTML = String(d) + (yearEventDates.has(dISO) ? '<span class="miniDot"></span>' : '');
+    el.onclick = ()=> openDayView(dISO);
+    container.appendChild(el);
+  }
+}
+
+function loadYearBookings(){
+  const start = `${viewYear}-01-01`;
+  const end = `${viewYear}-12-31`;
+  if(yearUnsub) yearUnsub();
+  yearUnsub = db.collection('bookings')
+    .where('date','>=',start).where('date','<=',end)
+    .onSnapshot(snap=>{
+      yearEventDates = new Set();
+      snap.forEach(doc=> yearEventDates.add(doc.data().date));
+      for(let m=0; m<12; m++) renderMiniMonth(m);
+    });
+}
+
 /* ---------------- DAY VIEW ---------------- */
 function changeDay(delta){
   const d = parseISO(selectedDate);
@@ -1588,6 +3095,7 @@ function renderDayView(){
 
   buildScheduleGrid();
   loadDayBookings();
+  loadDayBlocks();
   loadDayNote();
 }
 
@@ -1627,6 +3135,7 @@ function buildScheduleGrid(){
 
     col.addEventListener('click', (e)=>{
       if(e.target.closest('.bookingBlock')) return;
+      if(e.target.closest('.timeBlockEl')) return;
       const slot = e.target.closest('.hourSlot');
       if(!slot || slot.classList.contains('vanColHead')) return;
       const hour = parseInt(slot.dataset.hour);
@@ -1639,7 +3148,7 @@ function buildScheduleGrid(){
       const endMin = startMin+60;
       const endH = String(Math.floor(endMin/60)).padStart(2,'0');
       const endM = String(endMin%60).padStart(2,'0');
-      openBookingModal(null, v.id, `${startH}:${startM}`, `${endH}:${endM}`);
+      openCellChoice(v.id, `${startH}:${startM}`, `${endH}:${endM}`);
     });
 
     track.appendChild(col);
@@ -1701,6 +3210,43 @@ function renderBookingBlocks(){
   });
 }
 
+/* ---------------- TIME BLOCKS (blocked / unavailable periods) ---------------- */
+function loadDayBlocks(){
+  if(dayBlockUnsub) dayBlockUnsub();
+  dayBlockUnsub = db.collection('timeBlocks').where('date','==',selectedDate).onSnapshot(snap=>{
+    currentDayBlocks = [];
+    snap.forEach(doc=> currentDayBlocks.push({id:doc.id, ...doc.data()}));
+    renderTimeBlocks();
+  });
+}
+
+function renderTimeBlocks(){
+  document.querySelectorAll('.timeBlockEl').forEach(el=>el.remove());
+  const dayStartMin = HOUR_START*60;
+  const HEAD = 52;
+
+  currentDayBlocks.forEach(blk=>{
+    const col = document.querySelector(`.vanCol[data-van-id="${blk.vanId}"]`);
+    if(!col) return;
+    const startMin = timeToMinutes(blk.startTime||'00:00');
+    const endMin = Math.max(timeToMinutes(blk.endTime||'00:00'), startMin+15);
+    const rawTop = HEAD + ((startMin-dayStartMin)/60)*HOUR_PX;
+    const rawBottom = HEAD + ((endMin-dayStartMin)/60)*HOUR_PX;
+    const top = Math.max(HEAD, rawTop);
+    const height = Math.max(rawBottom - top, 30);
+
+    const isStreet = blk.kind === 'streetSales';
+    const el = document.createElement('div');
+    el.className = 'timeBlockEl' + (isStreet ? ' streetSales' : '');
+    el.style.top = top+'px';
+    el.style.height = height+'px';
+    const label = isStreet ? '🍦 Street Sales' : '🚫 Blocked';
+    el.innerHTML = `<div class="timeBlockLabel">${label}${blk.reason?'<br>'+escapeHtml(blk.reason):''}</div>`;
+    el.onclick = (e)=>{ e.stopPropagation(); openBlockModal(blk); };
+    col.appendChild(el);
+  });
+}
+
 /* ---------------- DAY NOTES ---------------- */
 function loadDayNote(){
   document.getElementById('dayNotesInput').value = '';
@@ -1754,7 +3300,7 @@ function openViewBookingModal(booking){
       : minutesToLabel(timeToMinutes(booking.eventTime));
     rows.push(['🕐','Time', timeValue]);
   }
-  if(booking.contactName) rows.push(['👤','Contact', booking.contactName]);
+  if(booking.contactName || booking.contactLastName) rows.push(['👤','Contact', [booking.contactName,booking.contactLastName].filter(Boolean).join(' ')]);
   if(booking.address) rows.push(['📍','Address', booking.address]);
   if(booking.phone) rows.push(['📞','Phone', booking.phone]);
   if(booking.numberOfPeople) rows.push(['👥','Number of People', String(booking.numberOfPeople)]);
@@ -1901,7 +3447,6 @@ async function generateItineraryPDF(){
     ['Date', formatDateBR(d)],
     ['Company / Event', pdfSafeText(b.clientName) || '—'],
     ['Contact', pdfSafeText(b.contactName) || '—'],
-    ['Contact Phone', pdfSafeText(b.phone) || '—'],
     ['Time', timeValue],
     ['Address', pdfSafeText(b.address) || '—'],
     ['Van', van ? pdfSafeText(van.name) : '—'],
@@ -1946,26 +3491,17 @@ async function generateItineraryPDF(){
     borderColor: borderPink, borderWidth: 1,
   });
 
-  // ---- QR code linking straight to the event address on Google Maps ----
-  // Generated as a crisp bitmap via an in-memory <canvas> (native browser API,
-  // no library needed for this step) and embedded as a PNG image. This avoids
-  // the rasterization artifacts that can affect very fine vector patterns at
-  // certain viewer/zoom scales, and — combined with high error correction and
-  // a standard quiet zone — maximizes real-world scan reliability.
-  // Layout: caption + address on the LEFT, QR code on the RIGHT, inside a
-  // reserved block sized to fit both, so nothing below it can ever overlap.
+  // ---- QR code (bitmap via canvas, embedded as PNG) ----
   const mapsUrl = buildMapsUrl(b);
-  const qrDisplaySize = 95; // size shown in the PDF, in points
   let qrImage = null;
-
   if(mapsUrl && window.qrcode){
     try{
-      const qr = qrcode(0, 'H'); // 'H' = highest error correction, most scan-tolerant
+      const qr = qrcode(0, 'H'); // highest error correction, most scan-tolerant
       qr.addData(mapsUrl);
       qr.make();
       const moduleCount = qr.getModuleCount();
-      const quietModules = 4; // standard quiet-zone width, for reliable scanning
-      const pxPerModule = 10; // crisp, deterministic bitmap resolution
+      const quietModules = 4;
+      const pxPerModule = 10;
       const qrPixelSize = (moduleCount + quietModules*2) * pxPerModule;
 
       const canvas = document.createElement('canvas');
@@ -1991,42 +3527,57 @@ async function generateItineraryPDF(){
     }
   }
 
-  const textColWidth = boxWidth - (qrImage ? qrDisplaySize + 20 : 0);
-  const addrLines = pdfWrapText(pdfSafeText(b.address) || (qrImage ? '' : 'No address on file'), font, 10, textColWidth).slice(0, 4);
-  const textBlockHeight = 32 + addrLines.length*13;
-  const qrBlockHeight = Math.max(qrImage ? qrDisplaySize : 0, textBlockHeight, 40) + 14;
-
+  // ---- Middle section: two side-by-side cards with thick rounded pink borders ----
   y += 22;
-  const blockTop = y;
+  const cardGap = 20;
+  const cardHeight = 150;
+  const cardWidth = (boxWidth - cardGap) / 2;
+  const cardTop = y;
+  const cardBorder = rgb(230/255, 0/255, 103/255); // shock pink
 
-  if(qrImage){
-    const qrX = margin + boxWidth - qrDisplaySize; // right-aligned
-    page.drawImage(qrImage, { x: qrX, y: toPdfY(blockTop + qrDisplaySize), width: qrDisplaySize, height: qrDisplaySize });
-
-    page.drawText('Scan for directions', { x: margin, y: toPdfY(blockTop + 14), size: 12, font: fontBold, color: ink });
-    addrLines.forEach((line, li)=>{
-      page.drawText(line, { x: margin, y: toPdfY(blockTop + 32 + li*13), size: 10, font, color: rgb(100/255,90/255,95/255) });
-    });
-  } else {
-    // no address on file, or the QR library failed to load — still print the
-    // address as plain text so the itinerary is never silently missing it
-    page.drawText(`Directions: ${pdfSafeText(b.address) || 'No address on file'}`, { x: margin, y: toPdfY(blockTop + 14), size: 10, font, color: rgb(100/255,90/255,95/255) });
-  }
-  y = blockTop + qrBlockHeight;
-
-  page.drawText('Additional Info', { x: margin, y: toPdfY(y), size: 12, font: fontBold, color: ink });
-  y += 18;
-  const notesText = b.notes && b.notes.trim() ? pdfSafeText(b.notes.trim()) : 'No additional information.';
-  const notesLines = pdfWrapText(notesText, font, 11, pageWidth - margin*2);
-  // opaque backdrop behind the notes text so the watermark doesn't show through
+  // LEFT card — Total People Served (blank space, filled in by hand after the event)
   page.drawRectangle({
-    x: margin-4, y: toPdfY(y + notesLines.length*14 + 4), width: (pageWidth-margin*2)+8, height: notesLines.length*14+16,
-    color: white,
+    x: margin, y: toPdfY(cardTop + cardHeight), width: cardWidth, height: cardHeight,
+    borderColor: cardBorder, borderWidth: 3, color: white, borderRadius: 12,
   });
+  page.drawText('Total People', { x: margin + 22, y: toPdfY(cardTop + 78), size: 17, font: fontBold, color: ink });
+  page.drawText('Served:', { x: margin + 22, y: toPdfY(cardTop + 100), size: 17, font: fontBold, color: ink });
+
+  // RIGHT card — Scan for Directions (QR code)
+  const rightCardX = margin + cardWidth + cardGap;
+  page.drawRectangle({
+    x: rightCardX, y: toPdfY(cardTop + cardHeight), width: cardWidth, height: cardHeight,
+    borderColor: cardBorder, borderWidth: 3, color: white, borderRadius: 12,
+  });
+  const qrDisplaySize = 100;
+  if(qrImage){
+    const qrX = rightCardX + cardWidth - qrDisplaySize - 20;
+    const qrY = cardTop + (cardHeight - qrDisplaySize)/2 - 10;
+    page.drawImage(qrImage, { x: qrX, y: toPdfY(qrY + qrDisplaySize), width: qrDisplaySize, height: qrDisplaySize });
+  }
+  page.drawText('Scan for', { x: rightCardX + 22, y: toPdfY(cardTop + 62), size: 15, font: fontBold, color: ink });
+  page.drawText('Directions', { x: rightCardX + 22, y: toPdfY(cardTop + 82), size: 15, font: fontBold, color: ink });
+  const addrLines = pdfWrapText(pdfSafeText(b.address) || 'No address on file', font, 9, cardWidth - 40);
+  addrLines.slice(0,3).forEach((line, li)=>{
+    page.drawText(line, { x: rightCardX + 22, y: toPdfY(cardTop + cardHeight - 22 + li*11), size: 9, font, color: rgb(120/255,110/255,115/255) });
+  });
+
+  y = cardTop + cardHeight + 20;
+
+  // ---- Additional Info block (saturated pink box with free space for notes) ----
+  const notesText = b.notes && b.notes.trim() ? pdfSafeText(b.notes.trim()) : '';
+  const notesLines = pdfWrapText(notesText, font, 11, pageWidth - margin*2 - 32);
+  const additionalBoxHeight = Math.max(100, 50 + notesLines.length*14);
+  const pinkFill = rgb(248/255, 165/255, 194/255);
+  page.drawRectangle({
+    x: margin, y: toPdfY(y + additionalBoxHeight), width: pageWidth - margin*2, height: additionalBoxHeight,
+    color: pinkFill,
+  });
+  page.drawText('Additional Info', { x: margin + 16, y: toPdfY(y + 24), size: 13, font: fontBold, color: rgb(60/255,20/255,40/255) });
   notesLines.forEach((line, li)=>{
-    page.drawText(line, { x: margin, y: toPdfY(y + li*14), size: 11, font, color: ink });
+    page.drawText(line, { x: margin + 16, y: toPdfY(y + 46 + li*14), size: 11, font, color: rgb(60/255,20/255,40/255) });
   });
-  y += notesLines.length*14 + 10;
+  y += additionalBoxHeight + 10;
 
   // ---- Footer reminders (fixed at the bottom of the page) ----
   const footerTop = pageHeight - footerHeight; // distance from top, in top-down units
@@ -2039,7 +3590,7 @@ async function generateItineraryPDF(){
   const reminders = [
     'Arrive 15 minutes before the event start time.',
     'Check all necessary items before leaving.',
-    'Remember the Last Call 15 minutes before the event ends.',
+    'Remember the last call is 15 minutes before the event ends.',
   ];
   let fy = footerTop + 20;
   reminders.forEach(line=>{
@@ -2063,6 +3614,118 @@ async function generateItineraryPDF(){
 /* ---------------- BOOKING MODAL (edit) ---------------- */
 let currentHelpers = []; // [{id, name}]
 
+/* ---------------- BLOCK TIME MODAL ---------------- */
+let editingBlockKind = 'blocked'; // 'blocked' | 'streetSales'
+
+function openStreetSalesModal(){
+  openBlockModal(null, 'streetSales');
+}
+function openStreetSalesModalForVanView(){
+  selectedDate = vanViewDate;
+  openBlockModal(null, 'streetSales');
+  if(vanViewSelectedVanId) document.getElementById('bVan').value = vanViewSelectedVanId;
+}
+
+function openBlockModal(block=null, kind='blocked', vanId=null, startTime=null, endTime=null){
+  populateVanSelectFor('bVan');
+  document.getElementById('blockTimeErrorMsg').style.display='none';
+  editingBlockKind = block ? (block.kind || 'blocked') : kind;
+  const isStreet = editingBlockKind === 'streetSales';
+  const reasonField = document.getElementById('bReason');
+  reasonField.placeholder = isStreet ? 'e.g. Downtown route, Beach area...' : 'e.g. Maintenance, driver day off...';
+  document.getElementById('bReasonLabel').textContent = isStreet ? 'Location / Route (optional)' : 'Reason (optional)';
+
+  if(block){
+    document.getElementById('blockModalTitle').textContent = isStreet ? 'Edit Street Sales' : 'Edit Blocked Time';
+    document.getElementById('blockId').value = block.id;
+    document.getElementById('bVan').value = block.vanId;
+    set24hrToSelects('bStart', block.startTime||'09:00');
+    set24hrToSelects('bEnd', block.endTime||'10:00');
+    document.getElementById('bReason').value = block.reason||'';
+    document.getElementById('blockDeleteBtn').style.display='inline-block';
+  } else {
+    document.getElementById('blockModalTitle').textContent = isStreet ? '🍦 Street Sales' : 'Block Time';
+    document.getElementById('blockId').value = '';
+    document.getElementById('bVan').value = vanId || (vans[0] && vans[0].id) || '';
+    set24hrToSelects('bStart', startTime || '09:00');
+    set24hrToSelects('bEnd', endTime || '10:00');
+    document.getElementById('bReason').value = '';
+    document.getElementById('blockDeleteBtn').style.display='none';
+  }
+  document.getElementById('blockOverlay').style.display='flex';
+}
+
+/* ---------------- CELL CLICK CHOICE (Event / Street Sales / Block Time) ---------------- */
+let cellChoiceCtx = null;
+function openCellChoice(vanId, startTime, endTime){
+  cellChoiceCtx = { vanId, startTime, endTime };
+  document.getElementById('cellChoiceOverlay').style.display = 'flex';
+}
+function closeCellChoice(){
+  document.getElementById('cellChoiceOverlay').style.display = 'none';
+  cellChoiceCtx = null;
+}
+function cellChoiceSelect(kind){
+  const ctx = cellChoiceCtx;
+  document.getElementById('cellChoiceOverlay').style.display = 'none';
+  if(!ctx) return;
+  if(kind === 'event'){
+    openBookingModal(null, ctx.vanId, ctx.startTime, ctx.endTime);
+  } else if(kind === 'street'){
+    openBlockModal(null, 'streetSales', ctx.vanId, ctx.startTime, ctx.endTime);
+  } else if(kind === 'block'){
+    openBlockModal(null, 'blocked', ctx.vanId, ctx.startTime, ctx.endTime);
+  }
+  cellChoiceCtx = null;
+}
+function closeBlockModal(){
+  document.getElementById('blockOverlay').style.display='none';
+}
+function populateVanSelectFor(selectId){
+  const sel = document.getElementById(selectId);
+  sel.innerHTML = vans.map(v=>`<option value="${v.id}">${escapeHtml(v.name)}</option>`).join('');
+}
+function saveBlock(){
+  const id = document.getElementById('blockId').value;
+  const startTime = selectsTo24hr('bStart');
+  const endTime = selectsTo24hr('bEnd');
+  const errBox = document.getElementById('blockTimeErrorMsg');
+
+  if(timeToMinutes(endTime) <= timeToMinutes(startTime)){
+    errBox.textContent = `⚠️ End time must be after start time.`;
+    errBox.style.display = 'block';
+    return;
+  }
+  const vanId = document.getElementById('bVan').value;
+  if(!vanId){ alert('Add at least one van before blocking time.'); return; }
+  errBox.style.display = 'none';
+
+  const data = {
+    date: selectedDate,
+    vanId,
+    startTime,
+    endTime,
+    kind: editingBlockKind,
+    reason: document.getElementById('bReason').value.trim(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  if(id){
+    db.collection('timeBlocks').doc(id).update(data);
+  } else {
+    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    db.collection('timeBlocks').add(data);
+  }
+  closeBlockModal();
+}
+function deleteBlock(){
+  const id = document.getElementById('blockId').value;
+  if(!id) return;
+  if(!confirm(editingBlockKind==='streetSales' ? 'Remove this Street Sales period?' : 'Remove this blocked time?')) return;
+  db.collection('timeBlocks').doc(id).delete();
+  closeBlockModal();
+}
+
 function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null){
   document.getElementById('bookingOverlay').style.display='flex';
   populateVanSelect();
@@ -2078,6 +3741,7 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     set24hrToSelects('fEventEndTime', booking.eventEndTime||booking.endTime||'10:00');
     document.getElementById('fClient').value = booking.clientName||'';
     document.getElementById('fContactName').value = booking.contactName||'';
+    document.getElementById('fContactLastName').value = booking.contactLastName||'';
     if(booking.addressStreet || booking.addressCity || booking.addressPostalCode){
       document.getElementById('fAddressStreet').value = booking.addressStreet||'';
       document.getElementById('fAddressCity').value = booking.addressCity||'';
@@ -2098,6 +3762,7 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     document.getElementById('fPriceSundae').value = booking.priceSundae||'';
     document.getElementById('fPriceOnly').value = booking.priceOnly||'';
     updateIceCreamPriceFields();
+    document.getElementById('fSiteNotes').value = booking.siteNotes||'';
     document.getElementById('fNotes').value = booking.notes||'';
     document.getElementById('fInternalNotes').value = booking.internalNotes||'';
     if(Array.isArray(booking.helperIds) && booking.helperIds.length){
@@ -2120,6 +3785,7 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     set24hrToSelects('fEventEndTime', endTime || '10:00');
     document.getElementById('fClient').value = '';
     document.getElementById('fContactName').value = '';
+    document.getElementById('fContactLastName').value = '';
     document.getElementById('fAddressStreet').value = '';
     document.getElementById('fAddressCity').value = '';
     document.getElementById('fAddressProvince').value = 'ON';
@@ -2131,6 +3797,7 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     document.getElementById('fPriceSundae').value = '';
     document.getElementById('fPriceOnly').value = '';
     updateIceCreamPriceFields();
+    document.getElementById('fSiteNotes').value = '';
     document.getElementById('fNotes').value = '';
     document.getElementById('fInternalNotes').value = '';
     currentHelpers = [];
@@ -2260,6 +3927,7 @@ function saveBooking(){
     eventEndTime: selectsTo24hr('fEventEndTime'),
     clientName: document.getElementById('fClient').value.trim(),
     contactName: document.getElementById('fContactName').value.trim(),
+    contactLastName: document.getElementById('fContactLastName').value.trim(),
     addressStreet: addressStreet,
     addressCity: addressCity,
     addressProvince: addressProvince,
@@ -2275,6 +3943,7 @@ function saveBooking(){
     driver: driverEmp ? driverEmp.name : '',
     helperIds: currentHelpers.map(h=>h.id).filter(Boolean),
     helpers: currentHelpers.map(h=>h.name),
+    siteNotes: document.getElementById('fSiteNotes').value.trim(),
     notes: document.getElementById('fNotes').value.trim(),
     internalNotes: document.getElementById('fInternalNotes').value.trim(),
     status: editingStatus,

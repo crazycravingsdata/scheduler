@@ -65,6 +65,30 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     font-size:15px;margin-bottom:14px;outline:none;
   }
   .loginBox input:focus{border-color:var(--purple);}
+  .passwordFieldWrap{position:relative;margin-bottom:14px;}
+  .passwordFieldWrap input{
+    width:100%;padding:12px 44px 12px 14px;border-radius:10px;border:1px solid var(--border);
+    font-size:15px;outline:none;margin-bottom:0;
+  }
+  .passwordFieldWrap input:focus{border-color:var(--purple);}
+  .passwordFieldWrap input:-webkit-autofill,
+  .passwordFieldWrap input:-webkit-autofill:hover,
+  .passwordFieldWrap input:-webkit-autofill:focus{
+    -webkit-box-shadow:0 0 0 1000px #fff inset;
+    -webkit-text-fill-color:var(--ink);
+    transition:background-color 9999s ease-in-out 0s;
+  }
+  .passwordToggleBtn{
+    position:absolute;right:6px;top:50%;transform:translateY(-50%);
+    border:none;background:transparent;cursor:pointer;color:var(--ink-soft);
+    width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    opacity:.55;transition:opacity .15s,background .15s;
+  }
+  .loginBox .passwordToggleBtn{
+    width:32px;height:32px;padding:0;border-radius:8px;background:transparent;color:var(--ink-soft);
+    font-weight:normal;font-size:inherit;margin-bottom:0;
+  }
+  .passwordToggleBtn:hover{opacity:1;background:#f2f0f8;}
   .loginBox button{
     width:100%;padding:12px;border:none;border-radius:10px;
     background:linear-gradient(135deg,var(--pink),var(--pink-dark));
@@ -74,59 +98,83 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   /* ---------- HEADER / NAV ---------- */
   header.topbar{
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    padding:14px 22px;
-    display:flex;align-items:center;justify-content:space-between;
+    background:linear-gradient(120deg,var(--pink),var(--pink-dark));
+    color:#fff;
+    padding:12px 22px;
+    display:flex;align-items:center;gap:16px;
+    box-shadow:0 4px 18px rgba(236,21,97,.18);
     position:sticky;top:0;z-index:50;
+    flex-wrap:wrap;
   }
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;}
-  .brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-dark));}
-  nav.tabs{display:flex;gap:6px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;color:#fff;white-space:nowrap;}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:#fff;opacity:.85;}
+  .navBar{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;width:100%;
+  }
+  nav.tabs{
+    display:flex;gap:2px;background:rgba(255,255,255,.14);border-radius:12px;
+    padding:4px;overflow-x:auto;
+  }
   nav.tabs button{
-    border:none;background:transparent;padding:9px 16px;border-radius:9px;
-    font-size:14px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+    border:none;background:transparent;padding:8px 14px;border-radius:9px;
+    font-size:13px;font-weight:600;color:rgba(255,255,255,.85);cursor:pointer;
+    white-space:nowrap;transition:background .15s cubic-bezier(.4,0,.2,1),color .15s cubic-bezier(.4,0,.2,1);
   }
-  nav.tabs button.active{background:var(--purple);color:#fff;}
+  nav.tabs button:hover{background:rgba(255,255,255,.14);color:#fff;}
+  nav.tabs button.active{background:#fff;color:var(--pink-dark);box-shadow:0 2px 8px rgba(0,0,0,.12);}
   .logoutBtn{
-    border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:9px;
-    font-size:13px;cursor:pointer;color:var(--ink-soft);
+    border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);padding:8px 14px;border-radius:10px;
+    font-size:12px;cursor:pointer;color:#fff;font-weight:600;transition:background .15s;
   }
+  .logoutBtn:hover{background:rgba(255,255,255,.24);}
   .notifBtn{
-    border:1px solid var(--border);background:#fff;padding:8px 14px;border-radius:9px;
-    font-size:13px;cursor:pointer;color:var(--ink-soft);font-weight:600;
+    border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);padding:8px 14px;border-radius:10px;
+    font-size:12px;cursor:pointer;color:#fff;font-weight:600;transition:background .15s;
   }
-  .notifBtn.on{background:#fdeef3;border-color:var(--pink);color:var(--pink-dark);}
+  .notifBtn.on{background:#fff;border-color:#fff;color:var(--pink-dark);}
+  .notifBtn:hover{background:rgba(255,255,255,.24);}
 
   main{padding:20px 22px 60px;max-width:1500px;margin:0 auto;}
 
   /* ---------- MONTH VIEW ---------- */
   .monthHeader{
     display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;
+    flex-wrap:wrap;gap:12px;
   }
-  .monthHeader h2{font-size:24px;margin:0;text-transform:capitalize;}
-  .monthNav{display:flex;gap:8px;align-items:center;}
+  .monthHeader h2{font-size:22px;margin:0;text-transform:capitalize;color:var(--ink);font-weight:800;}
+  .monthNav{
+    display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+    background:#fff;border:1px solid var(--border);border-radius:14px;
+    padding:6px;box-shadow:0 2px 10px rgba(20,10,20,.04);
+  }
   .navBtn{
-    border:1px solid var(--border);background:#fff;width:36px;height:36px;border-radius:9px;
+    border:none;background:transparent;color:var(--ink-soft);width:34px;height:34px;border-radius:9px;
     cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+    transition:background .15s,color .15s;
   }
+  .navBtn:hover{background:#fdeef3;color:var(--pink-dark);}
   .todayBtn{
-    border:1px solid var(--purple);color:var(--purple);background:#fff;padding:8px 14px;
-    border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;
+    border:none;color:#fff;background:linear-gradient(120deg,var(--pink),var(--pink-dark));padding:9px 16px;
+    border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;
+    box-shadow:0 2px 8px rgba(236,21,97,.25);transition:opacity .15s;
   }
+  .todayBtn:hover{opacity:.9;}
   .jumpToDate{
-    display:flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--border);
-    border-radius:9px;padding:5px;margin-right:6px;
+    display:flex;gap:0;align-items:stretch;background:#faf7f9;border:1px solid var(--border);
+    border-radius:10px;padding:0;margin-right:2px;overflow:hidden;
   }
   .jumpToDate select{
-    border:none;background:#fdeef3;border-radius:7px;padding:7px 8px;font-size:13px;font-weight:600;
-    color:var(--ink);font-family:inherit;outline:none;cursor:pointer;
+    border:none;background:transparent;border-right:1px solid var(--border);padding:8px 10px;font-size:13px;font-weight:600;
+    color:var(--ink);font-family:inherit;outline:none;cursor:pointer;transition:background .15s;
   }
+  .jumpToDate select:last-of-type{border-right:none;}
+  .jumpToDate select:focus, .jumpToDate select:hover{background:#fdeef3;}
   .jumpGoBtn{
-    border:none;background:var(--pink);color:#fff;padding:8px 12px;border-radius:7px;
-    font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;
+    border:none;background:var(--purple);color:#fff;padding:8px 14px;
+    font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s;
   }
-  .jumpGoBtn:hover{background:var(--pink-dark);}
+  .jumpGoBtn:hover{background:var(--purple-dark);}
   @media (max-width:900px){
     .jumpToDate{order:10;width:100%;margin-top:8px;margin-right:0;}
   }
@@ -154,9 +202,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   .moreLabel{font-size:10px;color:var(--ink-soft);font-weight:600;}
 
   .viewModeSelect{
-    border:1px solid var(--border);background:#fff;border-radius:9px;padding:9px 12px;
+    border:none;background:#faf7f9;border-radius:9px;padding:9px 12px;
     font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;
+    transition:background .15s;
   }
+  .viewModeSelect:hover, .viewModeSelect:focus{background:#fdeef3;}
 
   /* ---------- WEEK VIEW ---------- */
   .weekGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
@@ -277,10 +327,15 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     z-index:200;padding:20px;
   }
   .modal{
-    background:#fff;border-radius:16px;padding:26px;width:420px;max-width:100%;max-height:90vh;overflow-y:auto;
-    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    background:#fff;border-radius:16px;padding:26px;width:420px;max-width:100%;max-height:90vh;overflow-y:auto;overflow-x:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;
   }
-  .modal h3{margin:0 0 18px;font-size:18px;}
+  .modal h3{margin:0 0 18px;font-size:18px;padding-right:28px;}
+  .modalCloseBtn{
+    position:absolute;top:14px;right:14px;width:30px;height:30px;border:none;background:transparent;
+    color:var(--ink-soft);font-size:22px;line-height:1;border-radius:50%;cursor:pointer;
+  }
+  .modalCloseBtn:hover{background:#fbe9ef;color:var(--ink);}
 
   .viewModal{width:400px;}
   .viewModalHeader{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -319,16 +374,23 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
   .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--purple);}
   .fieldRow{display:flex;gap:10px;}
-  .fieldRow .field{flex:1;min-width:0;}
+  .fieldRow .field{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;}
   .formSection{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);}
   .formSection:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:14px;}
   .formSectionTitle{font-size:11px;font-weight:800;color:var(--pink-dark);text-transform:uppercase;letter-spacing:.5px;margin:0 0 12px;display:flex;align-items:center;gap:6px;}
-  .timeSelectGroup{display:flex;gap:5px;}
-  .timeSelectGroup select{
-    flex:1;min-width:0;padding:10px 4px;border:1px solid var(--border);border-radius:9px;font-size:14px;
-    font-family:inherit;outline:none;text-align:center;
+  .timeSelectGroup{
+    display:flex;align-items:stretch;
+    border:1px solid var(--border);border-radius:10px;overflow:hidden;
+    background:#fff;transition:border-color .15s;
   }
-  .timeSelectGroup select:focus{border-color:var(--pink);}
+  .timeSelectGroup:focus-within{border-color:var(--purple);}
+  .timeSelectGroup select{
+    flex:1;min-width:0;padding:10px 4px;border:none;border-right:1px solid var(--border);font-size:14px;
+    font-family:inherit;outline:none;text-align:center;background:transparent;cursor:pointer;
+    transition:background .15s;
+  }
+  .timeSelectGroup select:last-child{border-right:none;}
+  .timeSelectGroup select:focus{background:#fdeef3;color:var(--purple-dark);}
   textarea{resize:vertical;min-height:60px;}
   .chipsInputRow{display:flex;gap:8px;}
   .chipsInputRow input{flex:1;}
@@ -344,13 +406,32 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   .helperChip .removeX{cursor:pointer;font-weight:800;opacity:.6;}
   .helperChip .removeX:hover{opacity:1;}
 
+  /* ---------- Click-to-select grid (Driver/Helper/Van/Province/Service...) ---------- */
+  .staffGrid, .chipGrid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:6px;
+  }
+  .staffChip, .chipOption{
+    border:1px solid var(--border);background:#faf7f9;color:var(--ink);
+    padding:10px 10px;border-radius:10px;text-align:center;
+    font-weight:600;font-size:13px;cursor:pointer;
+    transition:border-color .15s,background .15s,color .15s;
+    user-select:none;
+  }
+  .staffChip:hover, .chipOption:hover{border-color:var(--purple);}
+  .staffChip.selected, .chipOption.selected{border-color:var(--purple);background:#fdeef3;color:var(--purple-dark);}
+  .staffChip.busy, .chipOption.busy{opacity:.45;cursor:not-allowed;text-decoration:line-through;}
+  .staffChip.busy:hover, .chipOption.busy:hover{border-color:var(--border);}
+  .staffGridEmpty, .chipGridEmpty{color:var(--ink-soft);font-size:13px;padding:6px 2px;}
+
   .statusOptions{display:flex;gap:6px;flex-wrap:wrap;}
   .statusChip{
     padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
     border:2px solid transparent;color:#fff;opacity:.55;
   }
   .statusChip.selected{opacity:1;box-shadow:0 0 0 2px rgba(0,0,0,0.08);}
-  .modalActions{display:flex;justify-content:space-between;margin-top:20px;gap:10px;}
+  .modalActions{display:flex;justify-content:space-between;margin-top:20px;gap:8px;flex-wrap:wrap;}
+  .modalActions .btn{flex:1 1 auto;min-width:0;}
+  .modalActions > div{display:flex;gap:8px;flex-wrap:wrap;}
   .btn{border:none;padding:11px 18px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer;}
   .btnPrimary{background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:#fff;}
   .btnDelete{background:#fdeaea;color:var(--cancel);}
@@ -489,6 +570,176 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     .loginBox{width:90%;}
     .vanCol{min-width:140px;}
   }
+
+  /* ---------- Nav v2: primary tabs + settings menu ---------- */
+  .navPrimary{display:flex;gap:4px;}
+  .settingsWrap{position:relative;}
+  .settingsBtn{
+    border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font-size:16px;line-height:1;
+    padding:8px 12px;border-radius:10px;cursor:pointer;transition:background .15s;
+  }
+  .settingsBtn:hover{background:rgba(255,255,255,.24);}
+  .settingsMenu{
+    display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid var(--border);
+    border-radius:12px;box-shadow:var(--shadow);min-width:180px;padding:6px;z-index:50;
+  }
+  .settingsMenu.open{display:block;}
+  .settingsMenu button{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:none;background:transparent;
+    padding:9px 10px;border-radius:8px;font-size:13.5px;cursor:pointer;color:var(--ink);
+  }
+  .settingsMenu button:hover{background:#fdeaf1;}
+  .settingsMenu button.active{color:var(--purple);font-weight:700;}
+
+  /* ---------- Single "+ Adicionar" action ---------- */
+  .addActionBtn{
+    border:none;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;
+    padding:9px 18px;border-radius:9px;font-size:13.5px;font-weight:700;cursor:pointer;
+    box-shadow:0 3px 10px rgba(236,21,97,0.28);
+  }
+  .addActionBtn:hover{filter:brightness(1.05);}
+
+  /* ---------- Van View: per-van color-coded selector buttons ---------- */
+  .vanViewTabs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+  .vanTabBtn{
+    border:1.5px solid transparent;border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;
+    cursor:pointer;white-space:nowrap;
+  }
+  .vanTabBtn.active{box-shadow:0 3px 10px rgba(0,0,0,0.18);}
+
+  /* ---------- Type-select cards (wizard step 0) ---------- */
+  .typeChoiceGrid{display:flex;flex-direction:column;gap:10px;}
+  .typeChoiceCard{
+    display:flex;align-items:center;gap:12px;border:1.5px solid var(--border);border-radius:12px;
+    padding:14px 16px;cursor:pointer;background:#fff;text-align:left;transition:.15s;
+  }
+  .typeChoiceCard:hover{border-color:var(--pink-soft);background:#fff8fa;}
+  .typeChoiceCard .tcIcon{font-size:22px;}
+  .typeChoiceCard .tcTitle{font-weight:700;font-size:14px;color:var(--ink);}
+  .typeChoiceCard .tcSub{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+
+  /* ---------- Booking wizard ---------- */
+  .wizProgress{display:flex;gap:6px;margin:2px 0 18px;}
+  .wizDot{flex:1;height:5px;border-radius:3px;background:var(--border);transition:.15s;}
+  .wizDot.done{background:var(--pink-soft);}
+  .wizDot.active{background:var(--purple);}
+  .wizStepLabel{font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.3px;font-weight:700;margin-bottom:14px;}
+  .wizStep{display:none;}
+  .wizStep.wizActive{display:block;}
+  .wizNav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
+  .wizBackBtn{
+    border:1px solid var(--border);background:#fff;color:var(--ink-soft);padding:9px 16px;border-radius:9px;
+    font-size:13px;font-weight:700;cursor:pointer;
+  }
+  .wizBackBtn:disabled{visibility:hidden;}
+  .wizNextBtn{
+    border:none;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;
+    padding:9px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;
+  }
+
+  /* =========================================================
+     MOTION SYSTEM — organic, physical, tactile feedback
+     ========================================================= */
+  :root{
+    /* spring-like overshoot ease (visually mimics mass:1 stiffness:180 damping:12) */
+    --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+    --ease-spring-soft:cubic-bezier(0.22,1.15,0.36,1);
+    /* smooth organic deceleration, no overshoot */
+    --ease-organic:cubic-bezier(0.22,1,0.36,1);
+    --ease-organic-in:cubic-bezier(0.55,0,0.55,0.2);
+  }
+
+  /* ---- Global press / release micro-interaction ---- */
+  button, .btn, .addActionBtn, .addBookingBtn, .blockTimeBtn, .streetSalesBtn,
+  .navPrimary button, .settingsBtn, .typeChoiceCard, .statusChip, .smallBtn,
+  .wizNextBtn, .wizBackBtn, .iconBtn, .helperChip, .dayCell, .monthCell{
+    transition:transform .16s var(--ease-spring), box-shadow .16s var(--ease-organic), background .15s ease, border-color .15s ease;
+  }
+  button:active, .btn:active, .addActionBtn:active, .addBookingBtn:active,
+  .blockTimeBtn:active, .streetSalesBtn:active, .navPrimary button:active,
+  .settingsBtn:active, .typeChoiceCard:active, .statusChip:active, .smallBtn:active,
+  .wizNextBtn:active, .wizBackBtn:active, .iconBtn:active{
+    transform:scale(0.96);
+  }
+  .typeChoiceCard:hover, .statusChip:hover{ transform:translateY(-1px) scale(1.015); }
+
+  /* ---- Error shake with physical damping (decaying amplitude) ---- */
+  @keyframes shakeError{
+    0%{ transform:translateX(0); }
+    12%{ transform:translateX(-10px) rotate(-0.6deg); }
+    24%{ transform:translateX(8px) rotate(0.5deg); }
+    36%{ transform:translateX(-6px) rotate(-0.4deg); }
+    48%{ transform:translateX(4px) rotate(0.3deg); }
+    60%{ transform:translateX(-2.5px) rotate(-0.15deg); }
+    72%{ transform:translateX(1.5px); }
+    84%{ transform:translateX(-0.5px); }
+    100%{ transform:translateX(0); }
+  }
+  .shake-anim{
+    animation:shakeError .5s var(--ease-organic-in) both;
+  }
+  .field-error-border{
+    border-color:var(--cancel) !important;
+    box-shadow:0 0 0 3px rgba(224,92,92,0.18) !important;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+
+  /* ---- Overlay / modal entrance (auto-plays on display:none -> flex, no JS needed) ---- */
+  .overlay{
+    animation:overlayFadeIn .28s var(--ease-organic) both;
+  }
+  @keyframes overlayFadeIn{
+    from{ background:rgba(30,10,20,0); }
+    to{ background:rgba(30,10,20,0.42); }
+  }
+  .overlay .modal{
+    transform-origin:var(--morph-x,50%) var(--morph-y,50%);
+    animation:modalPopIn .34s var(--ease-spring-soft) both;
+  }
+  @keyframes modalPopIn{
+    0%{ opacity:0; transform:translateY(14px) scale(0.86); }
+    60%{ opacity:1; }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  .overlay.closing{ animation:overlayFadeOut .18s var(--ease-organic-in) both; }
+  @keyframes overlayFadeOut{
+    from{ background:rgba(30,10,20,0.42); }
+    to{ background:rgba(30,10,20,0); }
+  }
+  .overlay.closing .modal{
+    animation:modalPopOut .18s var(--ease-organic-in) both;
+  }
+  @keyframes modalPopOut{
+    from{ opacity:1; transform:translateY(0) scale(1); }
+    to{ opacity:0; transform:translateY(10px) scale(0.92); }
+  }
+
+  /* ---- Toast system ---- */
+  #ccToastHost{
+    position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;
+    display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;
+  }
+  .ccToast{
+    pointer-events:auto;background:#2b1420;color:#fff;padding:11px 20px;border-radius:11px;
+    font-size:13.5px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.22);
+    animation:toastIn .38s var(--ease-spring-soft) both;
+    display:flex;align-items:center;gap:8px;max-width:88vw;
+  }
+  .ccToast.error{background:var(--cancel);}
+  .ccToast.success{background:var(--ok);}
+  .ccToast.leaving{animation:toastOut .22s var(--ease-organic-in) both;}
+  @keyframes toastIn{
+    from{ opacity:0; transform:translateY(-18px) scale(0.9); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  @keyframes toastOut{
+    from{ opacity:1; transform:translateY(0) scale(1); }
+    to{ opacity:0; transform:translateY(-14px) scale(0.92); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  }
 </style>
 </head>
 <body>
@@ -500,7 +751,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     <div class="loginBox">
       <img id="loginLogo" src="" alt="Crazy Cravings" style="width:140px;height:140px;margin-bottom:2px;border-radius:16px;">
       <p style="margin-top:2px;">Scheduler</p>
-      <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+      <div class="passwordFieldWrap">
+        <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+        <button type="button" class="passwordToggleBtn" onclick="togglePasswordVisibility()" id="passwordToggleBtn" aria-label="Show password" title="Show password">
+          <svg id="passwordToggleIconEye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg id="passwordToggleIconEyeOff" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 7 11 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61C3.35 8.36 1 12 1 12s4 7 11 7a9.26 9.26 0 0 0 5.39-1.61M9.53 9.53a3 3 0 0 0 4.24 4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </button>
+      </div>
       <button onclick="tryLogin()">Log In</button>
       <div class="loginError" id="loginError"></div>
     </div>
@@ -510,17 +767,25 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   <div id="mainApp" style="display:none;">
     <header class="topbar">
       <div class="brand"><img id="topbarLogo" src="" alt="" style="width:32px;height:32px;border-radius:8px;"> Crazy Cravings - Scheduler</div>
-      <nav class="tabs">
-        <button id="tabCalendar" class="active" onclick="switchTab('calendar')">Calendar</button>
-        <button id="tabEventsList" onclick="switchTab('eventsList')">Events</button>
-        <button id="tabVanView" onclick="switchTab('vanView')">Van View</button>
-        <button id="tabSchedule" onclick="switchTab('schedule')">Schedule</button>
-        <button id="tabVans" onclick="switchTab('vans')">Vans</button>
-        <button id="tabEmployees" onclick="switchTab('employees')">Employees</button>
-      </nav>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <button class="notifBtn" id="notifBtn" onclick="toggleNotifications()" title="Get a reminder 2h before each event">🔔 Notifications: Off</button>
-        <button class="logoutBtn" onclick="logout()">Log Out</button>
+      <div class="navBar">
+        <nav class="tabs navPrimary">
+          <button id="tabCalendar" class="active" onclick="switchTab('calendar')">Calendar</button>
+          <button id="tabVanView" onclick="switchTab('vanView')">Van View</button>
+          <button id="tabEventsList" onclick="switchTab('eventsList')">Events</button>
+          <button id="tabPending" onclick="switchTab('pending')">Pending<span id="pendingTabBadge" style="display:none;background:#f2a93b;color:#fff;border-radius:999px;padding:1px 7px;font-size:11px;margin-left:6px;"></span></button>
+          <button id="tabSchedule" onclick="switchTab('schedule')">Schedule</button>
+        </nav>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="notifBtn" id="notifBtn" onclick="toggleNotifications()" title="Get a reminder 2h before each event">🔔 Notifications: Off</button>
+          <div class="settingsWrap">
+            <button class="settingsBtn" onclick="toggleSettingsMenu()" title="Settings" aria-label="Settings">⚙️</button>
+            <div class="settingsMenu" id="settingsMenu">
+              <button id="tabVans" onclick="switchTab('vans');closeSettingsMenu();">🚐 Manage Vans</button>
+              <button id="tabEmployees" onclick="switchTab('employees');closeSettingsMenu();">👥 Manage Employees</button>
+            </div>
+          </div>
+          <button class="logoutBtn" onclick="logout()">Log Out</button>
+        </div>
       </div>
     </header>
 
@@ -569,9 +834,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             </div>
             <button class="navBtn" onclick="changeDay(-1)">‹</button>
             <button class="navBtn" onclick="changeDay(1)">›</button>
-            <button class="blockTimeBtn" onclick="openBlockModal()">🚫 Block Time</button>
-            <button class="streetSalesBtn" onclick="openStreetSalesModal()">🍦 Street Sales</button>
-            <button class="addBookingBtn" onclick="openBookingModal()">+ New Event</button>
+            <button class="addActionBtn" onclick="openAddFlow(event)">+ Adicionar</button>
           </div>
         </div>
 
@@ -622,6 +885,35 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         </div>
       </section>
 
+      <!-- PENDING (eventos vindos de cotação, aguardando Van/Driver/Helpers) -->
+      <section id="pendingView" style="display:none;">
+        <div class="dayViewHeader">
+          <div class="left">
+            <div>
+              <h2>⏳ Pending Assignment</h2>
+              <div class="sub">Events created from a quote — waiting to be assigned a Van, Driver and Helpers before they can go on the schedule.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="eventsTableWrap">
+          <table class="eventsTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Company / Event</th>
+                <th>Contact</th>
+                <th>Quote #</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="pendingBody"></tbody>
+          </table>
+          <p class="emptyCatalogMsg" id="pendingEmptyMsg" style="display:none;padding:20px;">No events waiting on assignment right now.</p>
+        </div>
+      </section>
+
       <!-- VAN VIEW -->
       <section id="vanViewSection" style="display:none;">
         <div class="dayViewHeader">
@@ -632,7 +924,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             </div>
           </div>
           <div style="display:flex;gap:8px;align-items:center;">
-            <select id="vanViewSelect" onchange="onVanViewSelectChange()"></select>
+            <div class="vanViewTabs" id="vanViewTabs"></div>
 <div class="zoomControls" title="Zoom the schedule rows">
               <button class="zoomBtn" onclick="changeHourZoom(-1)">−</button>
               <span class="zoomLabel">100%</span>
@@ -641,9 +933,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             <button class="navBtn" onclick="changeVanViewDay(-1)">‹</button>
             <button class="navBtn" onclick="changeVanViewDay(1)">›</button>
             <button class="todayBtn" onclick="goToVanViewToday()">Today</button>
-            <button class="blockTimeBtn" onclick="openBlockModalForVanView()">🚫 Block Time</button>
-            <button class="streetSalesBtn" onclick="openStreetSalesModalForVanView()">🍦 Street Sales</button>
-            <button class="addBookingBtn" onclick="openBookingModalForVanView()">+ New Event</button>
+            <button class="addActionBtn" onclick="openAddFlowVanView(event)">+ Adicionar</button>
           </div>
         </div>
         <div class="scheduleWrap" id="vanViewScheduleWrap"></div>
@@ -898,16 +1188,26 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 </div>
 
 <div class="overlay" id="cellChoiceOverlay" style="display:none;">
-  <div class="modal" style="width:320px;">
-    <h3>What would you like to add?</h3>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <button type="button" class="btn btnPrimary" style="width:100%;" onclick="cellChoiceSelect('event')">&#128197; Event</button>
-      <button type="button" class="btn btnPrimary" style="width:100%;background:linear-gradient(135deg,#8a7dc9,#6b5ca8);" onclick="cellChoiceSelect('street')">&#127848; Street Sales</button>
-      <button type="button" class="btn btnPrimary" style="width:100%;background:linear-gradient(135deg,#8f8f95,#6d6d73);" onclick="cellChoiceSelect('block')">&#128683; Block Time</button>
+  <div class="modal" style="width:360px;">
+    <div class="wizStepLabel">Etapa 1 de 5</div>
+    <h3 style="margin-top:0;">O que você quer adicionar?</h3>
+    <div class="typeChoiceGrid">
+      <button type="button" class="typeChoiceCard" onclick="cellChoiceSelect('event', event)">
+        <span class="tcIcon">📅</span>
+        <span><span class="tcTitle" style="display:block;">Evento</span><span class="tcSub">Sorveteria em festa ou evento</span></span>
+      </button>
+      <button type="button" class="typeChoiceCard" onclick="cellChoiceSelect('street', event)">
+        <span class="tcIcon">🍦</span>
+        <span><span class="tcTitle" style="display:block;">Street Sales</span><span class="tcSub">Venda de rua, sem cliente marcado</span></span>
+      </button>
+      <button type="button" class="typeChoiceCard" onclick="cellChoiceSelect('block', event)">
+        <span class="tcIcon">🚫</span>
+        <span><span class="tcTitle" style="display:block;">Bloqueio</span><span class="tcSub">Van ou equipe indisponível</span></span>
+      </button>
     </div>
     <div class="modalActions">
       <div></div>
-      <div><button class="btn btnCancel" onclick="closeCellChoice()">Cancel</button></div>
+      <div><button class="btn btnCancel" onclick="closeCellChoice()">Cancelar</button></div>
     </div>
   </div>
 </div>
@@ -915,14 +1215,19 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 <!-- BOOKING MODAL -->
 <div class="overlay" id="bookingOverlay" style="display:none;">
   <div class="modal">
+    <button type="button" class="modalCloseBtn" onclick="closeBookingModal()" aria-label="Fechar">&times;</button>
     <h3 id="modalTitle">New Event</h3>
     <input type="hidden" id="bookingId">
 
+    <div class="wizStepLabel" id="wizStepLabel">Etapa 2 de 5</div>
+    <div class="wizProgress" id="wizProgress"></div>
+
+    <div class="wizStep wizActive" data-wizstep="0">
     <div class="formSection">
       <p class="formSectionTitle">&#128667; Van &amp; Van Schedule</p>
       <div class="field">
         <label>Van</label>
-        <select id="fVan"></select>
+        <div class="chipGrid" id="fVanGrid"></div>
       </div>
 
       <div class="fieldRow">
@@ -947,10 +1252,33 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     </div>
 
     <div class="formSection">
+      <p class="formSectionTitle">&#128205; Location</p>
+      <div class="field">
+        <label>Street Address</label>
+        <input type="text" id="fAddressStreet" placeholder="e.g. #4 359 Lynden Rd">
+      </div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>City</label>
+          <input type="text" id="fAddressCity" placeholder="e.g. Hamilton">
+        </div>
+        <div class="field">
+          <label>Postal Code</label>
+          <input type="text" id="fAddressPostalCode" placeholder="e.g. L8P 1A1" style="text-transform:uppercase;">
+        </div>
+      </div>
+      <p class="fieldHint" style="margin-bottom:0;">📍 Fill in the full address (with postal code) so the QR code on the itinerary points to the exact location on Google Maps.</p>
+    </div>
+    </div><!-- /wizstep0 -->
+
+    <div class="wizStep" data-wizstep="1">
+    <div class="formSection">
       <p class="formSectionTitle">&#127970; Client &amp; Contact</p>
       <div class="field">
         <label>Company / Event Name</label>
-        <input type="text" id="fClient" placeholder="e.g. XPTO Inc / Dave Thompson's Birthday Party">
+        <input type="text" id="fClient" list="clientNameList" placeholder="e.g. XPTO Inc / Dave Thompson's Birthday Party" autocomplete="off" onchange="applyKnownClientPrefill()">
+        <datalist id="clientNameList"></datalist>
       </div>
 
       <div class="fieldRow">
@@ -968,44 +1296,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         <label>Phone</label>
         <input type="text" id="fPhone" placeholder="e.g. (289) 000-0000">
       </div>
-    </div>
 
-    <div class="formSection">
-      <p class="formSectionTitle">&#128205; Location</p>
       <div class="field">
-        <label>Street Address</label>
-        <input type="text" id="fAddressStreet" placeholder="e.g. #4 359 Lynden Rd">
+        <label>Contact Email</label>
+        <input type="email" id="fEmail" placeholder="e.g. jessica@company.com">
       </div>
-
-      <div class="fieldRow">
-        <div class="field">
-          <label>City</label>
-          <input type="text" id="fAddressCity" placeholder="e.g. Hamilton">
-        </div>
-        <div class="field">
-          <label>Province</label>
-          <select id="fAddressProvince">
-            <option value="ON">ON</option>
-            <option value="AB">AB</option>
-            <option value="BC">BC</option>
-            <option value="MB">MB</option>
-            <option value="NB">NB</option>
-            <option value="NL">NL</option>
-            <option value="NS">NS</option>
-            <option value="NT">NT</option>
-            <option value="NU">NU</option>
-            <option value="PE">PE</option>
-            <option value="QC">QC</option>
-            <option value="SK">SK</option>
-            <option value="YT">YT</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Postal Code</label>
-          <input type="text" id="fAddressPostalCode" placeholder="e.g. L8P 1A1" style="text-transform:uppercase;">
-        </div>
-      </div>
-      <p class="fieldHint" style="margin-bottom:0;">📍 Fill in the full address (with postal code) so the QR code on the itinerary points to the exact location on Google Maps.</p>
     </div>
 
     <div class="formSection">
@@ -1043,12 +1338,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
       <div class="field">
         <label>Ice Cream Type</label>
-        <select id="fIceCreamType" onchange="updateIceCreamPriceFields()">
-          <option value="">— select —</option>
-          <option value="sundae">Ice Cream Sundaes</option>
-          <option value="only">Ice Cream Only</option>
-          <option value="both">Ice Cream Sundaes & Ice Cream Only</option>
-        </select>
+        <div class="chipGrid" id="fIceCreamTypeGrid"></div>
       </div>
 
       <div class="fieldRow" id="iceCreamPriceFields" style="display:none;">
@@ -1062,24 +1352,24 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         </div>
       </div>
     </div>
+    </div><!-- /wizstep1 -->
 
+    <div class="wizStep" data-wizstep="2">
     <div class="formSection">
       <p class="formSectionTitle">&#128100; Staff</p>
       <div class="field">
         <label>Driver</label>
-        <select id="fDriver" onchange="onDriverSelectChange()"></select>
+        <div class="staffGrid" id="fDriverGrid"></div>
       </div>
 
       <div class="field">
         <label>Helper(s)</label>
-        <div class="chipsInputRow">
-          <select id="fHelperSelect"></select>
-          <button type="button" class="smallBtn" onclick="addHelperChip()">+ Add</button>
-        </div>
-        <div class="chipsList" id="helpersChipsList"></div>
+        <div class="staffGrid" id="fHelperGrid"></div>
       </div>
     </div>
+    </div><!-- /wizstep2 -->
 
+    <div class="wizStep" data-wizstep="3">
     <div class="formSection">
       <p class="formSectionTitle">&#128221; Notes</p>
       <div class="field">
@@ -1107,9 +1397,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
         <div class="statusChip" data-status="cancel" style="background:var(--cancel);" onclick="selectStatus('cancel')">Cancelled</div>
       </div>
     </div>
+    </div><!-- /wizstep3 -->
 
-    <div class="modalActions">
-      <div>
+    <div class="wizNav" id="wizNav">
+      <button class="wizBackBtn" id="wizBackBtn" onclick="wizStep(-1)">Voltar</button>
+      <button class="wizNextBtn" id="wizNextBtn" onclick="wizStep(1)">Avançar</button>
+    </div>
+
+    <div class="modalActions" id="bookingModalActions" style="display:none;">
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="btn wizBackBtn" onclick="wizStep(-1)" title="Back to previous step">← Back</button>
         <button class="btn btnDelete" id="deleteBtn" onclick="deleteBooking()" style="display:none;">Delete</button>
       </div>
       <div style="display:flex;gap:8px;">
@@ -1142,15 +1439,19 @@ const ITINERARY_TEMPLATE_PDF_B64 = "JVBERi0xLjYKJb/3ov4KMSAwIG9iago8PCAvVHlwZSAv
    FIREBASE CONFIG - substitua pelos dados do seu projeto
    ========================================================= */
 const firebaseConfig = {
-  apiKey: "AIzaSyDVxxif68ILuptDC674TUAWMPyRLPdMVUU",
-  authDomain: "crazy-cravings-scheduler.firebaseapp.com",
-  projectId: "crazy-cravings-scheduler",
-  storageBucket: "crazy-cravings-scheduler.firebasestorage.app",
-  messagingSenderId: "637114109955",
-  appId: "1:637114109955:web:8c654aa0d8a9d5ddd63e36"
+  apiKey: "AIzaSyDt4UHOAg_V4TAB56qOTOHhEkhLnwXyC3g",
+  authDomain: "crazy-cravings-data.firebaseapp.com",
+  projectId: "crazy-cravings-data",
+  storageBucket: "crazy-cravings-data.firebasestorage.app",
+  messagingSenderId: "445386914627",
+  appId: "1:445386914627:web:7800ce0e67bcac3b1a8df6"
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+/* Nota: a geração de invoice a partir de um evento agora acontece só pelo lado
+   do Invoice Generator, na aba "From Agenda" (ver /areas/crazy-cravings-integration).
+   O Scheduler não precisa mais de um botão de atalho pra isso. */
 
 const APP_PASSWORD = "crazy@admin";
 
@@ -1199,11 +1500,98 @@ let currentDayBlocks = [];
 let dayNotesCache = {};   // { 'yyyy-mm-dd': text }
 
 let editingStatus = 'ok';
+// Vínculo com o Invoice Generator (ver /areas/crazy-cravings-integration)
+let editingContactId = null, editingQuoteId = null, editingInvoiceId = null, editingOrigin = 'direct';
 let monthUnsub = null;
 let dayUnsub = null;
 let dayBlockUnsub = null;
 
+/* ---------------- MOTION / FEEDBACK UTILITIES ---------------- */
+function shakeEl(el){
+  if(!el) return;
+  el.classList.remove('shake-anim');
+  // force reflow so the animation restarts even if triggered twice in a row
+  void el.offsetWidth;
+  el.classList.add('shake-anim');
+  el.addEventListener('animationend', function handler(){
+    el.classList.remove('shake-anim');
+    el.removeEventListener('animationend', handler);
+  });
+}
+function markFieldError(el){
+  if(!el) return;
+  el.classList.add('field-error-border');
+  const clear = ()=>{ el.classList.remove('field-error-border'); el.removeEventListener('input', clear); el.removeEventListener('change', clear); };
+  el.addEventListener('input', clear);
+  el.addEventListener('change', clear);
+}
+function ensureToastHost(){
+  let host = document.getElementById('ccToastHost');
+  if(!host){
+    host = document.createElement('div');
+    host.id = 'ccToastHost';
+    document.body.appendChild(host);
+  }
+  return host;
+}
+function showToast(message, type){
+  const host = ensureToastHost();
+  const t = document.createElement('div');
+  t.className = 'ccToast' + (type ? ' '+type : '');
+  t.textContent = message;
+  host.appendChild(t);
+  setTimeout(()=>{
+    t.classList.add('leaving');
+    t.addEventListener('animationend', ()=> t.remove());
+  }, 3200);
+}
+// Sets the transform-origin of a modal to the point where the triggering
+// element/click sits, so it visually expands from that point (shared-element-style morph).
+function setMorphOrigin(overlayId, evt){
+  const overlay = document.getElementById(overlayId);
+  if(!overlay) return;
+  const modal = overlay.querySelector('.modal');
+  if(!modal) return;
+  let x = '50%', y = '50%';
+  if(evt){
+    const rect = (evt.currentTarget || evt.target).getBoundingClientRect ?
+      (evt.currentTarget || evt.target).getBoundingClientRect() : null;
+    if(rect){
+      x = (rect.left + rect.width/2) + 'px';
+      y = (rect.top + rect.height/2) + 'px';
+    }
+  }
+  modal.style.setProperty('--morph-x', x);
+  modal.style.setProperty('--morph-y', y);
+}
+// Animated close: plays the exit animation, then hides the overlay.
+// Falls back gracefully if called on an overlay that's already hidden.
+function closeOverlayAnimated(overlayId){
+  const overlay = document.getElementById(overlayId);
+  if(!overlay || overlay.style.display === 'none') return;
+  overlay.classList.add('closing');
+  const done = ()=>{
+    overlay.style.display = 'none';
+    overlay.classList.remove('closing');
+    overlay.removeEventListener('animationend', done);
+  };
+  overlay.addEventListener('animationend', done);
+  // safety fallback in case animationend doesn't fire
+  setTimeout(()=>{ if(overlay.classList.contains('closing')) done(); }, 260);
+}
+
 /* ---------------- AUTH (simple password gate) ---------------- */
+function togglePasswordVisibility(){
+  const input = document.getElementById('passwordInput');
+  const btn = document.getElementById('passwordToggleBtn');
+  const eyeIcon = document.getElementById('passwordToggleIconEye');
+  const eyeOffIcon = document.getElementById('passwordToggleIconEyeOff');
+  const showing = input.type === 'text';
+  input.type = showing ? 'password' : 'text';
+  eyeIcon.style.display = showing ? 'block' : 'none';
+  eyeOffIcon.style.display = showing ? 'none' : 'block';
+  btn.title = showing ? 'Show password' : 'Hide password';
+}
 function tryLogin(){
   const pw = document.getElementById('passwordInput').value;
   if(pw === APP_PASSWORD){
@@ -1211,6 +1599,8 @@ function tryLogin(){
     showApp();
   } else {
     document.getElementById('loginError').textContent = 'Incorrect password.';
+    shakeEl(document.getElementById('passwordInput'));
+    shakeEl(document.querySelector('.loginBox'));
   }
 }
 document.getElementById('passwordInput').addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
@@ -1229,6 +1619,73 @@ function showApp(){
   loadChecklistSettings();
   renderCalendarView();
   initNotificationSystem();
+  refreshKnownClients();
+  initPendingAssignListener();
+}
+
+function readableTextColor(hex){
+  if(!hex) return '#fff';
+  const h = hex.replace('#','');
+  const full = h.length===3 ? h.split('').map(c=>c+c).join('') : h;
+  const r = parseInt(full.substring(0,2),16), g = parseInt(full.substring(2,4),16), b = parseInt(full.substring(4,6),16);
+  if([r,g,b].some(isNaN)) return '#fff';
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.62 ? '#2b1420' : '#fff';
+}
+
+/* ---------------- KNOWN CLIENTS (prefill from previously registered companies) ---------------- */
+let knownClientsMap = {}; // lowercased clientName -> most recent booking fields
+function refreshKnownClients(){
+  db.collection('cc_events').orderBy('date','desc').limit(400).get().then(snap=>{
+    const map = {};
+    const names = [];
+    snap.forEach(doc=>{
+      const b = doc.data();
+      if(!b.clientName) return;
+      const key = b.clientName.trim().toLowerCase();
+      if(!key || map[key]) return; // keep only the most recent (first seen, since ordered desc)
+      map[key] = b;
+      names.push(b.clientName.trim());
+    });
+    knownClientsMap = map;
+    const list = document.getElementById('clientNameList');
+    if(list) list.innerHTML = names.sort((a,b)=>a.localeCompare(b)).map(n=>`<option value="${escapeHtml(n)}"></option>`).join('');
+  }).catch(()=>{ /* offline or no permission — silently skip autocomplete */ });
+}
+function rememberClient(booking){
+  if(!booking || !booking.clientName) return;
+  const key = booking.clientName.trim().toLowerCase();
+  if(!key) return;
+  knownClientsMap[key] = booking;
+  const list = document.getElementById('clientNameList');
+  if(list && !list.querySelector(`option[value="${CSS.escape(booking.clientName.trim())}"]`)){
+    const opt = document.createElement('option');
+    opt.value = booking.clientName.trim();
+    list.appendChild(opt);
+  }
+}
+// When the user picks/types a previously-known company, offer to prefill contact/address
+function applyKnownClientPrefill(){
+  const nameInput = document.getElementById('fClient');
+  const key = nameInput.value.trim().toLowerCase();
+  const known = knownClientsMap[key];
+  if(!known) return;
+  const fContactName = document.getElementById('fContactName');
+  const fContactLastName = document.getElementById('fContactLastName');
+  const fPhone = document.getElementById('fPhone');
+  const fEmail = document.getElementById('fEmail');
+  const fAddressStreet = document.getElementById('fAddressStreet');
+  const fAddressCity = document.getElementById('fAddressCity');
+  const fAddressPostalCode = document.getElementById('fAddressPostalCode');
+  // only fill fields that are still empty, so we never clobber what the user already typed
+  if(fContactName && !fContactName.value) fContactName.value = known.contactName || '';
+  if(fContactLastName && !fContactLastName.value) fContactLastName.value = known.contactLastName || '';
+  if(fPhone && !fPhone.value) fPhone.value = known.phone || '';
+  if(fEmail && !fEmail.value) fEmail.value = known.email || '';
+  if(fAddressStreet && !fAddressStreet.value) fAddressStreet.value = known.addressStreet || known.address || '';
+  if(fAddressCity && !fAddressCity.value) fAddressCity.value = known.addressCity || '';
+  // Província é fixa (Ontário) — não precisa de autofill aqui
+  if(fAddressPostalCode && !fAddressPostalCode.value) fAddressPostalCode.value = known.addressPostalCode || '';
 }
 
 /* ---------------- 2-HOUR-AHEAD EVENT NOTIFICATIONS ----------------
@@ -1288,7 +1745,7 @@ function startNotificationWatcher(){
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
   const tomorrowISO = formatISO(tomorrow);
 
-  notifyWatchUnsub = db.collection('bookings')
+  notifyWatchUnsub = db.collection('cc_events')
     .where('date','>=',todayISO).where('date','<=',tomorrowISO)
     .onSnapshot(snap=>{
       notifyWatchBookings = [];
@@ -1420,11 +1877,24 @@ function minutesToLabel(mins){
   return `${h12}:${String(m).padStart(2,'0')} ${ap}`;
 }
 
+/* ---------------- SETTINGS MENU (Vans / Employees) ---------------- */
+function toggleSettingsMenu(){
+  document.getElementById('settingsMenu').classList.toggle('open');
+}
+function closeSettingsMenu(){
+  document.getElementById('settingsMenu').classList.remove('open');
+}
+document.addEventListener('click', e=>{
+  const wrap = document.querySelector('.settingsWrap');
+  if(wrap && !wrap.contains(e.target)) closeSettingsMenu();
+});
+
 /* ---------------- TABS ---------------- */
 function switchTab(tab){
   currentTab = tab;
   document.getElementById('tabCalendar').classList.toggle('active', tab==='calendar');
   document.getElementById('tabEventsList').classList.toggle('active', tab==='eventsList');
+  document.getElementById('tabPending').classList.toggle('active', tab==='pending');
   document.getElementById('tabVanView').classList.toggle('active', tab==='vanView');
   document.getElementById('tabSchedule').classList.toggle('active', tab==='schedule');
   document.getElementById('tabVans').classList.toggle('active', tab==='vans');
@@ -1432,12 +1902,14 @@ function switchTab(tab){
   document.getElementById('monthView').style.display = tab==='calendar' ? 'block':'none';
   document.getElementById('dayView').style.display = 'none';
   document.getElementById('eventsListView').style.display = tab==='eventsList' ? 'block':'none';
+  document.getElementById('pendingView').style.display = tab==='pending' ? 'block':'none';
   document.getElementById('vanViewSection').style.display = tab==='vanView' ? 'block':'none';
   document.getElementById('scheduleView').style.display = tab==='schedule' ? 'block':'none';
   document.getElementById('vansView').style.display = tab==='vans' ? 'block':'none';
   document.getElementById('employeesView').style.display = tab==='employees' ? 'block':'none';
   if(tab==='calendar') renderCalendarView();
   if(tab==='eventsList') initEventsListTab();
+  if(tab==='pending') renderPendingTab();
   if(tab==='vanView') initVanViewTab();
   if(tab==='schedule') initScheduleTab();
   if(tab==='vans') renderVansManage();
@@ -1448,6 +1920,7 @@ function openDayView(dateISO){
   selectedDate = dateISO;
   document.getElementById('monthView').style.display='none';
   document.getElementById('eventsListView').style.display='none';
+  document.getElementById('pendingView').style.display='none';
   document.getElementById('vanViewSection').style.display='none';
   document.getElementById('scheduleView').style.display='none';
   document.getElementById('vansView').style.display='none';
@@ -1455,6 +1928,7 @@ function openDayView(dateISO){
   document.getElementById('dayView').style.display='block';
   document.getElementById('tabCalendar').classList.add('active');
   document.getElementById('tabEventsList').classList.remove('active');
+  document.getElementById('tabPending').classList.remove('active');
   document.getElementById('tabVanView').classList.remove('active');
   document.getElementById('tabSchedule').classList.remove('active');
   document.getElementById('tabVans').classList.remove('active');
@@ -1470,6 +1944,55 @@ function initEmployeesListener(){
     if(document.getElementById('employeesView').style.display==='block') renderEmployeesManage();
     if(document.getElementById('scheduleView').style.display==='block') populateScheduleEmployeeSelect();
     if(document.getElementById('bookingOverlay').style.display==='flex') refreshEmployeeOptions();
+  });
+}
+
+/* ---------------- PENDING ASSIGNMENT (eventos vindos de cotação, sem Van) ---------------- */
+// Ver /areas/crazy-cravings-integration — quotes geram eventos com vanId:'' aqui
+let pendingAssignBookings = [];
+function initPendingAssignListener(){
+  db.collection('cc_events').where('vanId','==','').onSnapshot(snap=>{
+    pendingAssignBookings = [];
+    snap.forEach(doc=> pendingAssignBookings.push({id:doc.id, ...doc.data()}));
+    pendingAssignBookings.sort((a,b)=> (a.date||'').localeCompare(b.date||''));
+    updatePendingTabBadge();
+    if(document.getElementById('pendingView').style.display==='block') renderPendingTab();
+  });
+}
+function updatePendingTabBadge(){
+  const badge = document.getElementById('pendingTabBadge');
+  if(pendingAssignBookings.length>0){
+    badge.textContent = pendingAssignBookings.length;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+function renderPendingTab(){
+  const tbody = document.getElementById('pendingBody');
+  const emptyMsg = document.getElementById('pendingEmptyMsg');
+  tbody.innerHTML = '';
+  if(pendingAssignBookings.length===0){
+    emptyMsg.style.display='block';
+    return;
+  }
+  emptyMsg.style.display='none';
+  pendingAssignBookings.forEach(b=>{
+    const d = b.date ? parseISO(b.date) : null;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${d?formatDateBR(d):'—'}</td>
+      <td>${(b.eventTime||'')+(b.eventTime&&b.eventEndTime?'–'+b.eventEndTime:'')}</td>
+      <td>${escapeHtml(b.clientName||'No name')}</td>
+      <td>${escapeHtml([b.contactName,b.contactLastName].filter(Boolean).join(' ')||'—')}</td>
+      <td>${b.quoteId?escapeHtml(b.quoteId.replace(/^#+/,'')):'—'}</td>
+      <td>
+        <div class="eventsRowActions">
+          <button class="catalogIconBtn" title="Assign Van / Driver / Helpers" onclick='openViewBookingModal(${JSON.stringify(b).replace(/'/g,"&#39;")})'>Assign →</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 }
 
@@ -1586,30 +2109,49 @@ function refreshEmployeeOptions(){
   const startMin = timeToMinutes(selectsTo24hr('fStart'));
   const endMin = timeToMinutes(selectsTo24hr('fEnd'));
   const busy = (endMin>startMin) ? computeBusyEmployeeIds(startMin, endMin, excludeId) : new Set();
+  const addedHelperIds = new Set(currentHelpers.map(h=>h.id));
 
-  // DRIVER select
-  const driverSel = document.getElementById('fDriver');
-  const currentDriverId = driverSel.value;
-  driverSel.innerHTML = '<option value="">— select —</option>' + employees
-    .filter(e=>employeeHasRole(e,'driver'))
-    .map(e=>{
-      const isBusy = busy.has(e.id) && e.id!==currentDriverId;
-      return `<option value="${e.id}" ${isBusy?'disabled':''}>${escapeHtml(e.name)}${isBusy?' (busy at this time)':''}</option>`;
-    }).join('');
-  if(currentDriverId) driverSel.value = currentDriverId;
+  // DRIVER grid (single-select) — alguém já escalado como Helper não pode virar Driver também
+  const driverGrid = document.getElementById('fDriverGrid');
+  const drivers = employees.filter(e=>employeeHasRole(e,'driver'));
+  driverGrid.innerHTML = drivers.length ? drivers.map(e=>{
+    const isSelected = e.id===currentDriverId;
+    const isTakenAsHelper = addedHelperIds.has(e.id);
+    const isBusy = busy.has(e.id) && !isSelected;
+    const disabled = isTakenAsHelper || isBusy;
+    const title = isTakenAsHelper ? 'Already assigned as Helper on this event' : (isBusy?'Busy at this time':'');
+    return `<button type="button" class="staffChip${isSelected?' selected':''}${disabled?' busy':''}"
+      onclick="${disabled?'':`selectDriverChip('${e.id}')`}" ${disabled?`disabled title="${title}"`:''}>${escapeHtml(e.name)}</button>`;
+  }).join('') : '<div class="staffGridEmpty">No drivers set up yet.</div>';
 
-  // HELPER select (excludes those already added and busy ones)
-  const helperSel = document.getElementById('fHelperSelect');
-  const addedIds = new Set(currentHelpers.map(h=>h.id));
-  helperSel.innerHTML = employees
-    .filter(e=>employeeHasRole(e,'helper') && !addedIds.has(e.id))
-    .map(e=>{
-      const isBusy = busy.has(e.id);
-      return `<option value="${e.id}" ${isBusy?'disabled':''}>${escapeHtml(e.name)}${isBusy?' (busy at this time)':''}</option>`;
-    }).join('');
+  // HELPER grid (multi-select) — o Driver escolhido não pode virar Helper também
+  const helperGrid = document.getElementById('fHelperGrid');
+  const helpers = employees.filter(e=>employeeHasRole(e,'helper'));
+  helperGrid.innerHTML = helpers.length ? helpers.map(e=>{
+    const isSelected = addedHelperIds.has(e.id);
+    const isTakenAsDriver = e.id===currentDriverId;
+    const isBusy = busy.has(e.id) && !isSelected;
+    const disabled = isTakenAsDriver || isBusy;
+    const title = isTakenAsDriver ? 'Already assigned as Driver on this event' : (isBusy?'Busy at this time':'');
+    return `<button type="button" class="staffChip${isSelected?' selected':''}${disabled?' busy':''}"
+      onclick="${disabled?'':`toggleHelperChip('${e.id}')`}" ${disabled?`disabled title="${title}"`:''}>${escapeHtml(e.name)}</button>`;
+  }).join('') : '<div class="staffGridEmpty">No helpers set up yet.</div>';
 }
-
-function onDriverSelectChange(){ /* reserved for future validations */ }
+function selectDriverChip(id){
+  currentDriverId = (currentDriverId===id) ? null : id; // clica de novo pra desmarcar
+  if(currentDriverId) currentHelpers = currentHelpers.filter(h=>h.id!==id); // não pode ser Driver e Helper ao mesmo tempo
+  refreshEmployeeOptions();
+}
+function toggleHelperChip(id){
+  const idx = currentHelpers.findIndex(h=>h.id===id);
+  if(idx>=0){
+    currentHelpers.splice(idx,1);
+  } else {
+    const emp = employees.find(e=>e.id===id);
+    if(emp) currentHelpers.push({id: emp.id, name: emp.name});
+  }
+  refreshEmployeeOptions();
+}
 
 /* ---------------- VANS ---------------- */
 function initVansListener(){
@@ -1619,7 +2161,7 @@ function initVansListener(){
     if(document.getElementById('vansView').style.display==='block') renderVansManage();
     if(document.getElementById('dayView').style.display==='block') renderDayView();
     if(document.getElementById('vanViewSection').style.display==='block') renderVanView();
-    populateVanSelect();
+    renderVanGrid();
   });
 }
 
@@ -1696,9 +2238,39 @@ function moveVan(id, dir){
   db.collection('vans').doc(a.id).update({order:b.order});
   db.collection('vans').doc(b.id).update({order:a.order});
 }
-function populateVanSelect(){
-  const sel = document.getElementById('fVan');
-  sel.innerHTML = vans.map(v=>`<option value="${v.id}">${escapeHtml(v.name)}</option>`).join('');
+let currentVanId = null;
+let currentIceCreamType = '';
+const ICE_CREAM_TYPES = [
+  {value:'sundae',label:'Ice Cream Sundaes'},
+  {value:'only',label:'Ice Cream Only'},
+  {value:'both',label:'Sundaes & Ice Cream Only'}
+];
+function renderIceCreamTypeGrid(){
+  const grid = document.getElementById('fIceCreamTypeGrid');
+  if(!grid) return;
+  grid.innerHTML = ICE_CREAM_TYPES.map(t=>{
+    const isSelected = t.value===currentIceCreamType;
+    return `<button type="button" class="chipOption${isSelected?' selected':''}" onclick="selectIceCreamTypeChip('${t.value}')">${t.label}</button>`;
+  }).join('');
+}
+function selectIceCreamTypeChip(value){
+  currentIceCreamType = (currentIceCreamType===value) ? '' : value; // clica de novo pra desmarcar
+  renderIceCreamTypeGrid();
+  updateIceCreamPriceFields();
+}
+const PROVINCES = ['ON']; // atendemos só Ontário — sem seletor, fixo
+let currentProvince = 'ON';
+function renderVanGrid(){
+  const grid = document.getElementById('fVanGrid');
+  if(!grid) return;
+  grid.innerHTML = vans.length ? vans.map(v=>{
+    const isSelected = v.id===currentVanId;
+    return `<button type="button" class="chipOption${isSelected?' selected':''}" onclick="selectVanChip('${v.id}')">${escapeHtml(v.name)}</button>`;
+  }).join('') : '<div class="chipGridEmpty">No vans set up yet.</div>';
+}
+function selectVanChip(id){
+  currentVanId = id; // sempre precisa de uma van selecionada, não dá pra desmarcar clicando de novo
+  renderVanGrid();
 }
 
 /* ---------------- MONTH VIEW ---------------- */
@@ -1801,13 +2373,19 @@ function initVanViewTab(){
 }
 
 function populateVanViewSelect(){
-  const sel = document.getElementById('vanViewSelect');
-  sel.innerHTML = vans.map(v=>`<option value="${v.id}">${escapeHtml(v.name)}</option>`).join('');
-  if(vanViewSelectedVanId) sel.value = vanViewSelectedVanId;
+  const wrap = document.getElementById('vanViewTabs');
+  wrap.innerHTML = vans.map(v=>{
+    const color = v.color || '#7c5cff';
+    const active = v.id === vanViewSelectedVanId;
+    const textColor = readableTextColor(color);
+    const style = active
+      ? `background:${color};color:${textColor};border-color:${color};`
+      : `background:#fff;color:${color};border-color:${color};`;
+    return `<button type="button" class="vanTabBtn${active?' active':''}" style="${style}" onclick="selectVanViewVan('${v.id}')">${escapeHtml(v.name)}</button>`;
+  }).join('');
 }
-
-function onVanViewSelectChange(){
-  vanViewSelectedVanId = document.getElementById('vanViewSelect').value;
+function selectVanViewVan(vanId){
+  vanViewSelectedVanId = vanId;
   renderVanView();
 }
 
@@ -1894,7 +2472,7 @@ function buildVanViewGrid(){
 
 function loadVanViewBookings(){
   if(vanViewBookingUnsub) vanViewBookingUnsub();
-  vanViewBookingUnsub = db.collection('bookings')
+  vanViewBookingUnsub = db.collection('cc_events')
     .where('date','==',vanViewDate).where('vanId','==',vanViewSelectedVanId)
     .onSnapshot(snap=>{
       vanViewBookings = [];
@@ -1952,7 +2530,7 @@ function renderVanViewBookingBlocks(){
     block.style.height = Math.max(height,44)+'px';
     block.style.background = color;
     block.innerHTML = lines.join('');
-    block.onclick = (e)=>{ e.stopPropagation(); selectedDate = vanViewDate; openViewBookingModal(b); };
+    block.onclick = (e)=>{ e.stopPropagation(); selectedDate = vanViewDate; openViewBookingModal(b, e); };
     col.appendChild(block);
   });
 }
@@ -2082,7 +2660,7 @@ function loadSchedule(){
 // derives a suggested day type / arrival / return for each date in range.
 function computeScheduleSuggestions(startISO, endISO){
   schedSuggestions = {};
-  const bookingsP = db.collection('bookings')
+  const bookingsP = db.collection('cc_events')
     .where('date','>=',startISO).where('date','<=',endISO).get();
   const blocksP = db.collection('timeBlocks')
     .where('date','>=',startISO).where('date','<=',endISO).get();
@@ -2233,7 +2811,7 @@ function openSchEditModal(dISO){
   document.getElementById('schEditOverlay').style.display = 'flex';
 }
 function closeSchEditModal(){
-  document.getElementById('schEditOverlay').style.display = 'none';
+  closeOverlayAnimated('schEditOverlay');
 }
 function saveScheduleDay(){
   const dISO = document.getElementById('schEditDate').value;
@@ -2279,27 +2857,34 @@ function generateSchedulePDF(){
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 32;
-  const bannerHeight = 60;
 
-  doc.setFillColor(236,21,97);
-  doc.rect(0,0,pageWidth,bannerHeight,'F');
+  // ---- plain black & white letterhead (matches Run Sheet / Itinerary) ----
+  doc.setDrawColor(0,0,0);
+  doc.setLineWidth(1.4);
+  doc.line(0, 4, pageWidth, 4);
   const logoH = 40, logoW = logoH * PDF_LOGO_RATIO;
-  doc.addImage(PDF_LOGO, 'PNG', margin, (bannerHeight-logoH)/2, logoW, logoH);
-  doc.setTextColor(255,255,255);
+  const headerTop = 16;
+  doc.addImage(PDF_LOGO, 'PNG', margin, headerTop, logoW, logoH);
+  doc.setTextColor(20,20,20);
   doc.setFont('helvetica','bold');
-  doc.setFontSize(15);
-  doc.text(`Schedule - ${pdfSafeText(empName)}`, margin + logoW + 14, bannerHeight/2 - 2);
-  doc.setFontSize(10);
+  doc.setFontSize(18);
+  doc.text(`Schedule — ${pdfSafeText(empName)}`, margin + logoW + 14, headerTop + 18);
+  doc.setFontSize(10.5);
   doc.setFont('helvetica','normal');
+  doc.setTextColor(60,60,60);
   doc.text(`${MONTHS[start.getMonth()]} ${start.getDate()} - ${MONTHS[end.getMonth()]} ${end.getDate()}, ${end.getFullYear()}`,
-           margin + logoW + 14, bannerHeight/2 + 14);
+           margin + logoW + 14, headerTop + 36);
+  const bannerHeight = headerTop + logoH + 14;
+  doc.setLineWidth(1.4);
+  doc.line(0, bannerHeight, pageWidth, bannerHeight);
 
   const gridTop = bannerHeight + 34;
   const colWidth = (pageWidth - margin*2) / 7;
 
-  doc.setFillColor(236,21,97);
-  doc.rect(margin, gridTop - 20, colWidth*7, 20, 'F');
-  doc.setTextColor(255,255,255);
+  doc.setDrawColor(0,0,0);
+  doc.setLineWidth(1);
+  doc.rect(margin, gridTop - 20, colWidth*7, 20);
+  doc.setTextColor(20,20,20);
   doc.setFont('helvetica','bold');
   doc.setFontSize(9);
   WEEKDAYS.forEach((w,i)=> doc.text(w, margin + i*colWidth + 6, gridTop - 6));
@@ -2317,7 +2902,7 @@ function generateSchedulePDF(){
 
   const PILL_RGB = { off:[185,185,194], corp:[63,178,127], street:[155,140,224], both:[90,160,175] };
 
-  doc.setDrawColor(220,205,212);
+  doc.setDrawColor(210,210,210);
   cells.forEach((d, idx)=>{
     const row = Math.floor(idx/7), col = idx % 7;
     const x = margin + col*colWidth;
@@ -2439,7 +3024,7 @@ function openChecklistEditor(){
   document.getElementById('checklistEditorOverlay').style.display = 'flex';
 }
 function closeChecklistEditor(){
-  document.getElementById('checklistEditorOverlay').style.display = 'none';
+  closeOverlayAnimated('checklistEditorOverlay');
 }
 function addChecklistEditorItem(){
   const list = document.getElementById('checklistEditorList');
@@ -2524,21 +3109,35 @@ function generateRunSheetPDF(){
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 44;
-  const bannerHeight = 70;
 
-  doc.setFillColor(236,21,97);
-  doc.rect(0,0,pageWidth,bannerHeight,'F');
+  // ---- plain black & white letterhead ----
+  doc.setDrawColor(0,0,0);
+  doc.setLineWidth(1.4);
+  doc.line(0, 4, pageWidth, 4);
+
   const logoH = 46, logoW = logoH * PDF_LOGO_RATIO;
-  doc.addImage(PDF_LOGO, 'PNG', margin, (bannerHeight-logoH)/2, logoW, logoH);
-  doc.setTextColor(255,255,255);
+  const headerTop = 20;
+  doc.addImage(PDF_LOGO, 'PNG', margin, headerTop, logoW, logoH);
+  doc.setTextColor(20,20,20);
   doc.setFont('helvetica','bold');
-  doc.setFontSize(17);
-  doc.text('Daily Run Sheet', margin + logoW + 16, bannerHeight/2 - 3);
-  doc.setFontSize(10);
+  doc.setFontSize(20);
+  doc.text('Daily Run Sheet', margin + logoW + 16, headerTop + 20);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(12);
+  doc.setTextColor(184,15,74);
+  const vanNameText = pdfSafeText(vanName);
+  doc.text(vanNameText, margin + logoW + 16, headerTop + 41);
+  const vanNameW = doc.getTextWidth(vanNameText);
   doc.setFont('helvetica','normal');
-  doc.text(`${pdfSafeText(vanName)}  |  ${WEEKDAYS_FULL[d.getDay()]}, ${formatDateBR(d)}`, margin + logoW + 16, bannerHeight/2 + 14);
+  doc.setFontSize(11);
+  doc.setTextColor(60,60,60);
+  doc.text(`   |   ${WEEKDAYS_FULL[d.getDay()]}, ${formatDateBR(d)}`, margin + logoW + 16 + vanNameW, headerTop + 41);
 
-  let y = bannerHeight + 30;
+  const headerBottom = headerTop + logoH + 14;
+  doc.setLineWidth(1.4);
+  doc.line(0, headerBottom, pageWidth, headerBottom);
+
+  let y = headerBottom + 34;
   const contentWidth = pageWidth - margin*2;
 
   // Build the chronological timeline: garage arrival -> stops -> street sales -> return
@@ -2546,7 +3145,7 @@ function generateRunSheetPDF(){
   if(instr.arrivalTime){
     timeline.push({ time: instr.arrivalTime, kind:'base', title:'Arrive at garage / base', lines:[] });
   }
-  vanViewBookings.slice().forEach(b=>{
+  vanViewBookings.slice().filter(b=> !b.status || b.status==='ok').forEach(b=>{
     const lines = [];
     if(b.address) lines.push(pdfSafeText(b.address));
     const evTime = b.eventTime
@@ -2590,57 +3189,57 @@ function generateRunSheetPDF(){
   // ---- checklist box ----
   const checked = new Set(instr.checklist || []);
   doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
+  doc.setFontSize(13);
   doc.setTextColor(40,20,30);
   doc.text('Pre-departure checklist', margin, y);
-  y += 14;
+  y += 15;
   doc.setFont('helvetica','normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(10.5);
   const colW = contentWidth/2;
   STANDARD_CHECKLIST.forEach((item, i)=>{
     const cx = margin + (i % 2) * colW;
-    const cy = y + Math.floor(i/2) * 15;
+    const cy = y + Math.floor(i/2) * 16;
     doc.setDrawColor(150,140,145);
-    doc.rect(cx, cy - 7.5, 9, 9);
+    doc.rect(cx, cy - 8, 10, 10);
     if(checked.has(item)){
       doc.setDrawColor(63,178,127);
       doc.setLineWidth(1.4);
-      doc.line(cx+1.6, cy-3.2, cx+3.6, cy-0.7);
-      doc.line(cx+3.6, cy-0.7, cx+7.4, cy-5.6);
+      doc.line(cx+1.8, cy-3.4, cx+4, cy-0.8);
+      doc.line(cx+4, cy-0.8, cx+8.2, cy-6.2);
       doc.setLineWidth(1);
     }
     doc.setTextColor(60,50,55);
-    doc.text(pdfSafeText(item), cx + 14, cy);
+    doc.text(pdfSafeText(item), cx + 15, cy);
   });
-  y += Math.ceil(STANDARD_CHECKLIST.length/2) * 15 + 12;
+  y += Math.ceil(STANDARD_CHECKLIST.length/2) * 16 + 12;
 
   if(instr.notes){
     doc.setFont('helvetica','bold');
-    doc.setFontSize(10);
+    doc.setFontSize(11);
     doc.setTextColor(40,20,30);
     doc.text("Today's notes:", margin, y);
     doc.setFont('helvetica','normal');
     doc.setTextColor(70,60,65);
-    const nl = doc.splitTextToSize(pdfSafeText(instr.notes), contentWidth - 78);
-    nl.forEach((line,i)=> doc.text(line, margin + 78, y + i*12));
-    y += Math.max(14, nl.length*12 + 4);
+    const nl = doc.splitTextToSize(pdfSafeText(instr.notes), contentWidth - 82);
+    nl.forEach((line,i)=> doc.text(line, margin + 82, y + i*13));
+    y += Math.max(15, nl.length*13 + 4);
   }
 
   y += 8;
-  doc.setDrawColor(246,217,226);
+  doc.setDrawColor(210,210,212);
   doc.line(margin, y, pageWidth - margin, y);
   y += 20;
 
   // ---- timeline ----
   doc.setFont('helvetica','bold');
-  doc.setFontSize(12);
+  doc.setFontSize(13);
   doc.setTextColor(40,20,30);
   doc.text("Today's run", margin, y);
-  y += 16;
+  y += 17;
 
   if(timeline.length === 0){
     doc.setFont('helvetica','normal');
-    doc.setFontSize(10);
+    doc.setFontSize(10.5);
     doc.setTextColor(140,130,135);
     doc.text('Nothing scheduled for this van today.', margin, y);
     y += 16;
@@ -2649,41 +3248,47 @@ function generateRunSheetPDF(){
   timeline.forEach((item, idx)=>{
     const lines = item.lines.filter(Boolean);
     const wrapped = [];
-    lines.forEach(l=>{ doc.splitTextToSize(l, contentWidth - 92).forEach(w=> wrapped.push(w)); });
-    const blockH = Math.max(30, 20 + wrapped.length*11);
+    lines.forEach(l=>{
+      const emphasis = /^(Driver:|Helper\(s\):)/.test(l);
+      doc.setFont('helvetica', emphasis ? 'bold' : 'normal');
+      doc.setFontSize(10);
+      doc.splitTextToSize(l, contentWidth - 96).forEach(w=> wrapped.push({text:w, emphasis}));
+    });
+    const blockH = Math.max(34, 23 + wrapped.length*12.5);
 
     if(y + blockH > pageHeight - 50){ doc.addPage(); y = 50; }
 
     const rgbv = KIND_RGB[item.kind] || [150,150,150];
-    doc.setFillColor(idx % 2 === 0 ? 253 : 255, idx % 2 === 0 ? 243 : 255, idx % 2 === 0 ? 246 : 255);
-    doc.rect(margin, y - 12, contentWidth, blockH, 'F');
+    doc.setFillColor(idx % 2 === 0 ? 240 : 255, idx % 2 === 0 ? 240 : 255, idx % 2 === 0 ? 240 : 255);
+    doc.rect(margin, y - 13, contentWidth, blockH, 'F');
     doc.setFillColor(rgbv[0], rgbv[1], rgbv[2]);
-    doc.rect(margin, y - 12, 4, blockH, 'F');
+    doc.rect(margin, y - 13, 4, blockH, 'F');
 
     doc.setFont('helvetica','bold');
-    doc.setFontSize(11);
+    doc.setFontSize(12);
     doc.setTextColor(40,20,30);
     doc.text(item.time ? minutesToLabel(timeToMinutes(item.time)) : '--:--', margin + 12, y);
-    doc.text(pdfSafeText(item.title), margin + 92, y);
+    doc.text(pdfSafeText(item.title), margin + 96, y);
 
-    doc.setFont('helvetica','normal');
-    doc.setFontSize(9);
-    doc.setTextColor(85,75,80);
-    wrapped.forEach((line, i)=> doc.text(line, margin + 92, y + 13 + i*11));
+    doc.setFontSize(10);
+    wrapped.forEach((w, i)=>{
+      doc.setFont('helvetica', w.emphasis ? 'bold' : 'normal');
+      doc.setTextColor(w.emphasis ? 184 : 85, w.emphasis ? 15 : 75, w.emphasis ? 74 : 80);
+      doc.text(w.text, margin + 96, y + 14 + i*12.5);
+    });
 
     y += blockH + 6;
   });
 
   // footer
   const footY = pageHeight - 34;
-  doc.setDrawColor(246,217,226);
+  doc.setDrawColor(0,0,0);
+  doc.setLineWidth(1);
   doc.line(margin, footY - 12, pageWidth - margin, footY - 12);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(8.5);
-  doc.setTextColor(236,21,97);
-  doc.text('.', margin, footY);
-  doc.setTextColor(70,60,65);
-  doc.text('Arrive 15 minutes before the event start time.   .   Check all items before leaving.   .   Last call is 15 minutes before the event ends.', margin + 6, footY);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(30,30,30);
+  doc.text('.   Arrive 15 minutes before the event start time.   .   Check all items before leaving.   .   Last call is 15 minutes before the event ends.', margin, footY);
 
   const vanCode = (vanName||'VAN').replace(/[^a-zA-Z0-9]/g,'').toUpperCase();
   doc.save(`RUNSHEET-${vanCode}-${buildEventFileCode('', vanViewDate)}.pdf`);
@@ -2724,7 +3329,7 @@ function loadEventsListMonth(){
   const end = formatISO(new Date(year, month+1, 0));
 
   if(eventsListUnsub) eventsListUnsub();
-  eventsListUnsub = db.collection('bookings')
+  eventsListUnsub = db.collection('cc_events')
     .where('date','>=',start).where('date','<=',end)
     .onSnapshot(snap=>{
       eventsListBookings = [];
@@ -2759,7 +3364,7 @@ function renderEventsList(){
       <td><span class="statusDot" style="background:${statusColor};"></span>${STATUS_LABELS[b.status]||'OK'}</td>
       <td>
         <div class="eventsRowActions">
-          <button class="catalogIconBtn" title="View / Edit" onclick='openViewBookingModal(${JSON.stringify(b).replace(/'/g,"&#39;")})'>👁️</button>
+          <button class="catalogIconBtn" title="View / Edit" onclick='openViewBookingModal(${JSON.stringify(b).replace(/'/g,"&#39;")})'><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
           <button class="catalogIconBtn removeBtn" title="Delete" onclick="deleteBookingFromList('${b.id}')">✕</button>
         </div>
       </td>
@@ -2770,19 +3375,19 @@ function renderEventsList(){
 
 function deleteBookingFromList(id){
   if(!confirm('Delete this event?')) return;
-  db.collection('bookings').doc(id).delete();
+  db.collection('cc_events').doc(id).delete();
 }
 
 function generateMonthlyReport(){
   if(!window.jspdf){ alert('PDF library failed to load. Check your internet connection and try again.'); return; }
-  if(eventsListBookings.length===0){ alert('No events found for this month.'); return; }
+  const reportBookings = eventsListBookings.filter(b=> !b.status || b.status === 'ok');
+  if(reportBookings.length===0){ alert('No confirmed events found for this month.'); return; }
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit:'pt', format:'letter', orientation:'landscape' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 36;
-  const bannerHeight = 64;
 
   const monthLabel = MONTHS[parseInt(document.getElementById('elMonth').value)];
   const year = document.getElementById('elYear').value;
@@ -2800,22 +3405,29 @@ function generateMonthlyReport(){
   const tableWidth = cols.reduce((s,c)=>s+c.width,0);
   const tableX = (pageWidth - tableWidth)/2;
 
+  // ---- plain black & white letterhead (matches Run Sheet / Itinerary) ----
+  const logoH = 40, logoW = logoH * PDF_LOGO_RATIO;
+  const headerTop = 16;
+  let bannerHeight;
   function drawHeader(){
-    doc.setFillColor(236,21,97);
-    doc.rect(0,0,pageWidth,bannerHeight,'F');
-    const logoH = 42;
-    const logoW = logoH * PDF_LOGO_RATIO;
-    doc.addImage(PDF_LOGO, 'PNG', margin, (bannerHeight-logoH)/2, logoW, logoH);
-    doc.setTextColor(255,255,255);
+    doc.setDrawColor(0,0,0);
+    doc.setLineWidth(1.4);
+    doc.line(0, 4, pageWidth, 4);
+    doc.addImage(PDF_LOGO, 'PNG', margin, headerTop, logoW, logoH);
+    doc.setTextColor(20,20,20);
     doc.setFont('helvetica','bold');
     doc.setFontSize(16);
-    doc.text(`Monthly Invoice Summary — ${monthLabel} ${year}`, margin + logoW + 16, bannerHeight/2 + 6);
+    doc.text(`Monthly Invoice Summary — ${monthLabel} ${year}`, margin + logoW + 14, headerTop + 26);
+    bannerHeight = headerTop + logoH + 14;
+    doc.setLineWidth(1.4);
+    doc.line(0, bannerHeight, pageWidth, bannerHeight);
   }
 
   function drawColumnHeaderRow(y){
-    doc.setFillColor(236,21,97);
-    doc.rect(tableX, y, tableWidth, 22, 'F');
-    doc.setTextColor(255,255,255);
+    doc.setDrawColor(0,0,0);
+    doc.setLineWidth(1);
+    doc.rect(tableX, y, tableWidth, 22);
+    doc.setTextColor(20,20,20);
     doc.setFont('helvetica','bold');
     doc.setFontSize(9);
     let x = tableX;
@@ -2834,7 +3446,7 @@ function generateMonthlyReport(){
   let totalTravelFee = 0;
   const bottomLimit = pageHeight - 40;
 
-  eventsListBookings.forEach((b, idx)=>{
+  reportBookings.forEach((b, idx)=>{
     const d = parseISO(b.date);
     const timeValue = b.eventTime
       ? (b.eventEndTime
@@ -2872,10 +3484,10 @@ function generateMonthlyReport(){
       doc.setFontSize(9);
     }
 
-    doc.setFillColor(idx % 2 === 0 ? 253 : 255, idx % 2 === 0 ? 243 : 255, idx % 2 === 0 ? 246 : 255);
+    doc.setFillColor(idx % 2 === 0 ? 246 : 255, idx % 2 === 0 ? 246 : 255, idx % 2 === 0 ? 246 : 255);
     doc.rect(tableX, y, tableWidth, rowHeight, 'F');
 
-    doc.setTextColor(40,20,30);
+    doc.setTextColor(20,20,20);
     doc.setFont('helvetica','normal');
     let x = tableX;
     cols.forEach(c=>{
@@ -2887,15 +3499,16 @@ function generateMonthlyReport(){
   });
 
   // outer border + total row
-  doc.setDrawColor(246,217,226);
+  doc.setDrawColor(0,0,0);
+  doc.setLineWidth(1);
   doc.rect(tableX, bannerHeight+26, tableWidth, y-(bannerHeight+26));
 
   if(y + 24 > bottomLimit){ doc.addPage(); y = 30; }
   y += 14;
   doc.setFont('helvetica','bold');
   doc.setFontSize(10);
-  doc.setTextColor(40,20,30);
-  doc.text(`Total events: ${eventsListBookings.length}`, tableX, y);
+  doc.setTextColor(20,20,20);
+  doc.text(`Total events: ${reportBookings.length}`, tableX, y);
   doc.text(`Total Travel Fee: $${totalTravelFee.toFixed(2)} CAD`, tableX + tableWidth - 160, y);
 
   doc.save(`crazy-cravings-invoice-summary_${monthLabel}-${year}.pdf`);
@@ -2947,7 +3560,7 @@ function loadMonthBookings(year, month){
   if(monthUnsub) monthUnsub();
   const start = formatISO(new Date(year, month, 1));
   const end = formatISO(new Date(year, month+1, 0));
-  monthUnsub = db.collection('bookings')
+  monthUnsub = db.collection('cc_events')
     .where('date','>=',start).where('date','<=',end)
     .onSnapshot(snap=>{
       const byDate = {};
@@ -3002,7 +3615,7 @@ function loadWeekBookings(startDate){
   const end = formatISO(endDate);
 
   if(weekUnsub) weekUnsub();
-  weekUnsub = db.collection('bookings')
+  weekUnsub = db.collection('cc_events')
     .where('date','>=',start).where('date','<=',end)
     .onSnapshot(snap=>{
       const byDate = {};
@@ -3071,7 +3684,7 @@ function loadYearBookings(){
   const start = `${viewYear}-01-01`;
   const end = `${viewYear}-12-31`;
   if(yearUnsub) yearUnsub();
-  yearUnsub = db.collection('bookings')
+  yearUnsub = db.collection('cc_events')
     .where('date','>=',start).where('date','<=',end)
     .onSnapshot(snap=>{
       yearEventDates = new Set();
@@ -3159,7 +3772,7 @@ function buildScheduleGrid(){
 
 function loadDayBookings(){
   if(dayUnsub) dayUnsub();
-  dayUnsub = db.collection('bookings').where('date','==',selectedDate).onSnapshot(snap=>{
+  dayUnsub = db.collection('cc_events').where('date','==',selectedDate).onSnapshot(snap=>{
     currentDayBookings = [];
     snap.forEach(doc=> currentDayBookings.push({id:doc.id, ...doc.data()}));
     renderBookingBlocks();
@@ -3205,7 +3818,7 @@ function renderBookingBlocks(){
     block.style.height = Math.max(height,44)+'px';
     block.style.background = color;
     block.innerHTML = lines.join('');
-    block.onclick = (e)=>{ e.stopPropagation(); openViewBookingModal(b); };
+    block.onclick = (e)=>{ e.stopPropagation(); openViewBookingModal(b, e); };
     col.appendChild(block);
   });
 }
@@ -3281,7 +3894,8 @@ function saveDayNote(){
 /* ---------------- VIEW BOOKING (pop-up read-only) ---------------- */
 let currentViewedBooking = null;
 
-function openViewBookingModal(booking){
+function openViewBookingModal(booking, evt){
+  setMorphOrigin('viewBookingOverlay', evt);
   currentViewedBooking = booking;
   const van = vans.find(v=>v.id===booking.vanId);
 
@@ -3290,6 +3904,15 @@ function openViewBookingModal(booking){
   pill.style.background = STATUS_COLORS[booking.status] || '#3fb27f';
 
   document.getElementById('viewClientName').textContent = booking.clientName || 'No name';
+
+  const itineraryBtn = document.querySelector('#viewBookingOverlay .itineraryBtn');
+  if(itineraryBtn){
+    const isOk = !booking.status || booking.status === 'ok';
+    itineraryBtn.disabled = !isOk;
+    itineraryBtn.style.opacity = isOk ? '1' : '0.45';
+    itineraryBtn.style.cursor = isOk ? 'pointer' : 'not-allowed';
+    itineraryBtn.title = isOk ? '' : 'Only confirmed (OK) events can generate an itinerary.';
+  }
 
   const rows = [];
   rows.push(['🚐','Van Schedule', `${booking.startTime||''} – ${booking.endTime||''}`]);
@@ -3303,6 +3926,7 @@ function openViewBookingModal(booking){
   if(booking.contactName || booking.contactLastName) rows.push(['👤','Contact', [booking.contactName,booking.contactLastName].filter(Boolean).join(' ')]);
   if(booking.address) rows.push(['📍','Address', booking.address]);
   if(booking.phone) rows.push(['📞','Phone', booking.phone]);
+  if(booking.email) rows.push(['✉️','Email', booking.email]);
   if(booking.numberOfPeople) rows.push(['👥','Number of People', String(booking.numberOfPeople)]);
   if(booking.iceCreamType) rows.push(['🍦','Ice Cream Type', ICE_CREAM_LABELS[booking.iceCreamType] || booking.iceCreamType]);
   if(booking.priceSundae) rows.push(['💲','Price per Sundae', `$${Number(booking.priceSundae).toFixed(2)} CAD`]);
@@ -3326,7 +3950,7 @@ function openViewBookingModal(booking){
   document.getElementById('viewBookingOverlay').style.display='flex';
 }
 function closeViewBookingModal(){
-  document.getElementById('viewBookingOverlay').style.display='none';
+  closeOverlayAnimated('viewBookingOverlay');
   currentViewedBooking = null;
 }
 function editFromView(){
@@ -3410,50 +4034,70 @@ function pdfWrapText(text, font, size, maxWidth){
 async function generateItineraryPDF(){
   const b = currentViewedBooking;
   if(!b){ return; }
+  if(b.status && b.status !== 'ok'){
+    showToast('Only confirmed (OK) events can generate an itinerary.', 'error');
+    return;
+  }
   if(!window.PDFLib){ alert('PDF library failed to load. Check your internet connection and try again.'); return; }
 
   const { PDFDocument, StandardFonts, rgb } = PDFLib;
 
-  // Load the EXACT template file provided by the client (pink banner + logo + watermark
-  // already baked in) and draw the event info on top of it — never redrawn from scratch.
-  const templateBytes = base64ToUint8Array(ITINERARY_TEMPLATE_PDF_B64);
-  const pdfDoc = await PDFDocument.load(templateBytes);
-  const page = pdfDoc.getPages()[0];
-  const { width: pageWidth, height: pageHeight } = page.getSize();
+  // Plain black & white letterhead style — built from scratch (no pink template).
+  const pdfDoc = await PDFDocument.create();
+  const pageWidth = 612, pageHeight = 792; // US Letter, points
+  const page = pdfDoc.addPage([pageWidth, pageHeight]);
   const toPdfY = (distanceFromTop) => pageHeight - distanceFromTop;
 
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
   const margin = 50;
-  const bannerHeight = 116; // measured height of the pink banner in the template
-  const footerHeight = 76;
-  const ink = rgb(40/255, 20/255, 30/255);
-  const pink = rgb(236/255, 21/255, 97/255);
-  const zebraPink = rgb(253/255, 243/255, 246/255);
+  const ink = rgb(20/255, 20/255, 20/255);
+  const inkSoft = rgb(90/255, 90/255, 90/255);
+  const black = rgb(0,0,0);
+  const zebraGray = rgb(245/255, 245/255, 245/255);
   const white = rgb(1,1,1);
-  const borderPink = rgb(246/255, 217/255, 226/255);
+  const borderGray = rgb(0,0,0);
 
   const van = vans.find(v=>v.id===b.vanId);
   const d = parseISO(b.date);
 
   const timeValue = b.eventTime
     ? (b.eventEndTime
-        ? `${minutesToLabel(timeToMinutes(b.eventTime))} – ${minutesToLabel(timeToMinutes(b.eventEndTime))}`
+        ? `${minutesToLabel(timeToMinutes(b.eventTime))} \u2013 ${minutesToLabel(timeToMinutes(b.eventEndTime))}`
         : minutesToLabel(timeToMinutes(b.eventTime)))
-    : '—';
+    : '\u2014';
+
+  // ---- header (logo + title, framed by two horizontal rules) ----
+  let logoImage = null;
+  try{
+    const logoBytes = base64ToUint8Array(PDF_LOGO.split(',')[1]);
+    logoImage = await pdfDoc.embedPng(logoBytes);
+  } catch(err){ logoImage = null; }
+
+  page.drawLine({ start:{x:0,y:toPdfY(4)}, end:{x:pageWidth,y:toPdfY(4)}, thickness:1.4, color:black });
+
+  const headerTop = 20;
+  const logoH = 60, logoW = logoImage ? logoH * (logoImage.width/logoImage.height) : 60;
+  if(logoImage){
+    page.drawImage(logoImage, { x: margin, y: toPdfY(headerTop + logoH), width: logoW, height: logoH });
+  }
+  page.drawText('Event Itinerary', { x: margin + logoW + 20, y: toPdfY(headerTop + 38), size: 30, font: fontBold, color: ink });
+
+  const headerBottom = headerTop + logoH + 16;
+  page.drawLine({ start:{x:0,y:toPdfY(headerBottom)}, end:{x:pageWidth,y:toPdfY(headerBottom)}, thickness:1.4, color:black });
 
   const rows = [
     ['Date', formatDateBR(d)],
-    ['Company / Event', pdfSafeText(b.clientName) || '—'],
-    ['Contact', pdfSafeText(b.contactName) || '—'],
+    ['Company / Event', pdfSafeText(b.clientName) || '\u2014'],
+    ['Contact', pdfSafeText(b.contactName) || '\u2014'],
     ['Time', timeValue],
-    ['Address', pdfSafeText(b.address) || '—'],
-    ['Van', van ? pdfSafeText(van.name) : '—'],
-    ['Driver', pdfSafeText(b.driver) || '—'],
-    ['Helper(s)', (b.helpers && b.helpers.length) ? pdfSafeText(b.helpers.join(', ')) : '—'],
-    ['Number of People', b.numberOfPeople ? String(b.numberOfPeople) : '—'],
-    ['Ice Cream Type', b.iceCreamType ? (ICE_CREAM_LABELS[b.iceCreamType]||b.iceCreamType) : '—'],
+    ['Address', pdfSafeText(b.address) || '\u2014'],
+    ['Van', van ? pdfSafeText(van.name) : '\u2014'],
+    ['Driver', pdfSafeText(b.driver) || '\u2014'],
+    ['Helper(s)', (b.helpers && b.helpers.length) ? pdfSafeText(b.helpers.join(', ')) : '\u2014'],
+    ['Number of People', b.numberOfPeople ? String(b.numberOfPeople) : '\u2014'],
+    ['Ice Cream Type', b.iceCreamType ? (ICE_CREAM_LABELS[b.iceCreamType]||b.iceCreamType) : '\u2014'],
   ];
 
   const rowPadX = 12;
@@ -3463,17 +4107,17 @@ async function generateItineraryPDF(){
   const fontSize = 11;
   const valueMaxWidth = boxWidth - 170 - rowPadX;
 
-  let y = bannerHeight + 40; // distance from top
+  let y = headerBottom + 30;
   const tableTop = y;
 
   rows.forEach(([label, value], idx)=>{
     const valueLines = pdfWrapText(value, font, fontSize, valueMaxWidth);
     const rowHeight = Math.max(24, valueLines.length*14 + 10);
 
-    // zebra stripe (opaque — sits on top of the watermark, exactly like the template)
+    // zebra stripe — plain light gray, no color
     page.drawRectangle({
       x: margin, y: toPdfY(y + rowHeight), width: boxWidth, height: rowHeight,
-      color: idx % 2 === 0 ? zebraPink : white,
+      color: idx % 2 === 0 ? zebraGray : white,
     });
 
     const textTopDownY = y + rowHeight/2 - (valueLines.length-1)*7 + 4;
@@ -3485,10 +4129,10 @@ async function generateItineraryPDF(){
     y += rowHeight;
   });
 
-  // thin outer border around the zebra table
+  // thin outer border around the table
   page.drawRectangle({
     x: margin, y: toPdfY(y), width: boxWidth, height: y - tableTop,
-    borderColor: borderPink, borderWidth: 1,
+    borderColor: borderGray, borderWidth: 1,
   });
 
   // ---- QR code (bitmap via canvas, embedded as PNG) ----
@@ -3527,18 +4171,18 @@ async function generateItineraryPDF(){
     }
   }
 
-  // ---- Middle section: two side-by-side cards with thick rounded pink borders ----
+  // ---- Middle section: two side-by-side boxes with plain black borders ----
   y += 22;
   const cardGap = 20;
   const cardHeight = 150;
   const cardWidth = (boxWidth - cardGap) / 2;
   const cardTop = y;
-  const cardBorder = rgb(230/255, 0/255, 103/255); // shock pink
+  const cardBorder = black;
 
   // LEFT card — Total People Served (blank space, filled in by hand after the event)
   page.drawRectangle({
     x: margin, y: toPdfY(cardTop + cardHeight), width: cardWidth, height: cardHeight,
-    borderColor: cardBorder, borderWidth: 3, color: white, borderRadius: 12,
+    borderColor: cardBorder, borderWidth: 1.5, color: white,
   });
   page.drawText('Total People', { x: margin + 22, y: toPdfY(cardTop + 78), size: 17, font: fontBold, color: ink });
   page.drawText('Served:', { x: margin + 22, y: toPdfY(cardTop + 100), size: 17, font: fontBold, color: ink });
@@ -3547,7 +4191,7 @@ async function generateItineraryPDF(){
   const rightCardX = margin + cardWidth + cardGap;
   page.drawRectangle({
     x: rightCardX, y: toPdfY(cardTop + cardHeight), width: cardWidth, height: cardHeight,
-    borderColor: cardBorder, borderWidth: 3, color: white, borderRadius: 12,
+    borderColor: cardBorder, borderWidth: 1.5, color: white,
   });
   const qrDisplaySize = 100;
   if(qrImage){
@@ -3559,32 +4203,29 @@ async function generateItineraryPDF(){
   page.drawText('Directions', { x: rightCardX + 22, y: toPdfY(cardTop + 82), size: 15, font: fontBold, color: ink });
   const addrLines = pdfWrapText(pdfSafeText(b.address) || 'No address on file', font, 9, cardWidth - 40);
   addrLines.slice(0,3).forEach((line, li)=>{
-    page.drawText(line, { x: rightCardX + 22, y: toPdfY(cardTop + cardHeight - 22 + li*11), size: 9, font, color: rgb(120/255,110/255,115/255) });
+    page.drawText(line, { x: rightCardX + 22, y: toPdfY(cardTop + cardHeight - 22 + li*11), size: 9, font, color: inkSoft });
   });
 
   y = cardTop + cardHeight + 20;
 
-  // ---- Additional Info block (saturated pink box with free space for notes) ----
+  // ---- Additional Info block (plain black border, white background) ----
   const notesText = b.notes && b.notes.trim() ? pdfSafeText(b.notes.trim()) : '';
   const notesLines = pdfWrapText(notesText, font, 11, pageWidth - margin*2 - 32);
   const additionalBoxHeight = Math.max(100, 50 + notesLines.length*14);
-  const pinkFill = rgb(248/255, 165/255, 194/255);
   page.drawRectangle({
     x: margin, y: toPdfY(y + additionalBoxHeight), width: pageWidth - margin*2, height: additionalBoxHeight,
-    color: pinkFill,
+    borderColor: black, borderWidth: 1.5, color: white,
   });
-  page.drawText('Additional Info', { x: margin + 16, y: toPdfY(y + 24), size: 13, font: fontBold, color: rgb(60/255,20/255,40/255) });
+  page.drawText('Additional Info:', { x: margin + 16, y: toPdfY(y + 24), size: 13, font: fontBold, color: ink });
   notesLines.forEach((line, li)=>{
-    page.drawText(line, { x: margin + 16, y: toPdfY(y + 46 + li*14), size: 11, font, color: rgb(60/255,20/255,40/255) });
+    page.drawText(line, { x: margin + 16, y: toPdfY(y + 46 + li*14), size: 11, font, color: ink });
   });
-  y += additionalBoxHeight + 10;
+  y += additionalBoxHeight + 24;
 
-  // ---- Footer reminders (fixed at the bottom of the page) ----
-  const footerTop = pageHeight - footerHeight; // distance from top, in top-down units
-  page.drawRectangle({ x: 0, y: 0, width: pageWidth, height: footerHeight+10, color: white });
+  // ---- Footer reminders ----
   page.drawLine({
-    start: { x: margin, y: toPdfY(footerTop) }, end: { x: pageWidth-margin, y: toPdfY(footerTop) },
-    thickness: 1, color: borderPink,
+    start: { x: margin, y: toPdfY(y) }, end: { x: pageWidth-margin, y: toPdfY(y) },
+    thickness: 1, color: rgb(210/255,210/255,210/255),
   });
 
   const reminders = [
@@ -3592,10 +4233,10 @@ async function generateItineraryPDF(){
     'Check all necessary items before leaving.',
     'Remember the last call is 15 minutes before the event ends.',
   ];
-  let fy = footerTop + 20;
+  let fy = y + 20;
   reminders.forEach(line=>{
-    page.drawText('•', { x: margin, y: toPdfY(fy), size: 10, font: fontBold, color: pink });
-    page.drawText(line, { x: margin + 14, y: toPdfY(fy), size: 10, font: fontBold, color: rgb(60/255,40/255,50/255) });
+    page.drawText('\u2022', { x: margin, y: toPdfY(fy), size: 10, font: fontBold, color: ink });
+    page.drawText(line, { x: margin + 14, y: toPdfY(fy), size: 10, font: fontBold, color: ink });
     fy += 16;
   });
 
@@ -3610,9 +4251,9 @@ async function generateItineraryPDF(){
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
-
 /* ---------------- BOOKING MODAL (edit) ---------------- */
 let currentHelpers = []; // [{id, name}]
+let currentDriverId = null;
 
 /* ---------------- BLOCK TIME MODAL ---------------- */
 let editingBlockKind = 'blocked'; // 'blocked' | 'streetSales'
@@ -3657,29 +4298,39 @@ function openBlockModal(block=null, kind='blocked', vanId=null, startTime=null, 
 
 /* ---------------- CELL CLICK CHOICE (Event / Street Sales / Block Time) ---------------- */
 let cellChoiceCtx = null;
-function openCellChoice(vanId, startTime, endTime){
+function openCellChoice(vanId, startTime, endTime, evt){
   cellChoiceCtx = { vanId, startTime, endTime };
+  setMorphOrigin('cellChoiceOverlay', evt);
   document.getElementById('cellChoiceOverlay').style.display = 'flex';
 }
+function openAddFlow(evt){
+  openCellChoice(null, null, null, evt);
+}
+function openAddFlowVanView(evt){
+  openCellChoice(vanViewSelectedVanId || null, null, null, evt);
+}
 function closeCellChoice(){
-  document.getElementById('cellChoiceOverlay').style.display = 'none';
+  closeOverlayAnimated('cellChoiceOverlay');
   cellChoiceCtx = null;
 }
-function cellChoiceSelect(kind){
+function cellChoiceSelect(kind, evt){
   const ctx = cellChoiceCtx;
   document.getElementById('cellChoiceOverlay').style.display = 'none';
   if(!ctx) return;
   if(kind === 'event'){
     openBookingModal(null, ctx.vanId, ctx.startTime, ctx.endTime);
+    setMorphOrigin('bookingOverlay', evt);
   } else if(kind === 'street'){
     openBlockModal(null, 'streetSales', ctx.vanId, ctx.startTime, ctx.endTime);
+    setMorphOrigin('blockOverlay', evt);
   } else if(kind === 'block'){
     openBlockModal(null, 'blocked', ctx.vanId, ctx.startTime, ctx.endTime);
+    setMorphOrigin('blockOverlay', evt);
   }
   cellChoiceCtx = null;
 }
 function closeBlockModal(){
-  document.getElementById('blockOverlay').style.display='none';
+  closeOverlayAnimated('blockOverlay');
 }
 function populateVanSelectFor(selectId){
   const sel = document.getElementById(selectId);
@@ -3694,6 +4345,7 @@ function saveBlock(){
   if(timeToMinutes(endTime) <= timeToMinutes(startTime)){
     errBox.textContent = `⚠️ End time must be after start time.`;
     errBox.style.display = 'block';
+    shakeEl(errBox);
     return;
   }
   const vanId = document.getElementById('bVan').value;
@@ -3728,13 +4380,12 @@ function deleteBlock(){
 
 function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null){
   document.getElementById('bookingOverlay').style.display='flex';
-  populateVanSelect();
   document.getElementById('timeErrorMsg').style.display='none';
 
   if(booking){
     document.getElementById('modalTitle').textContent = 'Edit Event';
     document.getElementById('bookingId').value = booking.id;
-    document.getElementById('fVan').value = booking.vanId;
+    currentVanId = booking.vanId;
     set24hrToSelects('fStart', booking.startTime||'09:00');
     set24hrToSelects('fEnd', booking.endTime||'10:00');
     set24hrToSelects('fEventTime', booking.eventTime||booking.startTime||'09:00');
@@ -3745,20 +4396,21 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     if(booking.addressStreet || booking.addressCity || booking.addressPostalCode){
       document.getElementById('fAddressStreet').value = booking.addressStreet||'';
       document.getElementById('fAddressCity').value = booking.addressCity||'';
-      document.getElementById('fAddressProvince').value = booking.addressProvince||'ON';
+      currentProvince = booking.addressProvince||'ON';
       document.getElementById('fAddressPostalCode').value = booking.addressPostalCode||'';
     } else {
       // legacy booking: only a single free-text address was stored — drop it into
       // Street Address and prompt the gestora to fill in city/postal for accuracy
       document.getElementById('fAddressStreet').value = booking.address||'';
       document.getElementById('fAddressCity').value = '';
-      document.getElementById('fAddressProvince').value = 'ON';
+      currentProvince = 'ON';
       document.getElementById('fAddressPostalCode').value = '';
     }
     document.getElementById('fPhone').value = booking.phone||'';
+    document.getElementById('fEmail').value = booking.email||'';
     document.getElementById('fNumberOfPeople').value = booking.numberOfPeople||'';
     document.getElementById('fTravelFee').value = booking.travelFee||'';
-    document.getElementById('fIceCreamType').value = booking.iceCreamType||'';
+    currentIceCreamType = booking.iceCreamType||'';
     document.getElementById('fPriceSundae').value = booking.priceSundae||'';
     document.getElementById('fPriceOnly').value = booking.priceOnly||'';
     updateIceCreamPriceFields();
@@ -3774,11 +4426,16 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
       currentHelpers = [];
     }
     selectStatus(booking.status||'ok');
+    editingContactId = booking.contactId || null;
+    editingQuoteId = booking.quoteId || null;
+    editingInvoiceId = booking.invoiceId || null;
+    editingOrigin = booking.origin || 'direct';
+    currentDriverId = booking.driverId || null;
     document.getElementById('deleteBtn').style.display='inline-block';
   } else {
     document.getElementById('modalTitle').textContent = 'New Event';
     document.getElementById('bookingId').value = '';
-    document.getElementById('fVan').value = vanId || (vans[0] && vans[0].id) || '';
+    currentVanId = vanId || (vans[0] && vans[0].id) || null;
     set24hrToSelects('fStart', startTime || '09:00');
     set24hrToSelects('fEnd', endTime || '10:00');
     set24hrToSelects('fEventTime', startTime || '09:00');
@@ -3788,12 +4445,13 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     document.getElementById('fContactLastName').value = '';
     document.getElementById('fAddressStreet').value = '';
     document.getElementById('fAddressCity').value = '';
-    document.getElementById('fAddressProvince').value = 'ON';
+    currentProvince = 'ON';
     document.getElementById('fAddressPostalCode').value = '';
     document.getElementById('fPhone').value = '';
+    document.getElementById('fEmail').value = '';
     document.getElementById('fNumberOfPeople').value = '';
     document.getElementById('fTravelFee').value = '';
-    document.getElementById('fIceCreamType').value = '';
+    currentIceCreamType = '';
     document.getElementById('fPriceSundae').value = '';
     document.getElementById('fPriceOnly').value = '';
     updateIceCreamPriceFields();
@@ -3801,39 +4459,50 @@ function openBookingModal(booking=null, vanId=null, startTime=null, endTime=null
     document.getElementById('fNotes').value = '';
     document.getElementById('fInternalNotes').value = '';
     currentHelpers = [];
+    currentDriverId = null;
     selectStatus('ok');
+    editingContactId = null;
+    editingQuoteId = null;
+    editingInvoiceId = null;
+    editingOrigin = 'direct';
     document.getElementById('deleteBtn').style.display='none';
   }
   refreshEmployeeOptions();
-  if(booking && booking.driverId) document.getElementById('fDriver').value = booking.driverId;
-  renderHelperChips();
+  renderVanGrid();
+  renderIceCreamTypeGrid();
+  updateIceCreamPriceFields();
   document.getElementById('eventTimeErrorMsg').style.display='none';
+  wizGoTo(booking ? 3 : 0);
 }
 function closeBookingModal(){
-  document.getElementById('bookingOverlay').style.display='none';
+  closeOverlayAnimated('bookingOverlay');
 }
 
-function addHelperChip(){
-  const sel = document.getElementById('fHelperSelect');
-  const id = sel.value;
-  if(!id) return;
-  const emp = employees.find(e=>e.id===id);
-  if(!emp) return;
-  currentHelpers.push({id: emp.id, name: emp.name});
-  renderHelperChips();
-  refreshEmployeeOptions();
+/* ---------------- BOOKING WIZARD (steps within the New Event modal) ---------------- */
+const WIZ_TOTAL_STEPS = 5; // 1 (type choice, outside this modal) + 4 here
+let wizCurrentStep = 0;
+function wizGoTo(step){
+  wizCurrentStep = Math.max(0, Math.min(3, step));
+  document.querySelectorAll('#bookingOverlay .wizStep').forEach(el=>{
+    el.classList.toggle('wizActive', Number(el.dataset.wizstep)===wizCurrentStep);
+  });
+  document.getElementById('wizStepLabel').textContent = `Etapa ${wizCurrentStep+2} de ${WIZ_TOTAL_STEPS}`;
+  const dotsEl = document.getElementById('wizProgress');
+  dotsEl.innerHTML = '';
+  for(let i=0;i<WIZ_TOTAL_STEPS;i++){
+    const d = document.createElement('div');
+    d.className = 'wizDot' + (i===0 || i-1<wizCurrentStep ? ' done' : (i-1===wizCurrentStep ? ' active' : ''));
+    dotsEl.appendChild(d);
+  }
+  const isLast = wizCurrentStep === 3;
+  document.getElementById('wizBackBtn').disabled = (wizCurrentStep===0);
+  document.getElementById('wizNav').style.display = isLast ? 'none' : 'flex';
+  document.getElementById('bookingModalActions').style.display = isLast ? 'flex' : 'none';
 }
-function removeHelperChip(idx){
-  currentHelpers.splice(idx,1);
-  renderHelperChips();
-  refreshEmployeeOptions();
+function wizStep(delta){
+  wizGoTo(wizCurrentStep + delta);
 }
-function renderHelperChips(){
-  const list = document.getElementById('helpersChipsList');
-  list.innerHTML = currentHelpers.map((h,idx)=>
-    `<div class="helperChip">${escapeHtml(h.name)} <span class="removeX" onclick="removeHelperChip(${idx})">×</span></div>`
-  ).join('');
-}
+
 function selectStatus(status){
   editingStatus = status;
   document.querySelectorAll('.statusChip').forEach(chip=>{
@@ -3841,7 +4510,7 @@ function selectStatus(status){
   });
 }
 function updateIceCreamPriceFields(){
-  const type = document.getElementById('fIceCreamType').value;
+  const type = currentIceCreamType;
   const wrap = document.getElementById('iceCreamPriceFields');
   const sundaeField = document.getElementById('priceSundaeField');
   const onlyField = document.getElementById('priceOnlyField');
@@ -3866,11 +4535,13 @@ function validateEventTimeRange(){
   if(evEnd <= evStart){
     errBox.textContent = '⚠️ Event End Time must be after Event Start Time.';
     errBox.style.display = 'block';
+    shakeEl(errBox);
     return false;
   }
   if(evStart < vanStart || evEnd > vanEnd){
     errBox.textContent = `⚠️ The event time must be within the van's Start/End window (${selectsTo24hr('fStart')} – ${selectsTo24hr('fEnd')}).`;
     errBox.style.display = 'block';
+    shakeEl(errBox);
     return false;
   }
   errBox.style.display = 'none';
@@ -3886,10 +4557,11 @@ function saveBooking(){
   if(timeToMinutes(endTime) <= timeToMinutes(startTime)){
     errBox.textContent = `⚠️ The end time (${endTime}) must be after the start time (${startTime}). Double-check you selected AM/PM correctly.`;
     errBox.style.display='block';
+    shakeEl(errBox);
     return;
   }
 
-  const driverId = document.getElementById('fDriver').value || null;
+  const driverId = currentDriverId || null;
   const driverEmp = driverId ? employees.find(e=>e.id===driverId) : null;
 
   // final conflict check (avoids race condition between open tabs/screens)
@@ -3897,12 +4569,14 @@ function saveBooking(){
   if(driverId && busy.has(driverId)){
     errBox.textContent = `⚠️ ${driverEmp?driverEmp.name:'This driver'} is already scheduled for another event at this time.`;
     errBox.style.display='block';
+    shakeEl(errBox);
     return;
   }
   const conflictHelper = currentHelpers.find(h=>h.id && busy.has(h.id));
   if(conflictHelper){
     errBox.textContent = `⚠️ ${conflictHelper.name} is already scheduled for another event at this time.`;
     errBox.style.display='block';
+    shakeEl(errBox);
     return;
   }
   errBox.style.display='none';
@@ -3914,13 +4588,13 @@ function saveBooking(){
 
   const addressStreet = document.getElementById('fAddressStreet').value.trim();
   const addressCity = document.getElementById('fAddressCity').value.trim();
-  const addressProvince = document.getElementById('fAddressProvince').value;
+  const addressProvince = currentProvince;
   const addressPostalCode = document.getElementById('fAddressPostalCode').value.trim().toUpperCase();
   const fullAddress = [addressStreet, addressCity, [addressProvince, addressPostalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
 
   const data = {
     date: selectedDate,
-    vanId: document.getElementById('fVan').value,
+    vanId: currentVanId,
     startTime: startTime,
     endTime: endTime,
     eventTime: selectsTo24hr('fEventTime'),
@@ -3934,9 +4608,10 @@ function saveBooking(){
     addressPostalCode: addressPostalCode,
     address: fullAddress,
     phone: document.getElementById('fPhone').value.trim(),
+    email: document.getElementById('fEmail').value.trim(),
     numberOfPeople: parseInt(document.getElementById('fNumberOfPeople').value) || null,
     travelFee: parseFloat(document.getElementById('fTravelFee').value) || 0,
-    iceCreamType: document.getElementById('fIceCreamType').value,
+    iceCreamType: currentIceCreamType,
     priceSundae: parseFloat(document.getElementById('fPriceSundae').value) || 0,
     priceOnly: parseFloat(document.getElementById('fPriceOnly').value) || 0,
     driverId: driverId,
@@ -3947,24 +4622,30 @@ function saveBooking(){
     notes: document.getElementById('fNotes').value.trim(),
     internalNotes: document.getElementById('fInternalNotes').value.trim(),
     status: editingStatus,
+    // Vínculo com o Invoice Generator (ver /areas/crazy-cravings-integration)
+    contactId: editingContactId || null,
+    quoteId: editingQuoteId || null,
+    invoiceId: editingInvoiceId || null,
+    origin: editingOrigin || 'direct',
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   };
   if(!data.vanId){ alert('Add at least one van before creating events.'); return; }
   if(!data.clientName){ alert('Enter the client/event name.'); return; }
 
   if(id){
-    db.collection('bookings').doc(id).update(data);
+    db.collection('cc_events').doc(id).update(data);
   } else {
     data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-    db.collection('bookings').add(data);
+    db.collection('cc_events').add(data);
   }
+  rememberClient(data);
   closeBookingModal();
 }
 function deleteBooking(){
   const id = document.getElementById('bookingId').value;
   if(!id) return;
   if(!confirm('Delete this event?')) return;
-  db.collection('bookings').doc(id).delete();
+  db.collection('cc_events').doc(id).delete();
   closeBookingModal();
 }
 
